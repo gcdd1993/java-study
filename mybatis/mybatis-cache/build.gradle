@@ -1,0 +1,12 @@
+dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("com.baomidou:mybatis-plus-boot-starter:3.4.3.4")
+    // https://github.com/redisson/redisson/tree/master/redisson-mybatis
+    implementation("org.redisson:redisson-mybatis:3.16.4")
+    implementation("org.redisson:redisson-spring-boot-starter:3.16.4")
+
+    runtimeOnly("mysql:mysql-connector-java:5.1.49")
+
+    compileOnly("org.projectlombok:lombok:1.18.22")
+    annotationProcessor("org.projectlombok:lombok:1.18.22")
+}
