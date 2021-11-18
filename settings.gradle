@@ -24,3 +24,4 @@ dependencyResolutionManagement {
 rootProject.name = 'java-study'
 
 include("mybatis:mybatis-cache")
+include("java-core:java-design-pattern")
