@@ -7,8 +7,9 @@ spring:
     password: 123456
     driver-class-name: com.mysql.jdbc.Driver
   redis:
-    host: localhost
-    port: 16379
+    redisson:
+      # https://github.com/redisson/redisson/issues/2229
+      file: file:///d/redisson.yaml
 mybatis-plus:
   global-config:
     db-config:

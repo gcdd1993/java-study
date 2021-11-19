@@ -20,7 +20,7 @@ import java.io.Serializable;
                 @Property(name = "timeToLive", value = "200000"),
                 @Property(name = "maxIdleTime", value = "100000"),
                 @Property(name = "maxSize", value = "100000"),
-                @Property(name = "redissonConfig", value = "/redisson.yaml")
+                @Property(name = "redissonConfig", value = "redisson.yaml")
         }
 )
 @Mapper
