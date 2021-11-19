@@ -1,14 +1,9 @@
 package io.github.gcdd1993.mybatis.cache.config;
 
 import org.apache.ibatis.cache.Cache;
-import org.redisson.Redisson;
 import org.redisson.api.RMapCache;
 import org.redisson.api.RedissonClient;
-import org.redisson.config.Config;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReadWriteLock;
 
@@ -27,6 +22,11 @@ public class RedissonCache implements Cache {
 
     public RedissonCache(String id) {
         this.id = id;
+        RedissonClient redissonClient = SpringUtil.getBean(RedissonClient.class);
+        mapCache = getMapCache(id, redissonClient);
+        if (maxSize > 0) {
+            mapCache.setMaxSize(maxSize);
+        }
     }
 
     @Override
@@ -85,20 +85,20 @@ public class RedissonCache implements Cache {
     }
 
     public void setRedissonConfig(String config) {
-        Config cfg;
-        try {
-            // getClass()是相对路径，而getClassLoader是取Jar内
-            InputStream is = getClass().getClassLoader().getResourceAsStream(config);
-            cfg = Config.fromYAML(is);
-        } catch (IOException e) {
-            throw new IllegalArgumentException("Can't parse config", e);
-        }
-
-        RedissonClient redisson = Redisson.create(cfg);
-        mapCache = getMapCache(id, redisson);
-        if (maxSize > 0) {
-            mapCache.setMaxSize(maxSize);
-        }
+//        Config cfg;
+//        try {
+//            // getClass()是相对路径，而getClassLoader是取Jar内
+//            InputStream is = getClass().getClassLoader().getResourceAsStream(config);
+//            cfg = Config.fromYAML(is);
+//        } catch (IOException e) {
+//            throw new IllegalArgumentException("Can't parse config", e);
+//        }
+//
+//        RedissonClient redisson = Redisson.create(cfg);
+//        mapCache = getMapCache(id, redisson);
+//        if (maxSize > 0) {
+//            mapCache.setMaxSize(maxSize);
+//        }
     }
 
     protected RMapCache<Object, Object> getMapCache(String id, RedissonClient redisson) {

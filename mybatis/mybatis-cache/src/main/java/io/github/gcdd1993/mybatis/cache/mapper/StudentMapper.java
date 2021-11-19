@@ -1,12 +1,12 @@
 package io.github.gcdd1993.mybatis.cache.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import io.github.gcdd1993.mybatis.cache.config.RedissonCache;
 import io.github.gcdd1993.mybatis.cache.model.StudentPo;
 import org.apache.ibatis.annotations.CacheNamespace;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Property;
-import org.redisson.mybatis.RedissonCache;
 
 import java.io.Serializable;
 
@@ -19,8 +19,7 @@ import java.io.Serializable;
         properties = {
                 @Property(name = "timeToLive", value = "200000"),
                 @Property(name = "maxIdleTime", value = "100000"),
-                @Property(name = "maxSize", value = "100000"),
-                @Property(name = "redissonConfig", value = "redisson.yaml")
+                @Property(name = "maxSize", value = "100000")
         }
 )
 @Mapper
