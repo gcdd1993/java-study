@@ -151,9 +151,9 @@ Lambda 表达式的结构
 #### 示例
 
 ```java
-Predicate<Integer> predicate = (i) -> i + 0;
+Predicate<Integer> predicate = (i) -> i > 0;
 Consumer<Integer> consumer = (i) -> System.out.println("consumer : " + i);
-Function<Integer, Boolean> function = (i) -> i> 0;
+Function<Integer, Boolean> function = (i) -> i > 0;
 Supplier<Integer> supplier = () -> 1;
 UnaryOperator<Integer> unaryOperator = (i) -> i * i;
 BinaryOperator<Integer> binaryOperator = (i1,i2) -> i1 * i2;

@@ -22,7 +22,7 @@ public class StudentController {
      * 新增后是否会刷新二级缓存？
      */
     @PostMapping
-    public StudentPo create(StudentPo po) {
+    public StudentPo create(@RequestBody StudentPo po) {
         var res = studentMapper.insert(po);
         if (res > 0) {
             return po;

@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="io.github.gcdd1993.mybatis.cache.mapper.StudentMapper">
-    <cache type="org.redisson.mybatis.RedissonCache">
-        <property name="timeToLive" value="200000"/>
-        <property name="maxIdleTime" value="100000"/>
-        <property name="maxSize" value="100000"/>
-        <property name="redissonConfig" value="redisson.yaml"/>
-    </cache>
-    <!-- 开启二级缓存 -->
-    <!--    <cache eviction="LRU" flushInterval="100000" readOnly="true" size="1024">-->
+    <!--    <cache type="org.redisson.mybatis.RedissonCache">-->
+    <!--        <property name="timeToLive" value="200000"/>-->
+    <!--        <property name="maxIdleTime" value="100000"/>-->
+    <!--        <property name="maxSize" value="100000"/>-->
+    <!--        <property name="redissonConfig" value="redisson.yaml"/>-->
     <!--    </cache>-->
+    <!-- 开启二级缓存 -->
+    <cache-ref namespace="io.github.gcdd1993.mybatis.cache.mapper.StudentMapper"/>
     <select id="selectById" resultType="io.github.gcdd1993.mybatis.cache.model.StudentPo">
         select *
         from student
