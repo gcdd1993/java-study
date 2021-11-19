@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="io.github.gcdd1993.mybatis.cache.mapper.StudentMapper">
-    <!--    <cache type="org.redisson.mybatis.RedissonCache">-->
+<!--    <cache type="io.github.gcdd1993.mybatis.cache.config.RedissonCache">-->
     <!--        <property name="timeToLive" value="200000"/>-->
     <!--        <property name="maxIdleTime" value="100000"/>-->
     <!--        <property name="maxSize" value="100000"/>-->
