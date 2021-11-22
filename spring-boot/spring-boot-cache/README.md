@@ -167,3 +167,53 @@ LRU（最近最少使用）。你可以设置为FIFO（先进先出）或是LFU�
 </ehcache>
 ```
 
+`EhCache`虽好，但也只是单机缓存，不适用于大规模集群部署的情况，不然必然会导致节点间缓存不一致，这时候推荐使用`Redis`作为分布式缓存
+
+## Redis
+
+添加依赖
+
+```groovy
+implementation("org.springframework.boot:spring-boot-starter-cache")
+implementation("org.springframework.boot:spring-boot-starter-data-redis")
+```
+
+为待缓存的类添加序列化接口
+
+```java
+@Data
+public class Student implements Serializable {
+    private static long serialVersionUID = -5493549786509863275L;
+
+    private Long id;
+    private String name;
+    private Integer age;
+}
+```
+
+切换缓存类型为`Redis`，并添加`redis`配置
+
+```yaml
+spring:
+  cache:
+    type: redis
+    redis:
+      key-prefix: "redis-key-test:" # 键前缀
+      time-to-live: 1d
+  redis:
+  	host: localhost
+    port: 16379
+```
+
+启动项目，请求接口，结果与`Ehcache`一致，查看`Redis`，发现缓存已经写入，与期望一致
+
+![image-20211122151729863](https://cdn.jsdelivr.net/gh/gcdd1993/image-repo/img/20211122151732.png)
+
+其他类型的缓存，切换方式基本一致，只能感叹一句，`SpringBoot`牛逼
+
+# Spring缓存管理
+
+# Spring缓存实现细节
+
+# 集成ASpectJ编译
+
