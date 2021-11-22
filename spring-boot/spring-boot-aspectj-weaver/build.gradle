@@ -1,6 +1,35 @@
+plugins {
+    id "io.freefair.aspectj.post-compile-weaving" version "5.3.3.3"
+}
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-cache")
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
+    implementation("org.springframework.boot:spring-boot-starter-aop")
     implementation("com.github.jsonzou:jmockdata")
+
+    implementation("org.aspectj:aspectjrt:${aspectj_version}")
+    implementation("org.springframework:spring-aspects")
+}
+
+compileJava {
+    ajc {
+        enabled = true
+        classpath
+        options {
+            aspectpath.setFrom configurations.aspect
+            compilerArgs = []
+        }
+    }
+}
+
+compileTestJava {
+    ajc {
+        enabled = true
+        classpath
+        options {
+            aspectpath.setFrom configurations.testAspect
+            compilerArgs = []
+        }
+    }
 }

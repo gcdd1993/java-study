@@ -114,3 +114,4 @@ hs_err_pid*
 # Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
 !gradle-wrapper.jar
 .idea
+!aspectjweaver-1.9.7.jar
