@@ -2,6 +2,7 @@ package io.github.gcdd1993.java.study.springboot.cache.ehcache;
 
 import com.github.jsonzou.jmockdata.JMockData;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +19,7 @@ import java.util.stream.IntStream;
 @RequestMapping("/api/student")
 public class StudentController {
 
+    @Cacheable(cacheNames = "student_list")
     @GetMapping
     public List<Student> listAll() {
         log.info("随机生成10个学生信息");

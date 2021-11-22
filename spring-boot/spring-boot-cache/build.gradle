@@ -1,0 +1,7 @@
+dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-cache")
+    implementation("com.github.jsonzou:jmockdata")
+//    implementation("org.ehcache:ehcache:3.9.7")
+    implementation("net.sf.ehcache:ehcache:2.10.9.2")
+}

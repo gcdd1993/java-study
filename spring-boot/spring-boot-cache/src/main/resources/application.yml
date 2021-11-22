@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: spring-cache-ehcache
+  cache:
+    type: ehcache
