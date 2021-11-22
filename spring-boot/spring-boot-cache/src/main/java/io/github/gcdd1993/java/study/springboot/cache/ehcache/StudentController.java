@@ -29,4 +29,13 @@ public class StudentController {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * 直接调用带缓存的listAll()
+     * 缓存无法生效，每次都打印"随机生成10个学生信息"
+     */
+    @GetMapping("/list1")
+    public List<Student> listAll1() {
+        return listAll();
+    }
+
 }

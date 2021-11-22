@@ -213,7 +213,69 @@ spring:
 
 # Spring缓存管理
 
+在`org.springframework.cache.annotation`，提供了一系列注解，以供缓存的生命周期管理。
+
+## @Cacheable
+
+> `@Cacheble`表示这个方法有了缓存的功能，方法的返回值会被缓存下来，下一次调用该方法前，会去检查是否缓存中已经有值，如果有就直接返回，不调用方法。如果没有，就调用方法，然后把结果缓存起来。
+
+这个注解**一般用在查询方法上**。
+
+## @CachePut
+
+> 加了`@CachePut`注解的方法，会把方法的返回值put到缓存里面缓存起来，供其它地方使用。
+
+它**通常用在新增方法上**。
+
+## @CacheEvict
+
+> 使用了`CacheEvict`注解的方法，会清空指定缓存。
+
+**一般用在更新或者删除的方法上**。
+
+## @Caching
+
+Java注解的机制决定了，一个方法上只能有一个相同的注解生效。那有时候可能一个方法会操作多个缓存（这个在删除缓存操作中比较常见，在添加操作中不太常见）。
+
+`Spring Cache`当然也考虑到了这种情况，`@Caching`注解就是用来解决这类情况的，可以指定多个缓存注解。
+
+```java
+public @interface Caching {
+    Cacheable[] cacheable() default {};
+    CachePut[] put() default {};
+    CacheEvict[] evict() default {};
+}
+```
+
+## @CacheConfig
+
+> 它是一个类级别的注解，可以在类级别上配置`cacheNames`、`keyGenerator`、`cacheManager`、`cacheResolver`等。
+
+一般来说，为了避免发生**缓存 - DB**不一致的情况，都是采取删除缓存，等到下次读取时，再写入缓存并返回的方式进行缓存的管理，所以较常用的注解是`@Cacheable`和`@CacheEvict`，如果使用`@CachePut`，就有可能会出现缓存数据不一致的情况，所以谨慎使用。
+
 # Spring缓存实现细节
 
-# 集成ASpectJ编译
 
+
+# 集成ASpectJ编译
+由于`Spring AOP`基于动态代理技术，所以有如下限制
+
+- 注解修饰的类或方法必须不是`final`的且是`public`的（`protected`应该也行），只要能被继承就行
+- 无法作用于内部调用
+
+在上面例子的基础上，添加`/list1`接口
+
+```java
+@GetMapping("/list1")
+public List<Student> listAll1() {
+    return listAll();
+}
+```
+
+直接调用带缓存的`listAll()`方法，但是发现缓存无法生效，每次都会打印”随机生成10个学生信息“。
+
+```
+2021-11-22 15:42:27.867  INFO 16676 --- [nio-8080-exec-5] i.g.g.j.s.s.c.ehcache.StudentController  : 随机生成10个学生信息
+2021-11-22 15:42:29.112  INFO 16676 --- [nio-8080-exec-6] i.g.g.j.s.s.c.ehcache.StudentController  : 随机生成10个学生信息
+2021-11-22 15:42:29.932  INFO 16676 --- [nio-8080-exec-7] i.g.g.j.s.s.c.ehcache.StudentController  : 随机生成10个学生信息
+```
