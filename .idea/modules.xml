@@ -18,6 +18,18 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/mybatis/mybatis-cache/java-study.mybatis.mybatis-cache.main.iml" filepath="$PROJECT_DIR$/.idea/modules/mybatis/mybatis-cache/java-study.mybatis.mybatis-cache.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/mybatis/mybatis-cache/java-study.mybatis.mybatis-cache.test.iml" filepath="$PROJECT_DIR$/.idea/modules/mybatis/mybatis-cache/java-study.mybatis.mybatis-cache.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/mybatis/java-study.mybatis.test.iml" filepath="$PROJECT_DIR$/.idea/modules/mybatis/java-study.mybatis.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/spring-boot/java-study.spring-boot.iml" filepath="$PROJECT_DIR$/.idea/modules/spring-boot/java-study.spring-boot.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/spring-boot/java-study.spring-boot.main.iml" filepath="$PROJECT_DIR$/.idea/modules/spring-boot/java-study.spring-boot.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/spring-boot/spring-cache-ehcache/java-study.spring-boot.spring-cache-ehcache.iml" filepath="$PROJECT_DIR$/.idea/modules/spring-boot/spring-cache-ehcache/java-study.spring-boot.spring-cache-ehcache.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/spring-boot/spring-cache-ehcache/java-study.spring-boot.spring-cache-ehcache.main.iml" filepath="$PROJECT_DIR$/.idea/modules/spring-boot/spring-cache-ehcache/java-study.spring-boot.spring-cache-ehcache.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/spring-boot/spring-cache-ehcache/java-study.spring-boot.spring-cache-ehcache.test.iml" filepath="$PROJECT_DIR$/.idea/modules/spring-boot/spring-cache-ehcache/java-study.spring-boot.spring-cache-ehcache.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/spring-boot/java-study.spring-boot.test.iml" filepath="$PROJECT_DIR$/.idea/modules/spring-boot/java-study.spring-boot.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/spring-cloud/java-study.spring-cloud.iml" filepath="$PROJECT_DIR$/.idea/modules/spring-cloud/java-study.spring-cloud.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/spring-cloud/java-study.spring-cloud.main.iml" filepath="$PROJECT_DIR$/.idea/modules/spring-cloud/java-study.spring-cloud.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/spring-cloud/spring-cloud-gateway/java-study.spring-cloud.spring-cloud-gateway.iml" filepath="$PROJECT_DIR$/.idea/modules/spring-cloud/spring-cloud-gateway/java-study.spring-cloud.spring-cloud-gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/spring-cloud/spring-cloud-gateway/java-study.spring-cloud.spring-cloud-gateway.main.iml" filepath="$PROJECT_DIR$/.idea/modules/spring-cloud/spring-cloud-gateway/java-study.spring-cloud.spring-cloud-gateway.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/spring-cloud/spring-cloud-gateway/java-study.spring-cloud.spring-cloud-gateway.test.iml" filepath="$PROJECT_DIR$/.idea/modules/spring-cloud/spring-cloud-gateway/java-study.spring-cloud.spring-cloud-gateway.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/spring-cloud/java-study.spring-cloud.test.iml" filepath="$PROJECT_DIR$/.idea/modules/spring-cloud/java-study.spring-cloud.test.iml" />
     </modules>
   </component>
 </project>

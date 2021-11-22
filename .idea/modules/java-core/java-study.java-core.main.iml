@@ -6,5 +6,6 @@
     <content url="file://$MODULE_DIR$/../../../java-core/src/main" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.projectlombok:lombok:1.18.22" level="project" />
   </component>
 </module>

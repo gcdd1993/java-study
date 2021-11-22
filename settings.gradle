@@ -26,3 +26,5 @@ rootProject.name = 'java-study'
 include("mybatis:mybatis-cache")
 include("java-core:java-design-pattern")
 include("java-core:new-feature-java8")
+include("spring-boot:spring-cache-ehcache")
+include("spring-cloud:spring-cloud-gateway")

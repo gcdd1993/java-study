@@ -61,3 +61,11 @@ Cache Hit Ratio [io.github.gcdd1993.mybatis.cache.mapper.StudentMapper]: 0.5
 
 自己写的方法
 
+```bash
+Cache Hit Ratio [io.github.gcdd1993.mybatis.cache.mapper.StudentMapper]: 0.6
+```
+
+都可以命中缓存。
+
+虽然搞了大半天，搞起来了二级缓存，但是部署到服务器后，效果并不好，有些接口甚至还比不用缓存更慢了，还是使用业务缓存吧
+

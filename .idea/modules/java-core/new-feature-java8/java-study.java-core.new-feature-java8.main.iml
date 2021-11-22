@@ -3,6 +3,9 @@
   <component name="NewModuleRootManager">
     <output url="file://$MODULE_DIR$/../../../../java-core/new-feature-java8/build/classes/java/main" />
     <exclude-output />
+    <content url="file://$MODULE_DIR$/../../../../java-core/new-feature-java8/build/generated/sources/annotationProcessor/java/main">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../java-core/new-feature-java8/build/generated/sources/annotationProcessor/java/main" isTestSource="false" generated="true" />
+    </content>
     <content url="file://$MODULE_DIR$/../../../../java-core/new-feature-java8/src/main">
       <sourceFolder url="file://$MODULE_DIR$/../../../../java-core/new-feature-java8/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../../../java-core/new-feature-java8/src/main/java" isTestSource="false" />
@@ -11,5 +14,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.projectlombok:lombok:1.18.22" level="project" />
   </component>
 </module>
