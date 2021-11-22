@@ -279,3 +279,107 @@ public List<Student> listAll1() {
 2021-11-22 15:42:29.112  INFO 16676 --- [nio-8080-exec-6] i.g.g.j.s.s.c.ehcache.StudentController  : 随机生成10个学生信息
 2021-11-22 15:42:29.932  INFO 16676 --- [nio-8080-exec-7] i.g.g.j.s.s.c.ehcache.StudentController  : 随机生成10个学生信息
 ```
+
+这时候，我们可以切换`Spring Aop`的`AdviceMode`（织入方式）来实现AOP内部调用。
+
+具体步骤如下
+
+> 以下以Gradle工程示例
+
+## 引入Gradle插件
+
+```groovy
+plugins {
+    id "io.freefair.aspectj.post-compile-weaving" version "5.3.3.3"
+}
+```
+
+## 配置Gradle任务
+
+```groovy
+compileJava {
+    ajc {
+        enabled = true
+        classpath
+        options {
+            aspectpath.setFrom configurations.aspect
+            compilerArgs = []
+        }
+    }
+}
+
+compileTestJava {
+    ajc {
+        enabled = true
+        classpath
+        options {
+            aspectpath.setFrom configurations.testAspect
+            compilerArgs = []
+        }
+    }
+}
+```
+
+## 修改AdviceMode
+
+```java
+@EnableCaching(mode = AdviceMode.ASPECTJ) // 修改为AdviceMode.ASPECTJ
+@Slf4j
+@SpringBootApplication
+public class SpringAspectJWeaverSampleApplication {
+    public static void main(String[] args) {
+        try {
+            SpringApplication.run(SpringAspectJWeaverSampleApplication.class, args);
+        } catch (Exception ex) {
+            log.error("app run error", ex);
+            System.exit(-1);
+        }
+    }
+}
+```
+
+由于织入是在编译时进行，所以本地运行需要添加`javaagent`
+
+## 添加运行时VM参数
+
+```bash
+java -jar xxx.jar -javaagent:gradle/aspectjweaver-1.9.7.jar
+```
+
+IDEA里面可以直接在运行配置中添加
+
+![image-20211122170956715](https://cdn.jsdelivr.net/gh/gcdd1993/image-repo/img/20211122170959.png)
+
+我们再次运行工程，会发现如下日志
+
+```
+[AppClassLoader@1f89ab83] warning javax.* types are not being woven because the weaver option '-Xset:weaveJavaxPackages=true' has not been specified
+...
+[AppClassLoader@1f89ab83] error can't determine implemented interfaces of missing type javax.mail.Session
+when weaving type org.springframework.mail.javamail.JavaMailSenderImpl
+when weaving classes 
+when weaving 
+ [Xlint:cantFindType]
+[AppClassLoader@1f89ab83] error can't determine implemented interfaces of missing type javax.mail.Session
+when weaving type org.springframework.mail.javamail.JavaMailSenderImpl
+when weaving classes 
+when weaving 
+ [Xlint:cantFindType]
+[AppClassLoader@1f89ab83] error can't determine implemented interfaces of missing type javax.mail.Session
+when weaving type org.springframework.mail.javamail.JavaMailSenderImpl
+when weaving classes 
+when weaving 
+ [Xlint:cantFindType]
+[AppClassLoader@1f89ab83] error can't determine implemented interfaces of missing type javax.activation.FileTypeMap
+when weaving type org.springframework.mail.javamail.JavaMailSenderImpl
+when weaving classes 
+when weaving 
+...
+```
+
+证明切换织入方式成功，这时候再次请求接口，会发现内部调用也能成功使用缓存了
+
+## 参考资料
+
+- [io_freefair_aspectj_post_compile_weaving](https://docs.freefair.io/gradle-plugins/6.3.0/reference/#_io_freefair_aspectj_post_compile_weaving)
+- [Spring Boot教程(20) – 用AspectJ实现AOP内部调用](https://fookwood.com/spring-boot-tutorial-20-aspectj)
