@@ -7,7 +7,9 @@ package compositePattern.exercise;
 //抽象构件
 public interface IComponent {
     void add(IComponent component);
+
     void remove(IComponent component);
+
     /**
      * 模拟控件方法
      */

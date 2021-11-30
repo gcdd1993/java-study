@@ -8,7 +8,7 @@ public enum Calculator {
     /**
      * 加
      */
-    ADD{
+    ADD {
         @Override
         public double calculate(double d1, double d2) {
             return d1 + d2;
@@ -42,5 +42,5 @@ public enum Calculator {
         }
     };
 
-    public abstract double calculate(double d1,double d2);
+    public abstract double calculate(double d1, double d2);
 }

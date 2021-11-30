@@ -1,7 +1,5 @@
 package iteratorPattern;
 
-import lombok.Data;
-
 import java.util.List;
 
 /**

@@ -1,7 +1,5 @@
 package flyweightPattern.exercise;
 
-import javax.print.attribute.standard.Media;
-
 /**
  * @author: gaochen
  * Date: 2019/1/21

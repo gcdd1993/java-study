@@ -28,4 +28,17 @@ public class Example01 {
             System.out.println("sum=" + sum);
         }
     }
+
+    public static class Solution03 {
+        public static void main(String[] args) {
+            int sum = 0;//执行1次
+            int n = 100;//执行1次
+            for (int i = 1; i <= n; i++) {
+                for (int j = 1; j <= n; j++) {
+                    sum += i;//执行n^2次
+                }
+            }
+            System.out.println("sum=" + sum);
+        }
+    }
 }

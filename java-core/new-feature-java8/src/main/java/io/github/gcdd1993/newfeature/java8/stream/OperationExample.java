@@ -1,22 +1,23 @@
 package io.github.gcdd1993.newfeature.java8.stream;
 
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
 
 /**
  * Created by gaochen on 2018/8/2.
  * Intermediate：一个流可以后面跟随零个或多个 intermediate 操作。
  * 其目的主要是打开流，做出某种程度的数据映射/过滤，然后返回一个新的流，
  * 交给下一个操作使用。这类操作都是惰性化的（lazy），就是说，仅仅调用到这类方法，并没有真正开始流的遍历。
- *
+ * <p>
  * map (mapToInt, flatMap 等)、 filter、 distinct、 sorted、 peek、 limit、 skip、 parallel、 sequential、 unordered
  */
 public class OperationExample {
     public static void main(String[] args) {
         Random random = new Random();
         List<Integer> list = new ArrayList<>();
-        for(int i=0;i<10;i++) {
+        for (int i = 0; i < 10; i++) {
             list.add(random.nextInt(10));
         }
         System.out.println("----------------map--------------------");

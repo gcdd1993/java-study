@@ -13,6 +13,7 @@ public class FulltimeEmployee implements Employee {
     private String name;
     private double weeklyWage;
     private int workTime;
+
     @Override
     public void accept(Department handler) {
         handler.visit(this); //调用访问者的访问方法

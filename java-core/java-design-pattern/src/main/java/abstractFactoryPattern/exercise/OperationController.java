@@ -7,6 +7,8 @@ package abstractFactoryPattern.exercise;
 //抽象操作控制类工厂
 public abstract class OperationController {
     public abstract OperationControl symbian();
+
     public abstract OperationControl android();
+
     public abstract OperationControl windowsMobile();
 }

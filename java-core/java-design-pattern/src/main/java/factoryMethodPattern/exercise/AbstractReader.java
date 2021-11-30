@@ -1,7 +1,5 @@
 package factoryMethodPattern.exercise;
 
-import lombok.Data;
-
 /**
  * @author: gaochen
  * Date: 2019/1/20

@@ -10,5 +10,6 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public abstract class AbstractHandler {
     protected AbstractHandler next; //责任链下一个
+
     public abstract void handle(Staff staff);
 }

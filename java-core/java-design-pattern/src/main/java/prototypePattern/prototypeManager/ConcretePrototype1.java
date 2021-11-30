@@ -18,7 +18,7 @@ public class ConcretePrototype1 implements Prototype {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "Now in Prototype1 , name = " + this.name;
     }
 }

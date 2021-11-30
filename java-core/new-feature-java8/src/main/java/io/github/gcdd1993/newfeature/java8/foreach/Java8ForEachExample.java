@@ -11,7 +11,7 @@ import java.util.function.Consumer;
 public class Java8ForEachExample {
     public static void main(String[] args) {
         List<Integer> myList = new ArrayList<Integer>();
-        for(int i=0; i<10; i++) myList.add(i);
+        for (int i = 0; i < 10; i++) myList.add(i);
 
         //使用iterator
         Iterator<Integer> iterator = myList.iterator();
@@ -24,7 +24,7 @@ public class Java8ForEachExample {
         myList.forEach(new Consumer<Integer>() {
 
             public void accept(Integer t) {
-                System.out.println("forEach anonymous class Value::"+t);
+                System.out.println("forEach anonymous class Value::" + t);
             }
 
         });
@@ -43,7 +43,7 @@ public class Java8ForEachExample {
 class MyConsumer implements Consumer<Integer> {
 
     public void accept(Integer t) {
-        System.out.println("Consumer impl Value::"+t);
+        System.out.println("Consumer impl Value::" + t);
     }
 
 }

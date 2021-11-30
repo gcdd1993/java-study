@@ -29,10 +29,9 @@ public class RestrictedState extends AccountState {
     //状态转换
     @Override
     public void stateCheck() {
-        if(acc.getBalance() > 0) {
+        if (acc.getBalance() > 0) {
             acc.setState(new NormalState(this));
-        }
-        else if(acc.getBalance() > -2000) {
+        } else if (acc.getBalance() > -2000) {
             acc.setState(new OverdraftState(this));
         }
     }

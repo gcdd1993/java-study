@@ -9,9 +9,13 @@ public abstract class AbstractBuilder {
     protected static StringBuffer sb = new StringBuffer(); //模拟视频播放软件
 
     public abstract void memu(); //菜单
+
     public abstract void playlist(); //播放列表
+
     public abstract void mainWindow(); //主窗口
+
     public abstract void controlStrip(); //控制条
+
     public abstract void favoritesList(); //收藏列表
 
     //完整模式

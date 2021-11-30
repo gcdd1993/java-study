@@ -1,6 +1,9 @@
 package io.github.gcdd1993.newfeature.java8.stream;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -20,7 +23,7 @@ public class Example1 {
     public static void main(String[] args) throws IOException {
         //从 Collection 和数组
         List<Integer> list = new ArrayList<>();
-        for(int i=0;i<100;i++) {
+        for (int i = 0; i < 100; i++) {
             list.add(i);
         }
         Stream<Integer> stream = list.stream(); //串行流

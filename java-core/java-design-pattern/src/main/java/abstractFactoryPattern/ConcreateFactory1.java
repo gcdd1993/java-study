@@ -1,7 +1,5 @@
 package abstractFactoryPattern;
 
-import factoryMethodPattern.AbstractProductFactory;
-
 /**
  * @author: gaochen
  * Date: 2019/1/14

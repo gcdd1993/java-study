@@ -7,6 +7,6 @@ package templateMethodPattern;
 public class Client {
     public static void main(String[] args) {
         Account account = new CurrentAccount();
-        account.handle("张无忌","123456");
+        account.handle("张无忌", "123456");
     }
 }

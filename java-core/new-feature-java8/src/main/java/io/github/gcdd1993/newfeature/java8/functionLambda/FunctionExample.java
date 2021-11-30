@@ -1,6 +1,5 @@
 package io.github.gcdd1993.newfeature.java8.functionLambda;
 
-import javax.sound.midi.Soundbank;
 import java.util.function.*;
 
 /**
@@ -18,16 +17,16 @@ public class FunctionExample {
 
         Predicate<Integer> predicate = (i) -> i > 0;
         Consumer<Integer> consumer = (i) -> System.out.println("consumer : " + i);
-        Function<Integer,Boolean> function = (i) -> i > 0;
+        Function<Integer, Boolean> function = (i) -> i > 0;
         Supplier<Integer> supplier = () -> 1;
         UnaryOperator<Integer> unaryOperator = (i) -> i * i;
-        BinaryOperator<Integer> binaryOperator = (i1,i2) -> i1 * i2;
+        BinaryOperator<Integer> binaryOperator = (i1, i2) -> i1 * i2;
 
         System.out.println(predicate.test(10));
         consumer.accept(10);
         System.out.println(function.apply(10));
         System.out.println(supplier.get());
         System.out.println(unaryOperator.apply(100));
-        System.out.println(binaryOperator.apply(100,200));
+        System.out.println(binaryOperator.apply(100, 200));
     }
 }

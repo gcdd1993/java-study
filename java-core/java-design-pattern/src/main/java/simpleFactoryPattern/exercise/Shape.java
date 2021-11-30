@@ -8,6 +8,7 @@ package simpleFactoryPattern.exercise;
 public interface Shape {
     //绘制
     void draw();
+
     //擦除
     void erase();
 }
