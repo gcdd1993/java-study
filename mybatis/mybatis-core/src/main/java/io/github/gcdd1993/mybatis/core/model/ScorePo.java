@@ -1,4 +1,4 @@
-package io.github.gcdd1993.mybatis.cache.model;
+package io.github.gcdd1993.mybatis.core.model;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;

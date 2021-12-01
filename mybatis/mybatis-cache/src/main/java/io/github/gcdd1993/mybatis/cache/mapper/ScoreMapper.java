@@ -1,7 +1,7 @@
 package io.github.gcdd1993.mybatis.cache.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import io.github.gcdd1993.mybatis.cache.model.ScorePo;
+import io.github.gcdd1993.mybatis.core.model.ScorePo;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

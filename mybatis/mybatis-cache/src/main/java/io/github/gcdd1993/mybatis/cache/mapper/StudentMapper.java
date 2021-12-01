@@ -2,7 +2,7 @@ package io.github.gcdd1993.mybatis.cache.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import io.github.gcdd1993.mybatis.cache.config.RedissonCache;
-import io.github.gcdd1993.mybatis.cache.model.StudentPo;
+import io.github.gcdd1993.mybatis.core.model.StudentPo;
 import org.apache.ibatis.annotations.CacheNamespace;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

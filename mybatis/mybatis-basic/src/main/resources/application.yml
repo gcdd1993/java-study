@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: mybatis-basic
+  datasource:
+    url: jdbc:mysql://localhost:3306/db_example?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+  redis:
+    port: 16379
+    #    redisson:
+    # https://github.com/redisson/redisson/issues/2229
+#      file: file:///d/redisson.yaml
+mybatis-plus:
+  global-config:
+    db-config:
+      update-strategy: ignored
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+    cache-enabled: true
+  mapper-locations: "classpath:mappers/*.xml"
+logging:
+  level:
+    "io.github.gcdd1993.mybatis.cache.mapper": debug
+server:
+  port: 9090

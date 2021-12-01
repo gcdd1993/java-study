@@ -29,7 +29,7 @@ public interface StudentMapper extends BaseMapper<StudentPo> {
 <mapper namespace="io.github.gcdd1993.mybatis.cache.mapper.StudentMapper">
     <!-- 开启二级缓存 -->
     <cache-ref namespace="io.github.gcdd1993.mybatis.cache.mapper.StudentMapper"/>
-    <select id="selectById" resultType="io.github.gcdd1993.mybatis.cache.model.StudentPo">
+    <select id="selectById" resultType="io.github.gcdd1993.mybatis.core.model.StudentPo">
         select *
         from student
         where id = #{id}

@@ -2,7 +2,7 @@ package io.github.gcdd1993.mybatis.cache.controller;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import io.github.gcdd1993.mybatis.cache.mapper.StudentMapper;
-import io.github.gcdd1993.mybatis.cache.model.StudentPo;
+import io.github.gcdd1993.mybatis.core.model.StudentPo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;

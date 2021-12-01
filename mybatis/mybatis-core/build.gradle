@@ -1,0 +1,11 @@
+plugins {
+    id "java-library"
+}
+dependencies {
+    api("org.springframework.boot:spring-boot-starter-web")
+    api("com.baomidou:mybatis-plus-boot-starter:3.4.3.4")
+    compileOnly("org.redisson:redisson-mybatis:3.16.4")
+
+    compileOnly("org.projectlombok:lombok:1.18.22")
+    annotationProcessor("org.projectlombok:lombok:1.18.22")
+}
