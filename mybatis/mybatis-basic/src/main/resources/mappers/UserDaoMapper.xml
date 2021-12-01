@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- mapper:根标签，namespace：命名空间，随便写，一般保证命名空间唯一 -->
+<mapper namespace="io.github.gcdd1993.mybatis.basic.mapper.UserDao">
+    <!-- statement，内容：sql语句。id：唯一标识，随便写，在同一个命名空间下保持唯一
+       resultType：sql语句查询结果集的封装类型,tb_user即为数据库中的表
+     -->
+    <!--<select id="queryUserById" resultType="io.github.gcdd1993.mybatis.core.model.User">-->
+    <!--select * from tb_user where id = #{id}-->
+    <!--</select>-->
+
+    <!--使用别名-->
+    <select id="queryUserById" resultType="io.github.gcdd1993.mybatis.core.model.User">
+        select tuser.id        as id,
+               tuser.user_name as userName,
+               tuser.password  as password,
+               tuser.name      as name,
+               tuser.age       as age,
+               tuser.birthday  as birthday,
+               tuser.sex       as sex,
+               tuser.created   as created,
+               tuser.updated   as updated
+        from tb_user tuser
+        where tuser.id = #{id};
+    </select>
+
+    <select id="queryUserAll" resultType="io.github.gcdd1993.mybatis.core.model.User">
+        select *
+        from tb_user;
+    </select>
+
+    <!--插入数据-->
+    <insert id="insertUser" parameterType="io.github.gcdd1993.mybatis.core.model.User">
+        INSERT INTO tb_user (user_name,
+                             password,
+                             name,
+                             age,
+                             sex,
+                             birthday,
+                             created,
+                             updated)
+        VALUES (#{userName},
+                #{password},
+                #{name},
+                #{age},
+                #{sex},
+                #{birthday},
+                now(),
+                now());
+    </insert>
+
+    <update id="updateUser" parameterType="io.github.gcdd1993.mybatis.core.model.User">
+        UPDATE tb_user
+        <trim prefix="set" suffixOverrides=",">
+            <if test="userName != null">
+                user_name = #{userName},
+            </if>
+            <if test="password != null">
+                password = #{password},
+            </if>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="age != null">
+                age = #{age},
+            </if>
+            <if test="sex != null">
+                sex = #{sex},
+            </if>
+            <if test="birthday != null">
+                birthday = #{birthday},
+            </if>
+            updated = now(),
+        </trim>
+        WHERE (id = #{id});
+    </update>
+
+    <delete id="deleteUser">
+        delete
+        from tb_user
+        where id = #{id}
+    </delete>
+</mapper>
