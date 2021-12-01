@@ -26,6 +26,7 @@ rootProject.name = 'java-study'
 include("mybatis:mybatis-core")
 include("mybatis:mybatis-cache")
 include("mybatis:mybatis-basic")
+include("mybatis:mybatis-pageHelper")
 
 include("java-core:java-design-pattern")
 include("java-core:new-feature-java8")
