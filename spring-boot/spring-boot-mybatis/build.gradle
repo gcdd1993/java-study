@@ -1,0 +1,8 @@
+dependencies {
+    implementation(project(":mybatis:mybatis-core"))
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("com.baomidou:mybatis-plus-boot-starter:3.4.3.4")
+
+    runtimeOnly("mysql:mysql-connector-java:5.1.49")
+    testImplementation("com.github.jsonzou:jmockdata")
+}

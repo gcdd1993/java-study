@@ -34,5 +34,6 @@ include("java-core:structure&algorithm")
 
 include("spring-boot:spring-boot-cache")
 include("spring-boot:spring-boot-aspectj-weaver")
+include("spring-boot:spring-boot-mybatis")
 
 include("spring-cloud:spring-cloud-gateway")

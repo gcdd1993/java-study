@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: spring-boot-mybatis
+  datasource:
+    url: jdbc:mysql://localhost:3306/db_example?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+mybatis-plus:
+  global-config:
+    db-config:
+      update-strategy: ignored
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+  mapper-locations: "classpath:mappers/*.xml" # *.xml配置文件目录

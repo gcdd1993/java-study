@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="io.github.gcdd1993.java.study.springboot.mybatis.mapper.StudentMapper">
+    <select id="findByName" resultType="io.github.gcdd1993.mybatis.core.model.StudentPo">
+        select *
+        from student
+        where name = #{name}
+    </select>
+</mapper>
