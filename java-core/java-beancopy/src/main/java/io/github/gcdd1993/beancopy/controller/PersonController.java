@@ -39,4 +39,14 @@ public class PersonController {
                 .collect(Collectors.toUnmodifiableList());
     }
 
+    @GetMapping("/2")
+    public List<PersonPo> list2() {
+        return IntStream.range(0, 20)
+                .boxed()
+                .map(__ -> JMockData.mock(PersonVo.class))
+//                .map(__ -> personConverter.po2Vo(__))
+                .map(__ -> conversionService.convert(__, PersonPo.class)) // 直接使用Spring ConversionService
+                .collect(Collectors.toUnmodifiableList());
+    }
+
 }
