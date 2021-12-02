@@ -3,6 +3,9 @@ dependencies {
 
     implementation("com.github.jsonzou:jmockdata")
 
+    implementation("org.mapstruct.extensions.spring:mapstruct-spring-annotations:0.1.0")
+    annotationProcessor("org.mapstruct.extensions.spring:mapstruct-spring-extensions:0.1.0")
+
     // 只参与编译
     compileOnly("org.mapstruct:mapstruct")
     testImplementation("org.mapstruct:mapstruct")
