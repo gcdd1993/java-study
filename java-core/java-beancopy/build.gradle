@@ -1,5 +1,10 @@
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
 
-    testImplementation("com.github.jsonzou:jmockdata")
+    implementation("com.github.jsonzou:jmockdata")
+
+    // 只参与编译
+    compileOnly("org.mapstruct:mapstruct")
+    testImplementation("org.mapstruct:mapstruct")
+    annotationProcessor("org.mapstruct:mapstruct-processor")
 }
