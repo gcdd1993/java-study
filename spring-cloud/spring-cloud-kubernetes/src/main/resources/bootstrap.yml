@@ -1,0 +1,46 @@
+management:
+  endpoint:
+    restart:
+      enabled: true
+    health:
+      enabled: true
+    info:
+      enabled: true
+spring:
+  application:
+    name: spring-cloud-kubernetes
+  cloud:
+    kubernetes:
+      loadbalancer:
+        # mode: pod # 使用POD IP和端口。
+        mode: service # 使用Kubernetes服务名称和端口。
+      # 设置热更新配置
+      reload:
+        enabled: true
+        mode: polling # 定时拉取或接收事件
+      config:
+        # 读取ConfigMap的配置
+        name: default-name
+        namespace: default-namespace
+        sources:
+          # Spring Cloud Kubernetes looks up a ConfigMap named c1 in namespace default-namespace
+          - name: c1
+          # Spring Cloud Kubernetes looks up a ConfigMap named default-name in whatever namespace n2
+          - namespace: n2
+          # Spring Cloud Kubernetes looks up a ConfigMap named c3 in namespace n3
+          - namespace: n3
+            name: c3
+      secrets:
+        enabled: true
+        name: default-name
+        namespace: default-namespace
+        sources:
+          # Spring Cloud Kubernetes looks up a ConfigMap named c1 in namespace default-namespace
+          - name: c1
+          # Spring Cloud Kubernetes looks up a ConfigMap named default-name in whatever namespace n2
+          - namespace: n2
+          # Spring Cloud Kubernetes looks up a ConfigMap named c3 in namespace n3
+          - namespace: n3
+            name: c3
+      discovery:
+        all-namespaces: true # 跨命名空间通信
