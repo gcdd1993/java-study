@@ -1,0 +1,6 @@
+dependencies {
+    implementation("org.springframework.cloud:spring-cloud-starter-kubernetes-fabric8-loadbalancer")
+    implementation("org.springframework.cloud:spring-cloud-starter-kubernetes-fabric8-config")
+
+
+}
