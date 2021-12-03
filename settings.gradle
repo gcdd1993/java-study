@@ -36,6 +36,7 @@ include("mybatis:mybatis-pageHelper")
 include("spring-boot:spring-boot-cache")
 include("spring-boot:spring-boot-aspectj-weaver")
 include("spring-boot:spring-boot-mybatis")
+include("spring-boot:spring-boot-arthas")
 
 include("spring-cloud:spring-cloud-gateway")
 include("spring-cloud:spring-cloud-kubernetes")

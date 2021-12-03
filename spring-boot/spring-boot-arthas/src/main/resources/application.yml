@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: spring-boot-arthas
+arthas:
+  tunnel-server: "ws://127.0.0.1:7777/ws" # 外部arthas-tunnel-server地址
+  # app-name: ${spring.application.name} # 默认使用的就是spring.application.name
+  # agent-id: ${spring.application.name}-${random.uuid} # 这么配置是错误的，生成的agent-id不符合要求，实际上，默认就会生成唯一的agent-id：app-name_随机字符串
+server:
+  port: 9090

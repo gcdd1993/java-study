@@ -1,0 +1,9 @@
+version: "3.1"
+
+services:
+  arthas-tunnel-server:
+    image: leixuewen/arthas-tunnel-server:3.5.4
+    restart: unless-stopped
+    ports:
+      - "7777:7777"
+      - "30192:8080"
