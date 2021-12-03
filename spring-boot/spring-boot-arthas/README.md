@@ -87,7 +87,73 @@ emm...，界面是有点朴素了点。如果能加个一键连接就好了。�
 
 ## Docker下使用
 
+### 使用的基础镜像必须是jdk，而不能是jre，否则启动时会出现
 
+推荐使用`adoptopenjdk/openjdk11-openj9:alpine-slim`，应该是我所知道的最小的带jdk的基础镜像了，虽然跟`alpine-jre`比起来还是很大（大了100多MB）
+
+![Image](https://cdn.jsdelivr.net/gh/gcdd1993/image-repo@master/img/202112031641407.png)
+
+## Nginx代理，配置SSL
+
+使用以下配置，无法连接上WebSocket，有空再回来研究。
+
+像这种服务，也没必要非得使用域名，直接访问挺好。。。
+
+```nginx
+upstream arthas.server {
+    server 127.0.0.1:8080;
+}
+upstream arthas.ws {
+    server 127.0.0.1:7778;
+}
+server {
+    server_name arthas.gcdd.top;
+
+    proxy_read_timeout 600s;
+    proxy_send_timeout 600s;
+
+    location / {
+        add_header X-Frame-Options deny;
+        proxy_pass http://arthas.server;
+    }
+
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/arthas.gcdd.top/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/arthas.gcdd.top/privkey.pem;
+    include /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+
+
+    server_tokens off;
+}
+server {
+    listen 7778;
+
+    location / {
+        if ($request_method = 'OPTIONS') {
+            return 204;
+        }
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_pass http://arthas.ws;
+    }
+}
+server {
+    listen 80;
+    server_name arthas.gcdd.top;
+
+    server_tokens off;
+
+    location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+    }
+
+    location / {
+        return 301 https://$host$request_uri;
+    }
+}
+```
 
 # 相关资料
 
