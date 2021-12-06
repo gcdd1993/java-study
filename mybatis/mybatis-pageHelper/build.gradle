@@ -7,4 +7,13 @@ dependencies {
     compileOnly("org.apache.tomcat:tomcat-jdbc:9.0.53")
     compileOnly("com.mchange:c3p0:0.9.5.5")
     compileOnly("org.apache.commons:commons-dbcp2:2.9.0")
+
+    testImplementation("org.mybatis:mybatis:3.5.7")
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("com.google.guava:guava:19.0")
+    testImplementation("com.zaxxer:HikariCP-java6:2.3.13")
+    testImplementation("com.alibaba:druid:1.2.8")
+    testImplementation("org.apache.tomcat:tomcat-jdbc:9.0.53")
+    testImplementation("com.mchange:c3p0:0.9.5.5")
+    testImplementation("org.apache.commons:commons-dbcp2:2.9.0")
 }
