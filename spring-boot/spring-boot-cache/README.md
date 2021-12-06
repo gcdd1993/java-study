@@ -1,6 +1,4 @@
-# SpringBoot集成缓存
-
-## 测试项目
+# 测试项目
 
 接口信息
 
@@ -16,7 +14,7 @@ curl --location --request GET 'http://localhost:8080/api/student'
 
 而且每次返回的结果均不一致
 
-## 配置使用缓存
+# 配置使用缓存
 
 1、在`@SpringBootApplication`所在类添加注解`@EnableCaching`
 
@@ -255,7 +253,7 @@ public @interface Caching {
 
 # Spring缓存实现细节
 
-
+TODO
 
 # 集成ASpectJ编译
 由于`Spring AOP`基于动态代理技术，所以有如下限制
@@ -506,7 +504,7 @@ public class StudentController {
 }
 ```
 
-## 参考资料
+# 参考资料
 
 - [io_freefair_aspectj_post_compile_weaving](https://docs.freefair.io/gradle-plugins/6.3.0/reference/#_io_freefair_aspectj_post_compile_weaving)
 - [Spring Boot教程(20) – 用AspectJ实现AOP内部调用](https://fookwood.com/spring-boot-tutorial-20-aspectj)
