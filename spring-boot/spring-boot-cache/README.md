@@ -379,6 +379,133 @@ when weaving
 
 证明切换织入方式成功，这时候再次请求接口，会发现内部调用也能成功使用缓存了
 
+# 自定义KeyGenerator
+
+为项目配置缓存，是一件精细活，如果选取的Key不正确，容易导致缓存命中率低，或者缓存未及时清除，出现缓存一致性问题。
+
+但是为每一个`Cacheable`配置自己的`Key`，显得又太愚蠢，毕竟如果项目大的话，为每一个方法配置唯一的key确实挺烦的。
+
+还好，`Spring`提供了自定义`KeyGenerator`这条途径，以下是个示例，但能解决80%的问题（自认为）
+
+```java
+package io.github.gcdd1993.java.study.springboot.cache.ehcache.keygenerator;
+
+import org.springframework.cache.interceptor.KeyGenerator;
+import org.springframework.stereotype.Component;
+
+import java.lang.reflect.Method;
+import java.util.Arrays;
+
+/**
+ * 自动生成CacheKey，规则为
+ * <p>
+ * className.methodName.[params.toString]
+ *
+ * @author gcdd1993
+ * @date 2021/12/6
+ * @since 1.0.0
+ */
+@Component
+public class AutoKeyGenerator implements KeyGenerator {
+    @Override
+    public Object generate(Object target, Method method, Object... params) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(target.getClass().getSimpleName()).append(".") // class name
+                .append(method.getName()); // method name
+        if (params.length > 0) { // if params is not empty
+            sb.append(".")
+                    .append(Arrays.toString(params));
+        }
+        return sb.toString();
+    }
+}
+```
+
+生成的缓存key示例
+
+![Image](https://cdn.jsdelivr.net/gh/gcdd1993/image-repo@master/img/202112061235123.png)
+
+为了简化使用，我们可以自定义新的注解，比如叫做`AutoKeyCacheable`
+
+```java
+package io.github.gcdd1993.java.study.springboot.cache.ehcache.keygenerator;
+
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.core.annotation.AliasFor;
+
+import java.lang.annotation.*;
+
+/**
+ * @author gcdd1993
+ * @date 2021/12/6
+ * @since 1.0.0
+ */
+@Target({ElementType.TYPE, ElementType.METHOD})
+@Retention(RetentionPolicy.RUNTIME)
+@Inherited
+@Documented
+@Cacheable(keyGenerator = "autoKeyGenerator")
+public @interface AutoKeyCacheable {
+    /**
+     * Alias for {@link #cacheNames}.
+     */
+    @AliasFor(annotation = Cacheable.class)
+    String[] value() default {};
+
+    /**
+     * Names of the caches in which method invocation results are stored.
+     * <p>Names may be used to determine the target cache (or caches), matching
+     * the qualifier value or bean name of a specific bean definition.
+     *
+     * @see #value
+     * @see CacheConfig#cacheNames
+     * @since 4.2
+     */
+    @AliasFor(annotation = Cacheable.class)
+    String[] cacheNames() default {};
+}
+```
+
+像下面这样使用就行
+
+```java
+@CacheConfig(cacheNames = "student_list")
+@Slf4j
+@RestController
+@RequestMapping("/api/student")
+public class StudentController {
+
+    @AutoKeyCacheable
+    @GetMapping
+    public List<Student> listAll() {
+        log.info("随机生成10个学生信息");
+        return IntStream.range(0, 10)
+                .boxed()
+                .map(i -> JMockData.mock(Student.class))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * 直接调用带缓存的listAll()
+     * 缓存无法生效，每次都打印"随机生成10个学生信息"
+     */
+    @GetMapping("/list1")
+    public List<Student> listAll1() {
+        return listAll();
+    }
+
+    @AutoKeyCacheable
+    @GetMapping("/{id}")
+    public Student findOne(@PathVariable Long id) {
+        Student one = JMockData.mock(Student.class);
+        one.setId(id);
+        return one;
+    }
+
+}
+```
+
 ## 参考资料
 
 - [io_freefair_aspectj_post_compile_weaving](https://docs.freefair.io/gradle-plugins/6.3.0/reference/#_io_freefair_aspectj_post_compile_weaving)
