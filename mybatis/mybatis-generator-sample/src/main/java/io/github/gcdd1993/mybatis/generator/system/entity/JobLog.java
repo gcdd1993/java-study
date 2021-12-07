@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * <p>
@@ -14,6 +16,8 @@ import java.time.LocalDateTime;
  * @author gcdd1993
  * @since 2021-12-07
  */
+@Getter
+@Setter
 @TableName("sys_job_log")
 public class JobLog implements Serializable {
 
@@ -60,74 +64,5 @@ public class JobLog implements Serializable {
      */
     private LocalDateTime createTime;
 
-    public Long getJobLogId() {
-        return jobLogId;
-    }
 
-    public void setJobLogId(Long jobLogId) {
-        this.jobLogId = jobLogId;
-    }
-    public String getJobName() {
-        return jobName;
-    }
-
-    public void setJobName(String jobName) {
-        this.jobName = jobName;
-    }
-    public String getJobGroup() {
-        return jobGroup;
-    }
-
-    public void setJobGroup(String jobGroup) {
-        this.jobGroup = jobGroup;
-    }
-    public String getInvokeTarget() {
-        return invokeTarget;
-    }
-
-    public void setInvokeTarget(String invokeTarget) {
-        this.invokeTarget = invokeTarget;
-    }
-    public String getJobMessage() {
-        return jobMessage;
-    }
-
-    public void setJobMessage(String jobMessage) {
-        this.jobMessage = jobMessage;
-    }
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-    public String getExceptionInfo() {
-        return exceptionInfo;
-    }
-
-    public void setExceptionInfo(String exceptionInfo) {
-        this.exceptionInfo = exceptionInfo;
-    }
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-    }
-
-    @Override
-    public String toString() {
-        return "JobLog{" +
-            "jobLogId=" + jobLogId +
-            ", jobName=" + jobName +
-            ", jobGroup=" + jobGroup +
-            ", invokeTarget=" + invokeTarget +
-            ", jobMessage=" + jobMessage +
-            ", status=" + status +
-            ", exceptionInfo=" + exceptionInfo +
-            ", createTime=" + createTime +
-        "}";
-    }
 }

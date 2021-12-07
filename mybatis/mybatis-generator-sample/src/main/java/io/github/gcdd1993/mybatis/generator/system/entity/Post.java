@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * <p>
@@ -14,6 +16,8 @@ import java.time.LocalDateTime;
  * @author gcdd1993
  * @since 2021-12-07
  */
+@Getter
+@Setter
 @TableName("sys_post")
 public class Post implements Serializable {
 
@@ -70,90 +74,5 @@ public class Post implements Serializable {
      */
     private String remark;
 
-    public Long getPostId() {
-        return postId;
-    }
 
-    public void setPostId(Long postId) {
-        this.postId = postId;
-    }
-    public String getPostCode() {
-        return postCode;
-    }
-
-    public void setPostCode(String postCode) {
-        this.postCode = postCode;
-    }
-    public String getPostName() {
-        return postName;
-    }
-
-    public void setPostName(String postName) {
-        this.postName = postName;
-    }
-    public Integer getPostSort() {
-        return postSort;
-    }
-
-    public void setPostSort(Integer postSort) {
-        this.postSort = postSort;
-    }
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-    public String getCreateBy() {
-        return createBy;
-    }
-
-    public void setCreateBy(String createBy) {
-        this.createBy = createBy;
-    }
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-    }
-    public String getUpdateBy() {
-        return updateBy;
-    }
-
-    public void setUpdateBy(String updateBy) {
-        this.updateBy = updateBy;
-    }
-    public LocalDateTime getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(LocalDateTime updateTime) {
-        this.updateTime = updateTime;
-    }
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
-    @Override
-    public String toString() {
-        return "Post{" +
-            "postId=" + postId +
-            ", postCode=" + postCode +
-            ", postName=" + postName +
-            ", postSort=" + postSort +
-            ", status=" + status +
-            ", createBy=" + createBy +
-            ", createTime=" + createTime +
-            ", updateBy=" + updateBy +
-            ", updateTime=" + updateTime +
-            ", remark=" + remark +
-        "}";
-    }
 }

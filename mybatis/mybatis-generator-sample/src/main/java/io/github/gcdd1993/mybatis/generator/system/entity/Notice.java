@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * <p>
@@ -14,6 +16,8 @@ import java.time.LocalDateTime;
  * @author gcdd1993
  * @since 2021-12-07
  */
+@Getter
+@Setter
 @TableName("sys_notice")
 public class Notice implements Serializable {
 
@@ -70,90 +74,5 @@ public class Notice implements Serializable {
      */
     private String remark;
 
-    public Integer getNoticeId() {
-        return noticeId;
-    }
 
-    public void setNoticeId(Integer noticeId) {
-        this.noticeId = noticeId;
-    }
-    public String getNoticeTitle() {
-        return noticeTitle;
-    }
-
-    public void setNoticeTitle(String noticeTitle) {
-        this.noticeTitle = noticeTitle;
-    }
-    public String getNoticeType() {
-        return noticeType;
-    }
-
-    public void setNoticeType(String noticeType) {
-        this.noticeType = noticeType;
-    }
-    public String getNoticeContent() {
-        return noticeContent;
-    }
-
-    public void setNoticeContent(String noticeContent) {
-        this.noticeContent = noticeContent;
-    }
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-    public String getCreateBy() {
-        return createBy;
-    }
-
-    public void setCreateBy(String createBy) {
-        this.createBy = createBy;
-    }
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-    }
-    public String getUpdateBy() {
-        return updateBy;
-    }
-
-    public void setUpdateBy(String updateBy) {
-        this.updateBy = updateBy;
-    }
-    public LocalDateTime getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(LocalDateTime updateTime) {
-        this.updateTime = updateTime;
-    }
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
-    @Override
-    public String toString() {
-        return "Notice{" +
-            "noticeId=" + noticeId +
-            ", noticeTitle=" + noticeTitle +
-            ", noticeType=" + noticeType +
-            ", noticeContent=" + noticeContent +
-            ", status=" + status +
-            ", createBy=" + createBy +
-            ", createTime=" + createTime +
-            ", updateBy=" + updateBy +
-            ", updateTime=" + updateTime +
-            ", remark=" + remark +
-        "}";
-    }
 }

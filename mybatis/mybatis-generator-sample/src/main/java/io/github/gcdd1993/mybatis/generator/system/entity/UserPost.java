@@ -2,6 +2,8 @@ package io.github.gcdd1993.mybatis.generator.system.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * <p>
@@ -11,6 +13,8 @@ import java.io.Serializable;
  * @author gcdd1993
  * @since 2021-12-07
  */
+@Getter
+@Setter
 @TableName("sys_user_post")
 public class UserPost implements Serializable {
 
@@ -26,26 +30,5 @@ public class UserPost implements Serializable {
      */
     private Long postId;
 
-    public Long getUserId() {
-        return userId;
-    }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-    public Long getPostId() {
-        return postId;
-    }
-
-    public void setPostId(Long postId) {
-        this.postId = postId;
-    }
-
-    @Override
-    public String toString() {
-        return "UserPost{" +
-            "userId=" + userId +
-            ", postId=" + postId +
-        "}";
-    }
 }

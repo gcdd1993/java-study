@@ -2,6 +2,8 @@ package io.github.gcdd1993.mybatis.generator.system.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * <p>
@@ -11,6 +13,8 @@ import java.io.Serializable;
  * @author gcdd1993
  * @since 2021-12-07
  */
+@Getter
+@Setter
 @TableName("sys_role_dept")
 public class RoleDept implements Serializable {
 
@@ -26,26 +30,5 @@ public class RoleDept implements Serializable {
      */
     private Long deptId;
 
-    public Long getRoleId() {
-        return roleId;
-    }
 
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
-    }
-    public Long getDeptId() {
-        return deptId;
-    }
-
-    public void setDeptId(Long deptId) {
-        this.deptId = deptId;
-    }
-
-    @Override
-    public String toString() {
-        return "RoleDept{" +
-            "roleId=" + roleId +
-            ", deptId=" + deptId +
-        "}";
-    }
 }

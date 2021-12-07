@@ -40,6 +40,7 @@ class GeneratorTest {
                     builder
                             .addTablePrefix("sys_") // 设置过滤表前缀
                             .controllerBuilder().enableRestStyle()
+                            .entityBuilder().enableLombok()
 //                            .addInclude("t_simple") // 设置需要生成的表名
                     ;
                 })

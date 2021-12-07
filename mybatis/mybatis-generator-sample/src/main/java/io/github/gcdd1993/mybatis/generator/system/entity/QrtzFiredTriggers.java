@@ -2,6 +2,8 @@ package io.github.gcdd1993.mybatis.generator.system.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * <p>
@@ -11,6 +13,8 @@ import java.io.Serializable;
  * @author gcdd1993
  * @since 2021-12-07
  */
+@Getter
+@Setter
 @TableName("qrtz_fired_triggers")
 public class QrtzFiredTriggers implements Serializable {
 
@@ -81,114 +85,5 @@ public class QrtzFiredTriggers implements Serializable {
      */
     private String requestsRecovery;
 
-    public String getSchedName() {
-        return schedName;
-    }
 
-    public void setSchedName(String schedName) {
-        this.schedName = schedName;
-    }
-    public String getEntryId() {
-        return entryId;
-    }
-
-    public void setEntryId(String entryId) {
-        this.entryId = entryId;
-    }
-    public String getTriggerName() {
-        return triggerName;
-    }
-
-    public void setTriggerName(String triggerName) {
-        this.triggerName = triggerName;
-    }
-    public String getTriggerGroup() {
-        return triggerGroup;
-    }
-
-    public void setTriggerGroup(String triggerGroup) {
-        this.triggerGroup = triggerGroup;
-    }
-    public String getInstanceName() {
-        return instanceName;
-    }
-
-    public void setInstanceName(String instanceName) {
-        this.instanceName = instanceName;
-    }
-    public Long getFiredTime() {
-        return firedTime;
-    }
-
-    public void setFiredTime(Long firedTime) {
-        this.firedTime = firedTime;
-    }
-    public Long getSchedTime() {
-        return schedTime;
-    }
-
-    public void setSchedTime(Long schedTime) {
-        this.schedTime = schedTime;
-    }
-    public Integer getPriority() {
-        return priority;
-    }
-
-    public void setPriority(Integer priority) {
-        this.priority = priority;
-    }
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-    public String getJobName() {
-        return jobName;
-    }
-
-    public void setJobName(String jobName) {
-        this.jobName = jobName;
-    }
-    public String getJobGroup() {
-        return jobGroup;
-    }
-
-    public void setJobGroup(String jobGroup) {
-        this.jobGroup = jobGroup;
-    }
-    public String getIsNonconcurrent() {
-        return isNonconcurrent;
-    }
-
-    public void setIsNonconcurrent(String isNonconcurrent) {
-        this.isNonconcurrent = isNonconcurrent;
-    }
-    public String getRequestsRecovery() {
-        return requestsRecovery;
-    }
-
-    public void setRequestsRecovery(String requestsRecovery) {
-        this.requestsRecovery = requestsRecovery;
-    }
-
-    @Override
-    public String toString() {
-        return "QrtzFiredTriggers{" +
-            "schedName=" + schedName +
-            ", entryId=" + entryId +
-            ", triggerName=" + triggerName +
-            ", triggerGroup=" + triggerGroup +
-            ", instanceName=" + instanceName +
-            ", firedTime=" + firedTime +
-            ", schedTime=" + schedTime +
-            ", priority=" + priority +
-            ", state=" + state +
-            ", jobName=" + jobName +
-            ", jobGroup=" + jobGroup +
-            ", isNonconcurrent=" + isNonconcurrent +
-            ", requestsRecovery=" + requestsRecovery +
-        "}";
-    }
 }

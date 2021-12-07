@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * <p>
@@ -14,6 +16,8 @@ import java.time.LocalDateTime;
  * @author gcdd1993
  * @since 2021-12-07
  */
+@Getter
+@Setter
 @TableName("sys_logininfor")
 public class Logininfor implements Serializable {
 
@@ -65,82 +69,5 @@ public class Logininfor implements Serializable {
      */
     private LocalDateTime loginTime;
 
-    public Long getInfoId() {
-        return infoId;
-    }
 
-    public void setInfoId(Long infoId) {
-        this.infoId = infoId;
-    }
-    public String getLoginName() {
-        return loginName;
-    }
-
-    public void setLoginName(String loginName) {
-        this.loginName = loginName;
-    }
-    public String getIpaddr() {
-        return ipaddr;
-    }
-
-    public void setIpaddr(String ipaddr) {
-        this.ipaddr = ipaddr;
-    }
-    public String getLoginLocation() {
-        return loginLocation;
-    }
-
-    public void setLoginLocation(String loginLocation) {
-        this.loginLocation = loginLocation;
-    }
-    public String getBrowser() {
-        return browser;
-    }
-
-    public void setBrowser(String browser) {
-        this.browser = browser;
-    }
-    public String getOs() {
-        return os;
-    }
-
-    public void setOs(String os) {
-        this.os = os;
-    }
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-    public LocalDateTime getLoginTime() {
-        return loginTime;
-    }
-
-    public void setLoginTime(LocalDateTime loginTime) {
-        this.loginTime = loginTime;
-    }
-
-    @Override
-    public String toString() {
-        return "Logininfor{" +
-            "infoId=" + infoId +
-            ", loginName=" + loginName +
-            ", ipaddr=" + ipaddr +
-            ", loginLocation=" + loginLocation +
-            ", browser=" + browser +
-            ", os=" + os +
-            ", status=" + status +
-            ", msg=" + msg +
-            ", loginTime=" + loginTime +
-        "}";
-    }
 }

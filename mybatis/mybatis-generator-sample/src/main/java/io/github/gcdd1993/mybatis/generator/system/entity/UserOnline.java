@@ -3,6 +3,8 @@ package io.github.gcdd1993.mybatis.generator.system.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * <p>
@@ -12,6 +14,8 @@ import java.time.LocalDateTime;
  * @author gcdd1993
  * @since 2021-12-07
  */
+@Getter
+@Setter
 @TableName("sys_user_online")
 public class UserOnline implements Serializable {
 
@@ -72,98 +76,5 @@ public class UserOnline implements Serializable {
      */
     private Integer expireTime;
 
-    public String getSessionId() {
-        return sessionId;
-    }
 
-    public void setSessionId(String sessionId) {
-        this.sessionId = sessionId;
-    }
-    public String getLoginName() {
-        return loginName;
-    }
-
-    public void setLoginName(String loginName) {
-        this.loginName = loginName;
-    }
-    public String getDeptName() {
-        return deptName;
-    }
-
-    public void setDeptName(String deptName) {
-        this.deptName = deptName;
-    }
-    public String getIpaddr() {
-        return ipaddr;
-    }
-
-    public void setIpaddr(String ipaddr) {
-        this.ipaddr = ipaddr;
-    }
-    public String getLoginLocation() {
-        return loginLocation;
-    }
-
-    public void setLoginLocation(String loginLocation) {
-        this.loginLocation = loginLocation;
-    }
-    public String getBrowser() {
-        return browser;
-    }
-
-    public void setBrowser(String browser) {
-        this.browser = browser;
-    }
-    public String getOs() {
-        return os;
-    }
-
-    public void setOs(String os) {
-        this.os = os;
-    }
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-    public LocalDateTime getStartTimestamp() {
-        return startTimestamp;
-    }
-
-    public void setStartTimestamp(LocalDateTime startTimestamp) {
-        this.startTimestamp = startTimestamp;
-    }
-    public LocalDateTime getLastAccessTime() {
-        return lastAccessTime;
-    }
-
-    public void setLastAccessTime(LocalDateTime lastAccessTime) {
-        this.lastAccessTime = lastAccessTime;
-    }
-    public Integer getExpireTime() {
-        return expireTime;
-    }
-
-    public void setExpireTime(Integer expireTime) {
-        this.expireTime = expireTime;
-    }
-
-    @Override
-    public String toString() {
-        return "UserOnline{" +
-            "sessionId=" + sessionId +
-            ", loginName=" + loginName +
-            ", deptName=" + deptName +
-            ", ipaddr=" + ipaddr +
-            ", loginLocation=" + loginLocation +
-            ", browser=" + browser +
-            ", os=" + os +
-            ", status=" + status +
-            ", startTimestamp=" + startTimestamp +
-            ", lastAccessTime=" + lastAccessTime +
-            ", expireTime=" + expireTime +
-        "}";
-    }
 }

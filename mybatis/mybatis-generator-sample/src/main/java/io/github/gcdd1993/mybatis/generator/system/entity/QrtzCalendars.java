@@ -3,6 +3,8 @@ package io.github.gcdd1993.mybatis.generator.system.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.sql.Blob;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * <p>
@@ -12,6 +14,8 @@ import java.sql.Blob;
  * @author gcdd1993
  * @since 2021-12-07
  */
+@Getter
+@Setter
 @TableName("qrtz_calendars")
 public class QrtzCalendars implements Serializable {
 
@@ -32,34 +36,5 @@ public class QrtzCalendars implements Serializable {
      */
     private Blob calendar;
 
-    public String getSchedName() {
-        return schedName;
-    }
 
-    public void setSchedName(String schedName) {
-        this.schedName = schedName;
-    }
-    public String getCalendarName() {
-        return calendarName;
-    }
-
-    public void setCalendarName(String calendarName) {
-        this.calendarName = calendarName;
-    }
-    public Blob getCalendar() {
-        return calendar;
-    }
-
-    public void setCalendar(Blob calendar) {
-        this.calendar = calendar;
-    }
-
-    @Override
-    public String toString() {
-        return "QrtzCalendars{" +
-            "schedName=" + schedName +
-            ", calendarName=" + calendarName +
-            ", calendar=" + calendar +
-        "}";
-    }
 }
