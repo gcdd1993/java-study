@@ -1,0 +1,8 @@
+dependencies {
+    implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
+    implementation("org.springframework.boot:spring-boot-starter-web")
+
+    // 切换为okhttp
+    implementation("io.github.openfeign:feign-okhttp")
+    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+}

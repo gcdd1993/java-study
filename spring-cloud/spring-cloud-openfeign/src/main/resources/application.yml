@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: spring-cloud-openfeign
+feign:
+  client:
+    config:
+      default:
+        logger-level: FULL
+  okhttp:
+    enabled: true
+  auth:
+    app-id: gcdd1993
+    app-key: gcdd1993
+logging:
+  level:
+    "io.github.gcdd1993.springcloud.openfeign.api": debug

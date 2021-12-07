@@ -40,3 +40,4 @@ include("spring-boot:spring-boot-arthas")
 
 include("spring-cloud:spring-cloud-gateway")
 include("spring-cloud:spring-cloud-kubernetes")
+include("spring-cloud:spring-cloud-openfeign")
