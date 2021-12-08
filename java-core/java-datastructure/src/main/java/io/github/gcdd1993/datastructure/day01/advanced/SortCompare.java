@@ -1,4 +1,4 @@
-package io.github.gcdd1993.structurealgorithm.day01.advanced;
+package io.github.gcdd1993.datastructure.day01.advanced;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

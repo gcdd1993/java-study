@@ -1,4 +1,4 @@
-package io.github.gcdd1993.structurealgorithm.day01.advanced;
+package io.github.gcdd1993.datastructure.day01.advanced;
 
 /**
  * @author gcdd1993

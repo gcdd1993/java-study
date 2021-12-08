@@ -25,7 +25,7 @@ rootProject.name = 'java-study'
 
 include("java-core:java-design-pattern")
 include("java-core:new-feature-java8")
-include("java-core:structure&algorithm")
+include("java-core:java-datastructure")
 include("java-core:java-beancopy")
 
 include("mybatis:mybatis-core")

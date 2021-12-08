@@ -1,4 +1,4 @@
-package io.github.gcdd1993.structurealgorithm.day01.simple;
+package io.github.gcdd1993.datastructure.day01.simple;
 
 import java.util.Arrays;
 

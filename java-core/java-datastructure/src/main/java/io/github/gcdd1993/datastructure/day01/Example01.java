@@ -1,4 +1,4 @@
-package io.github.gcdd1993.structurealgorithm.day01;
+package io.github.gcdd1993.datastructure.day01;
 
 /**
  * 计算1到100的和
