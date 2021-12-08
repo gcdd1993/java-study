@@ -27,8 +27,9 @@ public class SortCompare {
         Integer[] arr = new Integer[list.size()];
         list.toArray(arr);
 //        testInsertion(arr); //使用插入排序耗时：20859
-        testShell(arr); //使用希尔排序耗时：32
-        testMerge(arr); //使用归并排序耗时：37
+//        testShell(arr); //使用希尔排序耗时：32
+//        testMerge(arr); //使用归并排序耗时：37
+        testQuick(arr); //使用归并排序耗时：37
     }
 
 //    public static void testInsertion(Integer[] arr) {
@@ -53,5 +54,13 @@ public class SortCompare {
         Merge.sort(arr);
         long end = System.currentTimeMillis();
         System.out.println("使用归并排序耗时：" + (end - start));
+    }
+
+    public static void testQuick(Integer[] arr) {
+        //使用希尔排序完成测试
+        long start = System.currentTimeMillis();
+        Quick.sort(arr);
+        long end = System.currentTimeMillis();
+        System.out.println("使用快速排序耗时：" + (end - start));
     }
 }

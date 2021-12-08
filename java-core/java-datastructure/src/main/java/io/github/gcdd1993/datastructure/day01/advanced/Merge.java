@@ -23,10 +23,12 @@ public class Merge {
     }
 
     private static void sort(Comparable[] a, int lo, int hi) {
+        // 安全性校验
         if (hi <= lo) {
             return;
         }
-        int mid = lo + (hi - lo) / 2;
+        // 对lo到hi之间的数据，分为两个组
+        int mid = lo + (hi - lo) / 2; // 5,9 mid = 7
         // 对lo到mid之间的元素进行排序；
         sort(a, lo, mid);
         // 对mid+1到hi之间的元素进行排序；
@@ -37,6 +39,8 @@ public class Merge {
 
     /**
      * 对数组中，从lo到mid为一组，从mid+1到hi为一组，对这两组数据进行归并
+     * <p>
+     * 双指针排序，前提是排序的两组数据各自有序
      */
     private static void merge(Comparable[] a, int lo, int mid, int hi) {
         // lo到mid这组数据和mid+1到hi这组数据归并到辅助数组assist对应的索引处
