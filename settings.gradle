@@ -27,6 +27,7 @@ include("java-core:java-design-pattern")
 include("java-core:new-feature-java8")
 include("java-core:java-datastructure")
 include("java-core:java-beancopy")
+include("java-core:java-concurrency")
 
 include("mybatis:mybatis-core")
 include("mybatis:mybatis-cache")
