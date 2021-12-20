@@ -1,0 +1,14 @@
+dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("org.springframework.security.oauth:spring-security-oauth2:2.3.8.RELEASE")
+    implementation("org.springframework.boot:spring-boot-starter-data-redis")
+
+    // JAX-B dependencies for JDK 9+
+    implementation("javax.xml.bind:jaxb-api:2.3.0")
+    implementation("com.sun.xml.bind:jaxb-core:2.3.0")
+    implementation("com.sun.xml.bind:jaxb-impl:2.3.0")
+    implementation("javax.activation:activation:1.1.1")
+
+    testImplementation("com.github.jsonzou:jmockdata")
+}
