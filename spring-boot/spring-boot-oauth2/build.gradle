@@ -4,11 +4,14 @@ dependencies {
     implementation("org.springframework.security.oauth:spring-security-oauth2:2.3.8.RELEASE")
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
 
+    implementation("com.baomidou:mybatis-plus-boot-starter:3.4.3.4")
+
     // JAX-B dependencies for JDK 9+
     implementation("javax.xml.bind:jaxb-api:2.3.0")
     implementation("com.sun.xml.bind:jaxb-core:2.3.0")
     implementation("com.sun.xml.bind:jaxb-impl:2.3.0")
     implementation("javax.activation:activation:1.1.1")
 
+    runtimeOnly("mysql:mysql-connector-java:5.1.49")
     testImplementation("com.github.jsonzou:jmockdata")
 }

@@ -1,6 +1,11 @@
 spring:
   application:
     name: spring-boot-oauth2
+  datasource:
+    url: jdbc:mysql://localhost:3306/spring_boot_oauth2_demo?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
   redis:
     host: localhost
     port: 16379
