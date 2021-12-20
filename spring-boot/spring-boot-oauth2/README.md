@@ -170,3 +170,90 @@ VALUES ('fooClientIdPassword', '{noop}secret', 'read', 'client_credentials', nul
 
 数据库写入`client_secret`时，需要配置`{noop}`前缀，表示不使用`PasswordEncoder`加密，否则会报错`There is no PasswordEncoder mapped for the id "null"`，参考https://stackoverflow.com/questions/49654143/spring-security-5-there-is-no-passwordencoder-mapped-for-the-id-null
 
+### 数据库SQL
+
+https://github.com/spring-projects/spring-security-oauth/blob/main/spring-security-oauth2/src/test/resources/schema.sql
+
+```sql
+-- used in tests that use HSQL
+create table oauth_client_details (
+  client_id VARCHAR(256) PRIMARY KEY,
+  resource_ids VARCHAR(256),
+  client_secret VARCHAR(256),
+  scope VARCHAR(256),
+  authorized_grant_types VARCHAR(256),
+  web_server_redirect_uri VARCHAR(256),
+  authorities VARCHAR(256),
+  access_token_validity INTEGER,
+  refresh_token_validity INTEGER,
+  additional_information VARCHAR(4096),
+  autoapprove VARCHAR(256)
+);
+
+create table oauth_client_token (
+  token_id VARCHAR(256),
+  token LONGVARBINARY,
+  authentication_id VARCHAR(256) PRIMARY KEY,
+  user_name VARCHAR(256),
+  client_id VARCHAR(256)
+);
+
+create table oauth_access_token (
+  token_id VARCHAR(256),
+  token LONGVARBINARY,
+  authentication_id VARCHAR(256) PRIMARY KEY,
+  user_name VARCHAR(256),
+  client_id VARCHAR(256),
+  authentication LONGVARBINARY,
+  refresh_token VARCHAR(256)
+);
+
+create table oauth_refresh_token (
+  token_id VARCHAR(256),
+  token LONGVARBINARY,
+  authentication LONGVARBINARY
+);
+
+create table oauth_code (
+  code VARCHAR(256), authentication LONGVARBINARY
+);
+
+create table oauth_approvals (
+	userId VARCHAR(256),
+	clientId VARCHAR(256),
+	scope VARCHAR(256),
+	status VARCHAR(10),
+	expiresAt TIMESTAMP,
+	lastModifiedAt TIMESTAMP
+);
+
+
+-- customized oauth_client_details table
+create table ClientDetails (
+  appId VARCHAR(256) PRIMARY KEY,
+  resourceIds VARCHAR(256),
+  appSecret VARCHAR(256),
+  scope VARCHAR(256),
+  grantTypes VARCHAR(256),
+  redirectUrl VARCHAR(256),
+  authorities VARCHAR(256),
+  access_token_validity INTEGER,
+  refresh_token_validity INTEGER,
+  additionalInformation VARCHAR(4096),
+  autoApproveScopes VARCHAR(256)
+);
+```
+
+`access_token`也可以保存到数据库里面，但是存到Redis性能应该更好一点
+
+# 改为使用Redisson
+
+因为项目内使用的都是Redisson，所以必须试下
+
+只需要改个依赖就行，不得不说，SpringBoot真强
+
+```groovy
+//    implementation("org.springframework.boot:spring-boot-starter-data-redis")
+implementation("org.redisson:redisson-spring-boot-starter")
+```
+
