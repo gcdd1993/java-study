@@ -44,3 +44,8 @@ include("spring-boot:spring-boot-oauth2")
 include("spring-cloud:spring-cloud-gateway")
 include("spring-cloud:spring-cloud-kubernetes")
 include("spring-cloud:spring-cloud-openfeign")
+
+include("netty:nio-basic")
+include("netty:netty-basic")
+include("netty:netty-advanced")
+include("netty:netty-sourcecode")
