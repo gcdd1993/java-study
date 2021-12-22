@@ -11,7 +11,7 @@ spring:
     port: 16379
     database: 0
 server:
-  port: 8080
+  port: ${random.int(5000,5100)}
 logging:
   level:
     "org.springframework.security": debug
