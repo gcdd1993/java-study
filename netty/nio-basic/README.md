@@ -36,8 +36,6 @@ buffer 则用来缓冲读写数据，常见的 buffer 有
 * DoubleBuffer
 * CharBuffer
 
-
-
 ### 1.2 Selector
 
 selector 单从字面意思不好理解，需要结合服务器的设计演化来理解它的用途
@@ -58,12 +56,6 @@ end
 * 线程上下文切换成本高
 * 只适合连接数少的场景
 
-
-
-
-
-
-
 #### 线程池版设计
 
 ```mermaid
@@ -80,14 +72,6 @@ end
 * 阻塞模式下，线程仅能处理一个 socket 连接
 * 仅适合短连接场景
 
-
-
-
-
-
-
-
-
 #### selector 版设计
 
 selector 的作用就是配合一个线程来管理多个 channel，获取这些 channel 上发生的事件，这些 channel 工作在非阻塞模式下，不会让线程吊死在一个 channel 上。适合连接数特别多，但流量低的场景（low traffic）
@@ -102,15 +86,7 @@ selector --> c3(channel)
 end
 ```
 
-
-
 调用 selector 的 select() 会阻塞直到 channel 发生了读写就绪事件，这些事件发生，select 方法就会返回这些事件交给 thread 来处理
-
-
-
-
-
-
 
 ## 2. ByteBuffer
 
@@ -404,8 +380,6 @@ public class ByteBufferUtil {
 Bytebuffer buf = ByteBuffer.allocate(16);
 ```
 
-
-
 #### 向 buffer 写入数据
 
 有两种办法
@@ -490,13 +464,9 @@ class java.nio.HeapCharBuffer
 你好
 ```
 
-
-
 #### ⚠️ Buffer 的线程安全
 
 > Buffer 是**非线程安全的**
-
-
 
 ### 2.4 Scattering Reads
 
