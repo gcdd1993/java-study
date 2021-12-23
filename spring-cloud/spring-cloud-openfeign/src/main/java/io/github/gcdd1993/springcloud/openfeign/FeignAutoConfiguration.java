@@ -3,14 +3,16 @@ package io.github.gcdd1993.springcloud.openfeign;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import feign.RequestInterceptor;
 import feign.codec.Decoder;
+import feign.codec.ErrorDecoder;
 import io.github.gcdd1993.springcloud.openfeign.auth.AppAuthInterceptorImpl;
 import io.github.gcdd1993.springcloud.openfeign.auth.AppAuthProvider;
 import io.github.gcdd1993.springcloud.openfeign.auth.AuthFeignProperties;
+import io.github.gcdd1993.springcloud.openfeign.config.ErrorResponseDecoder;
+import io.github.gcdd1993.springcloud.openfeign.config.ResponseMessageDecoder;
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.openfeign.support.DefaultGzipDecoder;
 import org.springframework.cloud.openfeign.support.ResponseEntityDecoder;
-import org.springframework.cloud.openfeign.support.SpringDecoder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.support.BasicAuthenticationInterceptor;
@@ -42,9 +44,17 @@ public class FeignAutoConfiguration {
 
     @Bean
     public Decoder feignDecoder(ObjectMapper objectMapper) {
+//        HttpMessageConverter<?> messageConverter = new MappingJackson2HttpMessageConverter(objectMapper);
+//        Decoder decoder = new SpringDecoder(() -> new HttpMessageConverters(messageConverter));
+//        return new DefaultGzipDecoder(new ResponseEntityDecoder(decoder));
         HttpMessageConverter<?> messageConverter = new MappingJackson2HttpMessageConverter(objectMapper);
-        SpringDecoder springDecoder = new SpringDecoder(() -> new HttpMessageConverters(messageConverter));
-        return new DefaultGzipDecoder(new ResponseEntityDecoder(springDecoder));
+        Decoder decoder = new ResponseMessageDecoder(objectMapper, () -> new HttpMessageConverters(messageConverter));
+        return new DefaultGzipDecoder(new ResponseEntityDecoder(decoder));
+    }
+
+    @Bean
+    public ErrorDecoder errorDecoder(ObjectMapper objectMapper) {
+        return new ErrorResponseDecoder(objectMapper);
     }
 
     /**

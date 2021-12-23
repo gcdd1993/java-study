@@ -254,8 +254,8 @@ feign:
 @Bean
 public Decoder feignDecoder(ObjectMapper objectMapper) {
     HttpMessageConverter<?> messageConverter = new MappingJackson2HttpMessageConverter(objectMapper);
-    SpringDecoder springDecoder = new SpringDecoder(() -> new HttpMessageConverters(messageConverter));
-    return new DefaultGzipDecoder(new ResponseEntityDecoder(springDecoder));
+    Decoder decoder = new SpringDecoder(() -> new HttpMessageConverters(messageConverter));
+    return new DefaultGzipDecoder(new ResponseEntityDecoder(decoder));
 }
 ```
 
@@ -272,4 +272,151 @@ public RequestInterceptor gzipInterceptor() {
 测试一下，可以发现OpenFeign的请求头里面加上了`Accept-Encoding: gzip, deflate`，并且服务器响应了正确的GZip
 
 ![image-20211223104142535](https://cdn.jsdelivr.net/gh/gcdd1993/image-repo@master/img/202112231041799.png)
+
+# 自定义返回值解析
+
+一般我们为了返回值统一，会将其包裹，比如
+
+```
+@Data
+public class ResponseMessage<T> {
+    private Boolean success;
+    private String msg;
+    private T data;
+}
+```
+
+那么，我们在使用OpenFeign的时候，是无法解析出正确的返回值的，这时候，我们就需要自定义Decoder
+
+```java
+@Slf4j
+public class ResponseMessageDecoder extends SpringDecoder {
+    private final ObjectMapper objectMapper;
+
+    public ResponseMessageDecoder(ObjectMapper objectMapper,
+                                  ObjectFactory<HttpMessageConverters> messageConverters) {
+        super(messageConverters);
+        this.objectMapper = objectMapper;
+    }
+
+    @Override
+    public Object decode(Response response, Type type) throws IOException, FeignException {
+        log.debug("open feign get response status: {}, body: {}", response.status(), response.body());
+        if (response.body() == null) {
+            // 不一定需要返回非空数据
+            return null;
+        }
+        Reader reader = response.body().asReader(StandardCharsets.UTF_8);
+        String resBody = Util.toString(reader);
+        if (Objects.equals(type.getTypeName(), String.class.getTypeName())) {
+            // String 类型直接返回
+            return resBody;
+        }
+        try {
+            JavaType javaType = TypeFactory.defaultInstance().constructParametricType(ResponseMessage.class, TypeFactory.defaultInstance().constructType(type));
+            ResponseMessage<?> res = objectMapper.readValue(resBody, javaType);
+            if (res.getSuccess()) {
+                return res.getData();
+            } else {
+                // 根据errorCode和errorMsg 抛出自定义异常
+                throw new RuntimeException(MessageFormat.format("请求错误，错误码 {0}，错误信息 {1}", res.getErrorCode(), res.getErrorMsg()));
+            }
+        } catch (JsonProcessingException ex) {
+            log.warn("decode response body {} to ResponseMessage failed, check if target service is configured by @EnableResponseMessageWrapper.", resBody, ex);
+        }
+        // 如果解析失败，尝试使用原始类型解析
+        return objectMapper.readValue(resBody, TypeFactory.defaultInstance().constructType(type));
+    }
+}
+```
+
+配置新的Decoder
+
+```java
+@Bean
+public Decoder feignDecoder(ObjectMapper objectMapper) {
+    HttpMessageConverter<?> messageConverter = new MappingJackson2HttpMessageConverter(objectMapper);
+    Decoder decoder = new ResponseMessageDecoder(objectMapper, () -> new HttpMessageConverters(messageConverter));
+    return new DefaultGzipDecoder(new ResponseEntityDecoder(decoder));
+}
+```
+
+如果响应的状态码不是2xx，将会使用ErrorDecoder解析错误，如果错误信息也是使用`ResponseMessage`包裹的，那么我们要自定义错误解析器
+
+```
+/**
+ * 错误解析器
+ *
+ * @author gcdd1993
+ * @since 2021/12/23
+ */
+@RequiredArgsConstructor
+@Slf4j
+public class ErrorResponseDecoder implements ErrorDecoder {
+    private final ObjectMapper objectMapper;
+    private final ErrorDecoder defaultErrorDecoder = new ErrorDecoder.Default();
+
+    @Override
+    public Exception decode(String methodKey, Response response) {
+        Collection<String> encoding = null;
+        // 判断并解压GZip格式
+        if (response.headers().containsKey(HttpEncoding.CONTENT_ENCODING_HEADER)) {
+            encoding = response.headers().get(HttpEncoding.CONTENT_ENCODING_HEADER);
+        }
+        if (encoding != null && encoding.contains(HttpEncoding.GZIP_ENCODING)) {
+            String decompressedBody = decompress(response);
+            if (decompressedBody == null) {
+                throw new RuntimeException("decompress response error");
+            }
+            Response decompressedResponse = response.toBuilder().body(decompressedBody.getBytes(StandardCharsets.UTF_8)).build();
+            return doDecode(methodKey, decompressedResponse);
+        }
+        return doDecode(methodKey, response);
+    }
+
+    private Exception doDecode(String methodKey, Response response) {
+        try {
+            ResponseMessage<?> res = objectMapper.readValue(response.body().asInputStream(), ResponseMessage.class);
+            throw new RuntimeException(MessageFormat.format("自定义异常，错误码 {0}，错误信息 {1}", res.getErrorCode(), res.getErrorMsg()));
+        } catch (IOException ex) {
+            log.error("unexpected error, response status {} but parsing failed: {}", response.status(), ex.getMessage(), ex);
+            // 解析失败，使用默认错误解析器解析
+            return defaultErrorDecoder.decode(methodKey, response);
+        }
+    }
+
+    /**
+     * 解压缩
+     *
+     * @see org.springframework.cloud.openfeign.support.DefaultGzipDecoder
+     */
+    private String decompress(Response response) {
+        if (response.body() == null) {
+            return null;
+        }
+        try (GZIPInputStream gzipInputStream = new GZIPInputStream(response.body().asInputStream());
+             BufferedReader reader = new BufferedReader(
+                     new InputStreamReader(gzipInputStream, StandardCharsets.UTF_8))) {
+            StringBuilder outputString = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                outputString.append(line);
+            }
+            return outputString.toString();
+        } catch (IOException e) {
+            log.error("decompress response error", e);
+            return null;
+        }
+    }
+}
+```
+
+然后配置
+
+```java
+@Bean
+public ErrorDecoder errorDecoder(ObjectMapper objectMapper) {
+    return new ErrorResponseDecoder(objectMapper);
+}
+```
 
