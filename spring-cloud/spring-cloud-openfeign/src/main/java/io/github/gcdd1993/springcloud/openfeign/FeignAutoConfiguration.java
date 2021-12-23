@@ -1,12 +1,21 @@
 package io.github.gcdd1993.springcloud.openfeign;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import feign.RequestInterceptor;
+import feign.codec.Decoder;
 import io.github.gcdd1993.springcloud.openfeign.auth.AppAuthInterceptorImpl;
 import io.github.gcdd1993.springcloud.openfeign.auth.AppAuthProvider;
 import io.github.gcdd1993.springcloud.openfeign.auth.AuthFeignProperties;
+import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.cloud.openfeign.support.DefaultGzipDecoder;
+import org.springframework.cloud.openfeign.support.ResponseEntityDecoder;
+import org.springframework.cloud.openfeign.support.SpringDecoder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.support.BasicAuthenticationInterceptor;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 /**
@@ -24,6 +33,18 @@ public class FeignAutoConfiguration {
     @Bean
     public BasicAuthenticationInterceptor basicAuthRequestInterceptor(AuthFeignProperties authFeignProperties) {
         return new BasicAuthenticationInterceptor(authFeignProperties.getAppId(), authFeignProperties.getAppKey());
+    }
+
+    @Bean
+    public RequestInterceptor gzipInterceptor() {
+        return template -> template.header("Accept-Encoding", "gzip, deflate");
+    }
+
+    @Bean
+    public Decoder feignDecoder(ObjectMapper objectMapper) {
+        HttpMessageConverter<?> messageConverter = new MappingJackson2HttpMessageConverter(objectMapper);
+        SpringDecoder springDecoder = new SpringDecoder(() -> new HttpMessageConverters(messageConverter));
+        return new DefaultGzipDecoder(new ResponseEntityDecoder(springDecoder));
     }
 
     /**

@@ -11,6 +11,13 @@ feign:
   auth:
     app-id: gcdd1993
     app-key: gcdd1993
+  compression:
+    request:
+      enabled: true
+      mime-types: application/json
+      min-request-size: 1024 # 超过这个大小才会进行GZip压缩，因为GZip压缩耗费CPU
+    response:
+      enabled: true
 logging:
   level:
     "io.github.gcdd1993.springcloud.openfeign.api": debug

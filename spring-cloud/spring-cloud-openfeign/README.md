@@ -234,3 +234,42 @@ logging:
 可以观察请求明细，以便查找错误
 
 ![image-20211207153705957](https://cdn.jsdelivr.net/gh/gcdd1993/image-repo@master/img/202112071537027.png)
+
+# 开启GZip
+
+```yaml
+feign:
+  compression:
+    request:
+      enabled: true
+      mime-types: application/json
+      min-request-size: 1024 # 超过这个大小才会进行GZip压缩，因为GZip压缩耗费CPU
+    response:
+      enabled: true
+```
+
+配置Decoder，使用`DefaultGzipDecoder`包裹一下
+
+```java
+@Bean
+public Decoder feignDecoder(ObjectMapper objectMapper) {
+    HttpMessageConverter<?> messageConverter = new MappingJackson2HttpMessageConverter(objectMapper);
+    SpringDecoder springDecoder = new SpringDecoder(() -> new HttpMessageConverters(messageConverter));
+    return new DefaultGzipDecoder(new ResponseEntityDecoder(springDecoder));
+}
+```
+
+如果使用的是OkHttp，还需要加上
+
+```java
+//concatenating headers because of https://github.com/spring-projects/spring-boot/issues/18176
+@Bean
+public RequestInterceptor gzipInterceptor() {
+    return template -> template.header("Accept-Encoding", "gzip, deflate");
+}
+```
+
+测试一下，可以发现OpenFeign的请求头里面加上了`Accept-Encoding: gzip, deflate`，并且服务器响应了正确的GZip
+
+![image-20211223104142535](https://cdn.jsdelivr.net/gh/gcdd1993/image-repo@master/img/202112231041799.png)
+
