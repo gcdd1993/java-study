@@ -609,8 +609,6 @@ private static void split(ByteBuffer source) {
 }
 ```
 
-
-
 ## 3. 文件编程
 
 ### 3.1 FileChannel
@@ -618,8 +616,6 @@ private static void split(ByteBuffer source) {
 #### ⚠️ FileChannel 工作模式
 
 > FileChannel 只能工作在阻塞模式下
-
-
 
 #### 获取
 
@@ -629,8 +625,6 @@ private static void split(ByteBuffer source) {
 * 通过 FileOutputStream 获取的 channel 只能写
 * 通过 RandomAccessFile 是否能读写根据构造 RandomAccessFile 时的读写模式决定
 
-
-
 #### 读取
 
 会从 channel 读取数据填充 ByteBuffer，返回值表示读到了多少字节，-1 表示到达了文件的末尾
@@ -638,8 +632,6 @@ private static void split(ByteBuffer source) {
 ```java
 int readBytes = channel.read(buffer);
 ```
-
-
 
 #### 写入
 
@@ -722,8 +714,6 @@ System.out.println("transferTo 用时：" + (end - start) / 1000_000.0);
 transferTo 用时：8.2011
 ```
 
-
-
 超过 2g 大小的文件传输
 
 ```java
@@ -755,8 +745,6 @@ position:2147483647 left:5622464513
 position:4294967294 left:3474980866
 position:6442450941 left:1327497219
 ```
-
-
 
 ### 3.3 Path
 
@@ -998,10 +986,6 @@ Files.walk(Paths.get(source)).forEach(path -> {
 long end = System.currentTimeMillis();
 System.out.println(end - start);
 ```
-
-
-
-
 
 ## 4. 网络编程
 
