@@ -1444,7 +1444,7 @@ protected void run() {
 
 参考下图
 
-<img src="img/0032.png"  />
+<img src="https://cdn.jsdelivr.net/gh/gcdd1993/image-repo@master/img/202112271840131.png"  />
 
 
 
