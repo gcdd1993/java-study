@@ -63,6 +63,7 @@ subprojects { project ->
             dependency("com.github.bingoohuang:patchca:${patchca_version}")
             dependency("io.opentracing.contrib:opentracing-spring-jaeger-cloud-starter:${opentracing_jaeger_version}")
             dependency("com.github.jsonzou:jmockdata:${jmockdata_version}")
+            dependency("io.netty:netty-all:$netty_version")
         }
     }
 
