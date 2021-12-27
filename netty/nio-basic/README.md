@@ -21,8 +21,6 @@ buffer --> channel
 * SocketChannel
 * ServerSocketChannel
 
-
-
 buffer 则用来缓冲读写数据，常见的 buffer 有
 
 * ByteBuffer
@@ -54,7 +52,7 @@ end
 
 * 内存占用高
 * 线程上下文切换成本高
-* 只适合连接数少的场景
+* 只适合连接数少的场景（每个连接都需要创建一个线程）
 
 #### 线程池版设计
 
@@ -149,8 +147,6 @@ public class ChannelDemo1 {
 10:39:03 [DEBUG] [main] c.i.n.ChannelDemo1 - 读到字节数：-1
 ```
 
-
-
 ### 2.1  ByteBuffer 正确使用姿势
 
 1. 向 buffer 写入数据，例如调用 channel.read(buffer)
@@ -158,8 +154,6 @@ public class ChannelDemo1 {
 3. 从 buffer 读取数据，例如调用 buffer.get()
 4. 调用 clear() 或 compact() 切换至**写模式**
 5. 重复 1~4 步骤
-
-
 
 ### 2.2 ByteBuffer 结构
 

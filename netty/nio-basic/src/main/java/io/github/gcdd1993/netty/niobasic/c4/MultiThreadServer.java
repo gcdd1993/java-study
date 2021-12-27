@@ -13,6 +13,7 @@ import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * NIO 多线程
@@ -34,7 +35,12 @@ public class MultiThreadServer {
         ssc.bind(new InetSocketAddress(8080));
 
         // 1. 创建固定数量的worker
-        WorkerEventLoop worker = new WorkerEventLoop("worker-0");
+        Worker[] workers = new Worker[2];
+//        Worker worker = new Worker("worker-0");
+        for (int i = 0; i < workers.length; i++) {
+            workers[i] = new Worker("worker-" + i);
+        }
+        AtomicInteger counter = new AtomicInteger();
         while (true) {
             boss.select();
             Iterator<SelectionKey> iter = boss.selectedKeys().iterator();
@@ -49,7 +55,8 @@ public class MultiThreadServer {
 //                    // 2. 关联worker
 //                    sc.register(worker.selector, SelectionKey.OP_READ + SelectionKey.OP_WRITE, null);
 //                    log.info("after register...{}", sc.getRemoteAddress());
-                    worker.register(sc);
+                    // rolling 轮询
+                    workers[counter.getAndIncrement() % workers.length].register(sc);
                 }
             }
         }
@@ -57,7 +64,7 @@ public class MultiThreadServer {
 
 
     @RequiredArgsConstructor
-    static class WorkerEventLoop implements Runnable {
+    static class Worker implements Runnable {
         private Thread thread;
         private Selector selector;
         private final String name;
