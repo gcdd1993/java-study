@@ -165,7 +165,7 @@ new Bootstrap()
 
 事件循环对象
 
-EventLoop 本质是一个单线程执行器（同时维护了一个 Selector），里面有 run 方法处理 Channel 上源源不断的 io 事件。
+EventLoop 本质是一个**单线程执行器**（同时维护了一个 Selector），里面有 run 方法处理 Channel 上源源不断的 io 事件。
 
 它的继承关系比较复杂
 
@@ -216,13 +216,9 @@ io.netty.channel.DefaultEventLoop@60f82f98
 io.netty.channel.DefaultEventLoop@35f983a6
 ```
 
-
-
 #### 💡 优雅关闭
 
 优雅关闭 `shutdownGracefully` 方法。该方法会首先切换 `EventLoopGroup` 到关闭状态从而拒绝新的任务的加入，然后在任务队列的任务都处理完成后，停止线程的运行。从而确保整体应用是在正常有序的状态下退出的
-
-
 
 #### 演示 NioEventLoop 处理 io 事件
 
@@ -286,8 +282,6 @@ public static void main(String[] args) throws InterruptedException {
 可以看到两个工人轮流处理 channel，但工人与 channel 之间进行了绑定
 
 ![](https://cdn.jsdelivr.net/gh/gcdd1993/image-repo@master/img/202112271836155.png)
-
-
 
 再增加两个非 nio 工人
 
@@ -414,8 +408,6 @@ static void invokeChannelRead(final AbstractChannelHandlerContext next, Object m
 * 如果两个 handler 绑定的是同一个线程，那么就直接调用
 * 否则，把要调用的代码封装为一个任务对象，由下一个 handler 的线程来调用
 
-
-
 #### 演示 NioEventLoop 处理普通任务
 
 NioEventLoop 除了可以处理 io 事件，同样可以向它提交普通任务
@@ -438,8 +430,6 @@ nioWorkers.execute(()->{
 ```
 
 > 可以用来执行耗时较长的任务
-
-
 
 #### 演示 NioEventLoop 处理定时任务
 
@@ -465,8 +455,6 @@ nioWorkers.scheduleAtFixedRate(() -> {
 ```
 
 > 可以用来执行定时任务
-
-
 
 ### 3.2 Channel
 
