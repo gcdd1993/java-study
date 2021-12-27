@@ -1875,8 +1875,6 @@ public class UdpClient {
 * 同步：线程自己去获取结果（一个线程）
 * 异步：线程自己不去获取结果，而是由其它线程送结果（至少两个线程）
 
-
-
 当调用一次 channel.read 或 stream.read 后，会切换至操作系统内核态来完成真正数据读取，而读取又分为两个阶段，分别为：
 
 * 等待数据阶段
@@ -1912,8 +1910,6 @@ public class UdpClient {
 
 UNIX 网络编程 - 卷 I
 
-
-
 ### 5.3 零拷贝
 
 #### 传统 IO 问题
@@ -1945,14 +1941,10 @@ socket.getOutputStream().write(buf);
 
 4. 接下来要向网卡写数据，这项能力 java 又不具备，因此又得从**用户态**切换至**内核态**，调用操作系统的写能力，使用 DMA 将 **socket 缓冲区**的数据写入网卡，不会使用 cpu
 
-
-
 可以看到中间环节较多，java 的 IO 实际不是物理设备级别的读写，而是缓存的复制，底层的真正读写是操作系统来完成的
 
 * 用户态与内核态的切换发生了 3 次，这个操作比较重量级
 * 数据拷贝了共 4 次
-
-
 
 #### NIO 优化
 
@@ -1971,8 +1963,6 @@ socket.getOutputStream().write(buf);
   * 通过专门线程访问引用队列，根据虚引用释放堆外内存
 * 减少了一次数据拷贝，用户态与内核态的切换次数没有减少
 
-
-
 进一步优化（底层采用了 linux 2.1 后提供的 sendFile 方法），java 中对应着两个 channel 调用 transferTo/transferFrom 方法拷贝数据
 
 ![](https://cdn.jsdelivr.net/gh/gcdd1993/image-repo@master/img/202112221140302.png)
@@ -1985,8 +1975,6 @@ socket.getOutputStream().write(buf);
 
 * 只发生了一次用户态与内核态的切换
 * 数据拷贝了 3 次
-
-
 
 进一步优化（linux 2.4）
 
@@ -2002,8 +1990,6 @@ socket.getOutputStream().write(buf);
 * 不利用 cpu 计算，减少 cpu 缓存伪共享
 * 零拷贝适合小文件传输
 
-
-
 ### 5.3 AIO
 
 AIO 用来解决数据复制阶段的阻塞问题
@@ -2015,8 +2001,6 @@ AIO 用来解决数据复制阶段的阻塞问题
 >
 > * Windows 系统通过 IOCP 实现了真正的异步 IO
 > * Linux 系统异步 IO 在 2.6 版本引入，但其底层实现还是用多路复用模拟了异步 IO，性能没有优势
-
-
 
 #### 文件 AIO
 
@@ -2073,13 +2057,9 @@ public class AioDemo1 {
 * 响应文件读取成功的是另一个线程 Thread-5
 * 主线程并没有 IO 操作阻塞
 
-
-
 #### 💡 守护线程
 
 默认文件 AIO 使用的线程都是守护线程，所以最后要执行 `System.in.read()` 以避免守护线程意外结束
-
-
 
 #### 网络 AIO
 
