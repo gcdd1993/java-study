@@ -1,18 +1,3 @@
-geo:
-  ip:
-    lib:
-      enabled: false
-google:
-  recaptcha:
-    key:
-      secret: 6LefKOAUAAAAAGs0hOsCoOBu14TKDGu100LkpnVo
-      site: 6LefKOAUAAAAAE9c8M_Das3vwhlMPmkFTAzvxokN
-      threshold: 0.5
-purge:
-  cron:
-    expression: 0 0 5 * * ?
-server:
-  port: 8081
 spring:
   datasource:
     password: ''
@@ -45,3 +30,18 @@ spring:
     cache: false
 support:
   email: USERNAME@gmail.com
+geo:
+  ip:
+    lib:
+      enabled: false
+google:
+  recaptcha:
+    key:
+      secret: 6LefKOAUAAAAAGs0hOsCoOBu14TKDGu100LkpnVo
+      site: 6LefKOAUAAAAAE9c8M_Das3vwhlMPmkFTAzvxokN
+      threshold: 0.5
+purge:
+  cron:
+    expression: 0 0 5 * * ?
+server:
+  port: 8081

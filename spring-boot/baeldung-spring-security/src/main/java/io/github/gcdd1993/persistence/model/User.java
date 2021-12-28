@@ -31,4 +31,7 @@ public class User {
     @Transient
     private List<String> roles;
 
+    @Column(name = "enabled")
+    private boolean enabled;
+
 }
