@@ -6,6 +6,7 @@ import io.github.gcdd1993.registration.OnRegistrationCompleteEvent;
 import io.github.gcdd1993.service.IUserService;
 import io.github.gcdd1993.web.dto.UserDto;
 import io.github.gcdd1993.web.error.UserAlreadyExistException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.MessageSource;
@@ -28,6 +29,7 @@ import java.util.Locale;
  * @author gcdd1993
  * @since 2021/12/28
  */
+@Slf4j
 @Controller
 public class RegistrationController {
 
@@ -59,10 +61,12 @@ public class RegistrationController {
             String appUrl = request.getContextPath();
             eventPublisher.publishEvent(new OnRegistrationCompleteEvent(registered, request.getLocale(), appUrl));
         } catch (UserAlreadyExistException uaeEx) {
+            log.error("An account for that username/email already exists.", uaeEx);
             ModelAndView mav = new ModelAndView("registration", "user", userDto);
             mav.addObject("message", "An account for that username/email already exists.");
             return mav;
         } catch (RuntimeException ex) {
+            log.error("emailError", ex);
             return new ModelAndView("emailError", "user", userDto);
         }
         return new ModelAndView("successRegister", "user", userDto);

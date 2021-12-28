@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -47,6 +48,9 @@ public class MyUserDetailsService implements UserDetailsService {
     }
 
     private static List<GrantedAuthority> getAuthorities(List<String> roles) {
+        if (roles == null) {
+            return Collections.emptyList();
+        }
         List<GrantedAuthority> authorities = new ArrayList<>();
         for (String role : roles) {
             authorities.add(new SimpleGrantedAuthority(role));
