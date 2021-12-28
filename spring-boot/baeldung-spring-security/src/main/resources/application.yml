@@ -8,20 +8,10 @@ spring:
       ddl-auto: update
     show-sql: false
   mail:
-    host: smtp.gmail.com
-    password: PASSWORD
-    port: 465
-    properties:
-      mail:
-        smtps:
-          auth: true
-          starttls:
-            enable: true
-          timeout: 8000
-        transport:
-          protocol: smtps
-    protocol: smtps
-    username: USERNAME@gmail.com
+    host: localhost
+    port: 1025
+    username: "mailhog"
+    password: "mailhog"
   main:
     allow-bean-definition-overriding: true
   profiles:
