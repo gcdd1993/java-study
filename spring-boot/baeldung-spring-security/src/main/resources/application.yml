@@ -1,0 +1,47 @@
+geo:
+  ip:
+    lib:
+      enabled: false
+google:
+  recaptcha:
+    key:
+      secret: 6LefKOAUAAAAAGs0hOsCoOBu14TKDGu100LkpnVo
+      site: 6LefKOAUAAAAAE9c8M_Das3vwhlMPmkFTAzvxokN
+      threshold: 0.5
+purge:
+  cron:
+    expression: 0 0 5 * * ?
+server:
+  port: 8081
+spring:
+  datasource:
+    password: ''
+    url: jdbc:h2:mem:registration_02;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+  mail:
+    host: smtp.gmail.com
+    password: PASSWORD
+    port: 465
+    properties:
+      mail:
+        smtps:
+          auth: true
+          starttls:
+            enable: true
+          timeout: 8000
+        transport:
+          protocol: smtps
+    protocol: smtps
+    username: USERNAME@gmail.com
+  main:
+    allow-bean-definition-overriding: true
+  profiles:
+    active: dev
+  thymeleaf:
+    cache: false
+support:
+  email: USERNAME@gmail.com
