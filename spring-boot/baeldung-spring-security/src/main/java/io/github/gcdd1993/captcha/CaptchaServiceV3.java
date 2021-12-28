@@ -1,7 +1,5 @@
 package io.github.gcdd1993.captcha;
 
-import java.net.URI;
-
 import io.github.gcdd1993.web.error.ReCaptchaInvalidException;
 import io.github.gcdd1993.web.error.ReCaptchaUnavailableException;
 import org.slf4j.Logger;
@@ -9,17 +7,19 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 
+import java.net.URI;
+
 @Service("captchaServiceV3")
 public class CaptchaServiceV3 extends AbstractCaptchaService {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(CaptchaServiceV3.class);
-    
+
     public static final String REGISTER_ACTION = "register";
-    
+
     @Override
     public void processResponse(String response, final String action) throws ReCaptchaInvalidException {
         securityCheck(response);
-        
+
         final URI verifyUri = URI.create(String.format(RECAPTCHA_URL_TEMPLATE, getReCaptchaSecret(), response, getClientIP()));
         try {
             final GoogleResponse googleResponse = restTemplate.getForObject(verifyUri, GoogleResponse.class);
@@ -35,5 +35,5 @@ public class CaptchaServiceV3 extends AbstractCaptchaService {
             throw new ReCaptchaUnavailableException("Registration unavailable at this time.  Please try again later.", rce);
         }
         reCaptchaAttemptService.reCaptchaSucceeded(getClientIP());
-    } 
+    }
 }

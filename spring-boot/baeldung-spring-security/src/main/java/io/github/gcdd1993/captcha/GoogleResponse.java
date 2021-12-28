@@ -1,4 +1,3 @@
-
 package io.github.gcdd1993.captcha;
 
 import com.fasterxml.jackson.annotation.*;
@@ -9,7 +8,7 @@ import java.util.Map;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-@JsonPropertyOrder({ "success", "score", "action","challenge_ts", "hostname", "error-codes" })
+@JsonPropertyOrder({"success", "score", "action", "challenge_ts", "hostname", "error-codes"})
 public class GoogleResponse {
 
     @JsonProperty("success")
@@ -25,7 +24,7 @@ public class GoogleResponse {
     @JsonProperty("error-codes")
     private ErrorCode[] errorCodes;
 
-    
+
     enum ErrorCode {
         MissingSecret, InvalidSecret, MissingResponse, InvalidResponse, BadRequest, TimeoutOrDuplicate;
 
@@ -114,12 +113,12 @@ public class GoogleResponse {
         }
         for (final ErrorCode error : errors) {
             switch (error) {
-            case InvalidResponse:
-            case MissingResponse:
-            case BadRequest:
-                return true;
-            default:
-                break;
+                case InvalidResponse:
+                case MissingResponse:
+                case BadRequest:
+                    return true;
+                default:
+                    break;
             }
         }
         return false;
@@ -127,6 +126,6 @@ public class GoogleResponse {
 
     @Override
     public String toString() {
-        return "GoogleResponse{" + "success=" + success + ", challengeTs='" + challengeTs + '\'' + ", hostname='" + hostname + '\''+ ", score='" + score + '\''+ ", action='" + action+ '\'' + ", errorCodes=" + Arrays.toString(errorCodes) + '}';
+        return "GoogleResponse{" + "success=" + success + ", challengeTs='" + challengeTs + '\'' + ", hostname='" + hostname + '\'' + ", score='" + score + '\'' + ", action='" + action + '\'' + ", errorCodes=" + Arrays.toString(errorCodes) + '}';
     }
 }

@@ -1,9 +1,8 @@
 package io.github.gcdd1993.persistence.model;
 
+import javax.persistence.*;
 import java.util.Calendar;
 import java.util.Date;
-
-import javax.persistence.*;
 
 @Entity
 public class VerificationToken {

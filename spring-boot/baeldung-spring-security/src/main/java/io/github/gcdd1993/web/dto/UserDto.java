@@ -1,11 +1,11 @@
 package io.github.gcdd1993.web.dto;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
 import io.github.gcdd1993.validation.PasswordMatches;
 import io.github.gcdd1993.validation.ValidEmail;
 import io.github.gcdd1993.validation.ValidPassword;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @PasswordMatches
 public class UserDto {

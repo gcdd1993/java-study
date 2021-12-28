@@ -1,10 +1,10 @@
 package io.github.gcdd1993.service;
 
-import io.github.gcdd1993.persistence.dao.DeviceMetadataRepository;
 import com.google.common.base.Strings;
 import com.maxmind.geoip2.DatabaseReader;
 import com.maxmind.geoip2.exception.GeoIp2Exception;
 import com.maxmind.geoip2.model.CityResponse;
+import io.github.gcdd1993.persistence.dao.DeviceMetadataRepository;
 import io.github.gcdd1993.persistence.model.DeviceMetadata;
 import io.github.gcdd1993.persistence.model.User;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -20,7 +20,10 @@ import ua_parser.Parser;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.net.InetAddress;
-import java.util.*;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
 
 import static java.util.Objects.nonNull;
 
@@ -143,10 +146,10 @@ public class DeviceService {
         String text = getMessage("message.login.notification.deviceDetails", locale) +
                 " " + deviceDetails +
                 "\n" +
-                    getMessage("message.login.notification.location", locale) +
+                getMessage("message.login.notification.location", locale) +
                 " " + location +
                 "\n" +
-                    getMessage("message.login.notification.ip", locale) +
+                getMessage("message.login.notification.ip", locale) +
                 " " + ip;
 
         notification.setText(text);

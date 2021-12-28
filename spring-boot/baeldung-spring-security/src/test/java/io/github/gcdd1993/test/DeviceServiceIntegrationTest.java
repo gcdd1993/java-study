@@ -1,18 +1,14 @@
 package io.github.gcdd1993.test;
 
-import static io.restassured.RestAssured.given;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.util.Collections;
-import java.util.Date;
-
 import io.github.gcdd1993.BaeldungSpringSecurityApplication;
+import io.github.gcdd1993.persistence.dao.DeviceMetadataRepository;
+import io.github.gcdd1993.persistence.dao.UserRepository;
+import io.github.gcdd1993.persistence.model.DeviceMetadata;
+import io.github.gcdd1993.persistence.model.User;
 import io.github.gcdd1993.spring.TestDbConfig;
 import io.github.gcdd1993.spring.TestIntegrationConfig;
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,18 +22,18 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
-import io.github.gcdd1993.persistence.dao.DeviceMetadataRepository;
-import io.github.gcdd1993.persistence.dao.UserRepository;
-import io.github.gcdd1993.persistence.model.DeviceMetadata;
-import io.github.gcdd1993.persistence.model.User;
+import java.util.Collections;
+import java.util.Date;
 
-import io.restassured.RestAssured;
-import io.restassured.response.Response;
+import static io.restassured.RestAssured.given;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
 @Transactional
 @SpringBootTest(classes = {BaeldungSpringSecurityApplication.class, TestDbConfig.class, TestIntegrationConfig.class},
-    properties = "geo.ip.lib.enabled=true", webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+        properties = "geo.ip.lib.enabled=true", webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class DeviceServiceIntegrationTest {
 
     @Autowired

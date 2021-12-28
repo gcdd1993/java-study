@@ -1,19 +1,9 @@
 package io.github.gcdd1993.test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
-import java.util.Date;
-import java.util.Optional;
-import java.util.UUID;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
+import io.github.gcdd1993.persistence.dao.UserRepository;
+import io.github.gcdd1993.persistence.dao.VerificationTokenRepository;
+import io.github.gcdd1993.persistence.model.User;
+import io.github.gcdd1993.persistence.model.VerificationToken;
 import io.github.gcdd1993.spring.TestDbConfig;
 import io.github.gcdd1993.spring.TestTaskConfig;
 import io.github.gcdd1993.task.TokensPurgeTask;
@@ -26,13 +16,18 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
-import io.github.gcdd1993.persistence.dao.UserRepository;
-import io.github.gcdd1993.persistence.dao.VerificationTokenRepository;
-import io.github.gcdd1993.persistence.model.User;
-import io.github.gcdd1993.persistence.model.VerificationToken;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
+import java.util.Optional;
+import java.util.UUID;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = { TestDbConfig.class, TestTaskConfig.class })
+@SpringBootTest(classes = {TestDbConfig.class, TestTaskConfig.class})
 @Transactional
 public class TokenExpirationIntegrationTest {
 
@@ -89,9 +84,9 @@ public class TokenExpirationIntegrationTest {
 
     @Test
     public void whenContextLoad_thenCorrect() {
-    	assertNotNull(user_id);
-    	assertNotNull(token_id);
-    	assertTrue(userRepository.findById(user_id).isPresent());
+        assertNotNull(user_id);
+        assertNotNull(token_id);
+        assertTrue(userRepository.findById(user_id).isPresent());
 
         Optional<VerificationToken> verificationToken = tokenRepository.findById(token_id);
         assertTrue(verificationToken.isPresent());

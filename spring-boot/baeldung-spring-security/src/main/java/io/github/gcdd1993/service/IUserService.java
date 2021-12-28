@@ -1,14 +1,14 @@
 package io.github.gcdd1993.service;
 
-import java.io.UnsupportedEncodingException;
-import java.util.List;
-import java.util.Optional;
-
-import io.github.gcdd1993.web.dto.UserDto;
+import io.github.gcdd1993.persistence.model.NewLocationToken;
 import io.github.gcdd1993.persistence.model.PasswordResetToken;
 import io.github.gcdd1993.persistence.model.User;
 import io.github.gcdd1993.persistence.model.VerificationToken;
-import io.github.gcdd1993.persistence.model.NewLocationToken;
+import io.github.gcdd1993.web.dto.UserDto;
+
+import java.io.UnsupportedEncodingException;
+import java.util.List;
+import java.util.Optional;
 
 public interface IUserService {
 

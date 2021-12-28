@@ -1,9 +1,9 @@
 package io.github.gcdd1993.validation;
 
+import io.github.gcdd1993.web.dto.UserDto;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-
-import io.github.gcdd1993.web.dto.UserDto;
 
 public class PasswordMatchesValidator implements ConstraintValidator<PasswordMatches, Object> {
 

@@ -1,20 +1,20 @@
 package io.github.gcdd1993.test;
 
-import static org.hamcrest.Matchers.containsString;
-
 import io.github.gcdd1993.BaeldungSpringSecurityApplication;
 import io.github.gcdd1993.spring.TestIntegrationConfig;
+import io.restassured.RestAssured;
+import io.restassured.specification.RequestSpecification;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import io.restassured.RestAssured;
-import io.restassured.specification.RequestSpecification;
+
+import static org.hamcrest.Matchers.containsString;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = { BaeldungSpringSecurityApplication.class, TestIntegrationConfig.class }, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = {BaeldungSpringSecurityApplication.class, TestIntegrationConfig.class}, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class LocalizationIntegrationTest {
 
     @Value("${local.server.port}")

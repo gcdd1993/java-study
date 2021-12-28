@@ -1,13 +1,13 @@
 package io.github.gcdd1993.captcha;
 
-import java.net.URI;
-
 import io.github.gcdd1993.web.error.ReCaptchaInvalidException;
 import io.github.gcdd1993.web.error.ReCaptchaUnavailableException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
+
+import java.net.URI;
 
 @Service("captchaService")
 public class CaptchaService extends AbstractCaptchaService {

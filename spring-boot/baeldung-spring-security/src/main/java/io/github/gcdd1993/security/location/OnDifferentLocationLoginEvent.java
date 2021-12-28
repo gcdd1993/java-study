@@ -1,9 +1,9 @@
 package io.github.gcdd1993.security.location;
 
-import java.util.Locale;
-
 import io.github.gcdd1993.persistence.model.NewLocationToken;
 import org.springframework.context.ApplicationEvent;
+
+import java.util.Locale;
 
 @SuppressWarnings("serial")
 public class OnDifferentLocationLoginEvent extends ApplicationEvent {

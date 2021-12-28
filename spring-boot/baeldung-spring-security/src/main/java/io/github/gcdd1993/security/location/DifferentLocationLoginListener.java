@@ -1,7 +1,5 @@
 package io.github.gcdd1993.security.location;
 
-import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.MessageSource;
@@ -9,6 +7,8 @@ import org.springframework.core.env.Environment;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
+
+import java.util.Date;
 
 @Component
 public class DifferentLocationLoginListener implements ApplicationListener<OnDifferentLocationLoginEvent> {
@@ -25,13 +25,13 @@ public class DifferentLocationLoginListener implements ApplicationListener<OnDif
     @Override
     public void onApplicationEvent(final OnDifferentLocationLoginEvent event) {
         final String enableLocUri = event.getAppUrl() + "/user/enableNewLoc?token=" + event.getToken()
-            .getToken();
+                .getToken();
         final String changePassUri = event.getAppUrl() + "/changePassword.html";
         final String recipientAddress = event.getUsername();
         final String subject = "Login attempt from different location";
-        final String message = messages.getMessage("message.differentLocation", new Object[] { new Date().toString(), event.getToken()
-            .getUserLocation()
-            .getCountry(), event.getIp(), enableLocUri, changePassUri }, event.getLocale());
+        final String message = messages.getMessage("message.differentLocation", new Object[]{new Date().toString(), event.getToken()
+                .getUserLocation()
+                .getCountry(), event.getIp(), enableLocUri, changePassUri}, event.getLocale());
 
         final SimpleMailMessage email = new SimpleMailMessage();
         email.setTo(recipientAddress);

@@ -1,13 +1,13 @@
 package io.github.gcdd1993.web.controller;
 
-import java.util.Locale;
-
 import io.github.gcdd1993.security.ActiveUserStore;
 import io.github.gcdd1993.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.Locale;
 
 @Controller
 public class UserController {

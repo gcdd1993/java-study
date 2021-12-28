@@ -1,12 +1,5 @@
 package io.github.gcdd1993.security;
 
-import java.io.IOException;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import io.github.gcdd1993.persistence.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -14,6 +7,12 @@ import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 //@Component("myAuthenticationSuccessHandler")
 public class MyCustomLoginAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
@@ -33,12 +32,11 @@ public class MyCustomLoginAuthenticationSuccessHandler implements Authentication
             session.setMaxInactiveInterval(30 * 60);
             String username;
             if (authentication.getPrincipal() instanceof User) {
-            	username = ((User)authentication.getPrincipal()).getEmail();
+                username = ((User) authentication.getPrincipal()).getEmail();
+            } else {
+                username = authentication.getName();
             }
-            else {
-            	username = authentication.getName();
-            }
-       
+
             LoggedUser user = new LoggedUser(username, activeUserStore);
             session.setAttribute("user", user);
         }

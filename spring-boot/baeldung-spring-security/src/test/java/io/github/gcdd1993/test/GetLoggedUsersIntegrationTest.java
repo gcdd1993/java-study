@@ -1,14 +1,14 @@
 package io.github.gcdd1993.test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.HashMap;
-import java.util.Map;
-
 import io.github.gcdd1993.BaeldungSpringSecurityApplication;
+import io.github.gcdd1993.persistence.dao.UserRepository;
+import io.github.gcdd1993.persistence.model.User;
 import io.github.gcdd1993.spring.TestDbConfig;
 import io.github.gcdd1993.spring.TestIntegrationConfig;
+import io.restassured.RestAssured;
+import io.restassured.authentication.FormAuthConfig;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,17 +19,15 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import io.github.gcdd1993.persistence.dao.UserRepository;
-import io.github.gcdd1993.persistence.model.User;
+import java.util.HashMap;
+import java.util.Map;
 
-import io.restassured.RestAssured;
-import io.restassured.authentication.FormAuthConfig;
-import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = { BaeldungSpringSecurityApplication.class, TestDbConfig.class, TestIntegrationConfig.class }, webEnvironment = WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = {BaeldungSpringSecurityApplication.class, TestDbConfig.class, TestIntegrationConfig.class}, webEnvironment = WebEnvironment.RANDOM_PORT)
 public class GetLoggedUsersIntegrationTest {
 
     @Autowired

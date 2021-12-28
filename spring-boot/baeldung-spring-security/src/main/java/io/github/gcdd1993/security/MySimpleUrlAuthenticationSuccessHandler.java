@@ -44,10 +44,9 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
 
             String username;
             if (authentication.getPrincipal() instanceof User) {
-            	username = ((User)authentication.getPrincipal()).getEmail();
-            }
-            else {
-            	username = authentication.getName();
+                username = ((User) authentication.getPrincipal()).getEmail();
+            } else {
+                username = authentication.getName();
             }
             LoggedUser user = new LoggedUser(username, activeUserStore);
             session.setAttribute("user", user);
@@ -60,7 +59,7 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
     private void loginNotification(Authentication authentication, HttpServletRequest request) {
         try {
             if (authentication.getPrincipal() instanceof User && isGeoIpLibEnabled()) {
-                deviceService.verifyDevice(((User)authentication.getPrincipal()), request);
+                deviceService.verifyDevice(((User) authentication.getPrincipal()), request);
             }
         } catch (Exception e) {
             logger.error("An error occurred while verifying device or location", e);
@@ -93,15 +92,14 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
             }
         }
         if (isUser) {
-        	 String username;
-             if (authentication.getPrincipal() instanceof User) {
-             	username = ((User)authentication.getPrincipal()).getEmail();
-             }
-             else {
-             	username = authentication.getName();
-             }
+            String username;
+            if (authentication.getPrincipal() instanceof User) {
+                username = ((User) authentication.getPrincipal()).getEmail();
+            } else {
+                username = authentication.getName();
+            }
 
-            return "/homepage.html?user="+username;
+            return "/homepage.html?user=" + username;
         } else if (isAdmin) {
             return "/console";
         } else {

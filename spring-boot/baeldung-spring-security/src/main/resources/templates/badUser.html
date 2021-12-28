@@ -1,22 +1,22 @@
 <html>
 <head>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"/>
     <title th:utext="#{label.badUser.title}">bad user</title>
 </head>
 <body>
 <div class="container">
-<h1 class="alert alert-danger" th:utext="${message}">error</h1>
-<br/>
-<a class="btn btn-default" th:href="@{/registration.html}" th:utext="#{label.form.loginSignUp}">signup</a>
+    <h1 class="alert alert-danger" th:utext="${message}">error</h1>
+    <br/>
+    <a class="btn btn-default" th:href="@{/registration.html}" th:utext="#{label.form.loginSignUp}">signup</a>
 
-<div th:if="${expired}">
-<br/>
-<h1 th:utext="#{label.form.resendRegistrationToken}">resend</h1>
-<button onclick="resendToken()">resend</button>
+    <div th:if="${expired}">
+        <br/>
+        <h1 th:utext="#{label.form.resendRegistrationToken}">resend</h1>
+        <button onclick="resendToken()">resend</button>
 
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script th:inline="javascript">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script th:inline="javascript">
 var serverContext = [[@{/}]];
 
 function resendToken(){
@@ -38,9 +38,10 @@ function resendToken(){
 $(document).ajaxStart(function() {
     $("title").html("LOADING ...");
 });
-</script>
 
-</div>
+        </script>
+
+    </div>
 </div>
 </body>
 </html>

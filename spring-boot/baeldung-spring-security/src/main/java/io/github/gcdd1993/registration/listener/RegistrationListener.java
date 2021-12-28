@@ -1,10 +1,8 @@
 package io.github.gcdd1993.registration.listener;
 
-import java.util.UUID;
-
-import io.github.gcdd1993.service.IUserService;
 import io.github.gcdd1993.persistence.model.User;
 import io.github.gcdd1993.registration.OnRegistrationCompleteEvent;
+import io.github.gcdd1993.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.MessageSource;
@@ -12,6 +10,8 @@ import org.springframework.core.env.Environment;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
+
+import java.util.UUID;
 
 @Component
 public class RegistrationListener implements ApplicationListener<OnRegistrationCompleteEvent> {
@@ -57,6 +57,6 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
         email.setFrom(env.getProperty("support.email"));
         return email;
     }
-    
+
 
 }

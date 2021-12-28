@@ -1,11 +1,11 @@
 package io.github.gcdd1993.test;
 
-import static org.junit.Assert.assertNull;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-
+import io.github.gcdd1993.persistence.dao.PrivilegeRepository;
+import io.github.gcdd1993.persistence.dao.RoleRepository;
+import io.github.gcdd1993.persistence.dao.UserRepository;
+import io.github.gcdd1993.persistence.model.Privilege;
+import io.github.gcdd1993.persistence.model.Role;
+import io.github.gcdd1993.persistence.model.User;
 import io.github.gcdd1993.spring.TestDbConfig;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,12 +15,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
-import io.github.gcdd1993.persistence.dao.PrivilegeRepository;
-import io.github.gcdd1993.persistence.dao.RoleRepository;
-import io.github.gcdd1993.persistence.dao.UserRepository;
-import io.github.gcdd1993.persistence.model.Privilege;
-import io.github.gcdd1993.persistence.model.Role;
-import io.github.gcdd1993.persistence.model.User;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = TestDbConfig.class)

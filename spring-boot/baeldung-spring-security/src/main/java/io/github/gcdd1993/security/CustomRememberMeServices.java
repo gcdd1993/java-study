@@ -1,10 +1,5 @@
 package io.github.gcdd1993.security;
 
-import java.util.Date;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import io.github.gcdd1993.persistence.dao.UserRepository;
 import io.github.gcdd1993.persistence.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +14,10 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.security.web.authentication.rememberme.PersistentRememberMeToken;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 
 public class CustomRememberMeServices extends PersistentTokenBasedRememberMeServices {
 
@@ -58,6 +57,6 @@ public class CustomRememberMeServices extends PersistentTokenBasedRememberMeServ
     }
 
     private void addCookie(PersistentRememberMeToken token, HttpServletRequest request, HttpServletResponse response) {
-        setCookie(new String[] { token.getSeries(), token.getTokenValue() }, getTokenValiditySeconds(), request, response);
+        setCookie(new String[]{token.getSeries(), token.getTokenValue()}, getTokenValiditySeconds(), request, response);
     }
 }

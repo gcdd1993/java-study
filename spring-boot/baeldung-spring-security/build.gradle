@@ -20,4 +20,5 @@ dependencies {
     runtimeOnly("com.h2database:h2")
 
     testImplementation("io.rest-assured:rest-assured")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
 }

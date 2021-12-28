@@ -1,9 +1,9 @@
 package io.github.gcdd1993.registration;
 
-import java.util.Locale;
-
 import io.github.gcdd1993.persistence.model.User;
 import org.springframework.context.ApplicationEvent;
+
+import java.util.Locale;
 
 @SuppressWarnings("serial")
 public class OnRegistrationCompleteEvent extends ApplicationEvent {

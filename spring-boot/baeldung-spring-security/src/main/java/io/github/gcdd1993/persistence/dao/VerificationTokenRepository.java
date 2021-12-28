@@ -1,7 +1,7 @@
 package io.github.gcdd1993.persistence.dao;
 
-import io.github.gcdd1993.persistence.model.VerificationToken;
 import io.github.gcdd1993.persistence.model.User;
+import io.github.gcdd1993.persistence.model.VerificationToken;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

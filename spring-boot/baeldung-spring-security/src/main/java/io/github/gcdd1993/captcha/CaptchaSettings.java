@@ -9,7 +9,7 @@ public class CaptchaSettings {
 
     private String site;
     private String secret;
-    
+
     //reCAPTCHA V3
     private String siteV3;
     private String secretV3;

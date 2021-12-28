@@ -1,12 +1,9 @@
 package io.github.gcdd1993.test;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.UUID;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
+import io.github.gcdd1993.persistence.dao.UserRepository;
+import io.github.gcdd1993.persistence.dao.VerificationTokenRepository;
+import io.github.gcdd1993.persistence.model.User;
+import io.github.gcdd1993.persistence.model.VerificationToken;
 import io.github.gcdd1993.spring.LoginNotificationConfig;
 import io.github.gcdd1993.spring.ServiceConfig;
 import io.github.gcdd1993.spring.TestDbConfig;
@@ -22,13 +19,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
-import io.github.gcdd1993.persistence.dao.UserRepository;
-import io.github.gcdd1993.persistence.dao.VerificationTokenRepository;
-import io.github.gcdd1993.persistence.model.User;
-import io.github.gcdd1993.persistence.model.VerificationToken;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import java.util.UUID;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = { TestDbConfig.class, ServiceConfig.class, TestIntegrationConfig.class, LoginNotificationConfig.class})
+@SpringBootTest(classes = {TestDbConfig.class, ServiceConfig.class, TestIntegrationConfig.class, LoginNotificationConfig.class})
 @Transactional
 public class UserIntegrationTest {
 
@@ -76,8 +74,8 @@ public class UserIntegrationTest {
 
     @Test
     public void whenContextLoad_thenCorrect() {
-    	assertTrue(userRepository.count() > 0);
-    	assertTrue(tokenRepository.count() > 0);
+        assertTrue(userRepository.count() > 0);
+        assertTrue(tokenRepository.count() > 0);
     }
 
     // @Test(expected = Exception.class)

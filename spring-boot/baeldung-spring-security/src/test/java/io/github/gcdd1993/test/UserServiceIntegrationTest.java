@@ -1,20 +1,12 @@
 package io.github.gcdd1993.test;
 
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
-import java.util.stream.Collectors;
-
+import io.github.gcdd1993.persistence.dao.RoleRepository;
+import io.github.gcdd1993.persistence.dao.UserRepository;
+import io.github.gcdd1993.persistence.dao.VerificationTokenRepository;
+import io.github.gcdd1993.persistence.model.Role;
+import io.github.gcdd1993.persistence.model.User;
+import io.github.gcdd1993.persistence.model.VerificationToken;
 import io.github.gcdd1993.service.IUserService;
 import io.github.gcdd1993.service.UserService;
 import io.github.gcdd1993.spring.LoginNotificationConfig;
@@ -23,6 +15,7 @@ import io.github.gcdd1993.spring.TestDbConfig;
 import io.github.gcdd1993.spring.TestIntegrationConfig;
 import io.github.gcdd1993.validation.EmailExistsException;
 import io.github.gcdd1993.web.dto.UserDto;
+import io.github.gcdd1993.web.error.UserAlreadyExistException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,16 +25,17 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
-import io.github.gcdd1993.persistence.dao.RoleRepository;
-import io.github.gcdd1993.persistence.dao.UserRepository;
-import io.github.gcdd1993.persistence.dao.VerificationTokenRepository;
-import io.github.gcdd1993.persistence.model.Role;
-import io.github.gcdd1993.persistence.model.User;
-import io.github.gcdd1993.persistence.model.VerificationToken;
-import io.github.gcdd1993.web.error.UserAlreadyExistException;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = { TestDbConfig.class, ServiceConfig.class, TestIntegrationConfig.class, LoginNotificationConfig.class})
+@SpringBootTest(classes = {TestDbConfig.class, ServiceConfig.class, TestIntegrationConfig.class, LoginNotificationConfig.class})
 public class UserServiceIntegrationTest {
 
     @Autowired
@@ -103,19 +97,19 @@ public class UserServiceIntegrationTest {
 
     @Test
     public void givenUserRegistered_whenDuplicatedRegister_thenCorrect() {
-    	assertThrows(UserAlreadyExistException.class, () -> {
-    		
+        assertThrows(UserAlreadyExistException.class, () -> {
+
             final String email = UUID.randomUUID().toString();
             final UserDto userDto = createUserDto(email);
             userService.registerNewUserAccount(userDto);
             userService.registerNewUserAccount(userDto);
-    	});
+        });
 
     }
 
     @Transactional
     public void givenUserRegistered_whenDtoRoleAdmin_thenUserNotAdmin() {
-    	assertNotNull(roleRepository);
+        assertNotNull(roleRepository);
         final UserDto userDto = new UserDto();
         userDto.setEmail(UUID.randomUUID().toString());
         userDto.setPassword("SecretPassword");
@@ -170,14 +164,14 @@ public class UserServiceIntegrationTest {
 
     @Test
     public void givenUserAndToken_whenRemovingUserByDao_thenFKViolation() {
-    	assertThrows(DataIntegrityViolationException.class, () -> {
+        assertThrows(DataIntegrityViolationException.class, () -> {
             final User user = registerUser();
             final String token = UUID.randomUUID().toString();
             userService.createVerificationTokenForUser(user, token);
             final long userId = user.getId();
             userService.getVerificationToken(token).getId();
             userRepository.deleteById(userId);
-    	});
+        });
     }
 
     @Test

@@ -1,30 +1,10 @@
 package io.github.gcdd1993.service;
 
-import java.io.UnsupportedEncodingException;
-import java.net.InetAddress;
-import java.net.URLEncoder;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
-import java.util.stream.Collectors;
-
-import javax.transaction.Transactional;
-
-import io.github.gcdd1993.persistence.dao.NewLocationTokenRepository;
-import io.github.gcdd1993.persistence.dao.PasswordResetTokenRepository;
-import io.github.gcdd1993.persistence.dao.RoleRepository;
-import io.github.gcdd1993.persistence.dao.UserLocationRepository;
-import io.github.gcdd1993.persistence.dao.UserRepository;
+import com.maxmind.geoip2.DatabaseReader;
+import io.github.gcdd1993.persistence.dao.*;
+import io.github.gcdd1993.persistence.model.*;
 import io.github.gcdd1993.web.dto.UserDto;
 import io.github.gcdd1993.web.error.UserAlreadyExistException;
-import io.github.gcdd1993.persistence.dao.VerificationTokenRepository;
-import io.github.gcdd1993.persistence.model.NewLocationToken;
-import io.github.gcdd1993.persistence.model.PasswordResetToken;
-import io.github.gcdd1993.persistence.model.User;
-import io.github.gcdd1993.persistence.model.UserLocation;
-import io.github.gcdd1993.persistence.model.VerificationToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.env.Environment;
@@ -35,7 +15,12 @@ import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.maxmind.geoip2.DatabaseReader;
+import javax.transaction.Transactional;
+import java.io.UnsupportedEncodingException;
+import java.net.InetAddress;
+import java.net.URLEncoder;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -143,7 +128,7 @@ public class UserService implements IUserService {
     public VerificationToken generateNewVerificationToken(final String existingVerificationToken) {
         VerificationToken vToken = tokenRepository.findByToken(existingVerificationToken);
         vToken.updateToken(UUID.randomUUID()
-            .toString());
+                .toString());
         vToken = tokenRepository.save(vToken);
         return vToken;
     }
@@ -166,7 +151,7 @@ public class UserService implements IUserService {
 
     @Override
     public Optional<User> getUserByPasswordResetToken(final String token) {
-        return Optional.ofNullable(passwordTokenRepository.findByToken(token) .getUser());
+        return Optional.ofNullable(passwordTokenRepository.findByToken(token).getUser());
     }
 
     @Override
@@ -195,8 +180,8 @@ public class UserService implements IUserService {
         final User user = verificationToken.getUser();
         final Calendar cal = Calendar.getInstance();
         if ((verificationToken.getExpiryDate()
-            .getTime() - cal.getTime()
-            .getTime()) <= 0) {
+                .getTime() - cal.getTime()
+                .getTime()) <= 0) {
             tokenRepository.delete(verificationToken);
             return TOKEN_EXPIRED;
         }
@@ -215,13 +200,13 @@ public class UserService implements IUserService {
     @Override
     public User updateUser2FA(boolean use2FA) {
         final Authentication curAuth = SecurityContextHolder.getContext()
-            .getAuthentication();
+                .getAuthentication();
         User currentUser = (User) curAuth.getPrincipal();
         currentUser.setUsing2FA(use2FA);
         currentUser = userRepository.save(currentUser);
         final Authentication auth = new UsernamePasswordAuthenticationToken(currentUser, currentUser.getPassword(), curAuth.getAuthorities());
         SecurityContextHolder.getContext()
-            .setAuthentication(auth);
+                .setAuthentication(auth);
         return currentUser;
     }
 
@@ -232,31 +217,31 @@ public class UserService implements IUserService {
     @Override
     public List<String> getUsersFromSessionRegistry() {
         return sessionRegistry.getAllPrincipals()
-            .stream()
-            .filter((u) -> !sessionRegistry.getAllSessions(u, false)
-                .isEmpty())
-            .map(o -> {
-                if (o instanceof User) {
-                    return ((User) o).getEmail();
-                } else {
-                    return o.toString()
-            ;
-                }
-            }).collect(Collectors.toList());
+                .stream()
+                .filter((u) -> !sessionRegistry.getAllSessions(u, false)
+                        .isEmpty())
+                .map(o -> {
+                    if (o instanceof User) {
+                        return ((User) o).getEmail();
+                    } else {
+                        return o.toString()
+                                ;
+                    }
+                }).collect(Collectors.toList());
     }
 
     @Override
     public NewLocationToken isNewLoginLocation(String username, String ip) {
 
-        if(!isGeoIpLibEnabled()) {
+        if (!isGeoIpLibEnabled()) {
             return null;
         }
 
         try {
             final InetAddress ipAddress = InetAddress.getByName(ip);
             final String country = databaseReader.country(ipAddress)
-                .getCountry()
-                .getName();
+                    .getCountry()
+                    .getName();
             System.out.println(country + "====****");
             final User user = userRepository.findByEmail(username);
             final UserLocation loc = userLocationRepository.findByCountryAndUser(country, user);
@@ -285,15 +270,15 @@ public class UserService implements IUserService {
     @Override
     public void addUserLocation(User user, String ip) {
 
-        if(!isGeoIpLibEnabled()) {
+        if (!isGeoIpLibEnabled()) {
             return;
         }
 
         try {
             final InetAddress ipAddress = InetAddress.getByName(ip);
             final String country = databaseReader.country(ipAddress)
-                .getCountry()
-                .getName();
+                    .getCountry()
+                    .getName();
             UserLocation loc = new UserLocation(country, user);
             loc.setEnabled(true);
             userLocationRepository.save(loc);
@@ -311,7 +296,7 @@ public class UserService implements IUserService {
         loc = userLocationRepository.save(loc);
 
         final NewLocationToken token = new NewLocationToken(UUID.randomUUID()
-            .toString(), loc);
+                .toString(), loc);
         return newLocationTokenRepository.save(token);
     }
 }

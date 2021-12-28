@@ -1,7 +1,5 @@
 package io.github.gcdd1993.security.location;
 
-import javax.servlet.http.HttpServletRequest;
-
 import io.github.gcdd1993.persistence.model.NewLocationToken;
 import io.github.gcdd1993.service.IUserService;
 import io.github.gcdd1993.web.error.UnusualLocationException;
@@ -10,6 +8,8 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsChecker;
 import org.springframework.stereotype.Component;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Component
 public class DifferentLocationChecker implements UserDetailsChecker {

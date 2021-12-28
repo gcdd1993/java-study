@@ -1,8 +1,8 @@
 package io.github.gcdd1993.security.google2fa;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
+
+import javax.servlet.http.HttpServletRequest;
 
 public class CustomWebAuthenticationDetails extends WebAuthenticationDetails {
 
