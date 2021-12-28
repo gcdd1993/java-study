@@ -1,39 +1,108 @@
 package io.github.gcdd1993.web.dto;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import io.github.gcdd1993.validation.PasswordMatches;
 import io.github.gcdd1993.validation.ValidEmail;
-import lombok.Data;
+import io.github.gcdd1993.validation.ValidPassword;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-
-/**
- * 3. The User DTO Object
- * <p>
- * We need a Data Transfer Object to send all of the registration information to our Spring backend.
- * The DTO object should have all the information we'll require later on when we create and populate our User object
- *
- * @author gcdd1993
- * @since 2021/12/28
- */
 @PasswordMatches
-@Data
 public class UserDto {
     @NotNull
-    @NotEmpty
+    @Size(min = 1, message = "{Size.userDto.firstName}")
     private String firstName;
 
     @NotNull
-    @NotEmpty
+    @Size(min = 1, message = "{Size.userDto.lastName}")
     private String lastName;
 
-    @NotNull
-    @NotEmpty
+    @ValidPassword
     private String password;
+
+    @NotNull
+    @Size(min = 1)
     private String matchingPassword;
 
     @ValidEmail
     @NotNull
-    @NotEmpty
+    @Size(min = 1, message = "{Size.userDto.email}")
     private String email;
+
+    private boolean isUsing2FA;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(final String email) {
+        this.email = email;
+    }
+
+    private Integer role;
+
+    public Integer getRole() {
+        return role;
+    }
+
+    public void setRole(final Integer role) {
+        this.role = role;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(final String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(final String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(final String password) {
+        this.password = password;
+    }
+
+    public String getMatchingPassword() {
+        return matchingPassword;
+    }
+
+    public void setMatchingPassword(final String matchingPassword) {
+        this.matchingPassword = matchingPassword;
+    }
+
+    public boolean isUsing2FA() {
+        return isUsing2FA;
+    }
+
+    public void setUsing2FA(boolean isUsing2FA) {
+        this.isUsing2FA = isUsing2FA;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("UserDto [firstName=")
+                .append(firstName)
+                .append(", lastName=")
+                .append(lastName)
+                .append(", email=")
+                .append(email)
+                .append(", isUsing2FA=")
+                .append(isUsing2FA)
+                .append(", role=")
+                .append(role).append("]");
+        return builder.toString();
+    }
+
 }

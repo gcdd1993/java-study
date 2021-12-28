@@ -3,14 +3,16 @@ package io.github.gcdd1993;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.context.request.RequestContextListener;
 
 /**
- * @author gcdd1993
- * @since 2021/12/28
+ * https://www.baeldung.com/spring-security-registration
  */
 @Slf4j
 @SpringBootApplication
-public class BaeldungSpringSecurityApplication {
+public class BaeldungSpringSecurityApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
         try {
@@ -19,4 +21,10 @@ public class BaeldungSpringSecurityApplication {
             log.error("app run error.", ex);
         }
     }
+
+    @Bean
+    public RequestContextListener requestContextListener() {
+        return new RequestContextListener();
+    }
+
 }

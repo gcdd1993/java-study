@@ -1,31 +1,36 @@
 package io.github.gcdd1993.registration;
 
-import io.github.gcdd1993.persistence.model.User;
-import lombok.Getter;
-import lombok.Setter;
-import org.springframework.context.ApplicationEvent;
-
 import java.util.Locale;
 
-/**
- * 3.1. Using a Spring Event to Create the Token and Send the Verification Email
- *
- * @author gcdd1993
- * @since 2021/12/28
- */
-@Setter
-@Getter
+import io.github.gcdd1993.persistence.model.User;
+import org.springframework.context.ApplicationEvent;
+
+@SuppressWarnings("serial")
 public class OnRegistrationCompleteEvent extends ApplicationEvent {
-    private String appUrl;
-    private Locale locale;
-    private User user;
 
-    public OnRegistrationCompleteEvent(
-            User user, Locale locale, String appUrl) {
+    private final String appUrl;
+    private final Locale locale;
+    private final User user;
+
+    public OnRegistrationCompleteEvent(final User user, final Locale locale, final String appUrl) {
         super(user);
-
         this.user = user;
         this.locale = locale;
         this.appUrl = appUrl;
     }
+
+    //
+
+    public String getAppUrl() {
+        return appUrl;
+    }
+
+    public Locale getLocale() {
+        return locale;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
 }

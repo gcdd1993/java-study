@@ -4,8 +4,20 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity5")
     implementation("org.hibernate.validator:hibernate-validator")
     implementation("org.jboss.aerogear:aerogear-otp-java:1.0.0")
+    runtimeOnly("javax.servlet:jstl")
+//    implementation("javax.el:el-api:2.2")
+    implementation("com.google.guava:guava:20.0")
+    implementation("org.passay:passay:1.0")
+    implementation("net.logstash.logback:logstash-logback-encoder:4.8")
+    // User Agent parser
+    implementation("com.github.ua-parser:uap-java:1.4.0")
+    // maxmind dependency
+    implementation("com.maxmind.geoip2:geoip2:2.16.1")
 
     runtimeOnly("com.h2database:h2")
+
+    testImplementation("io.rest-assured:rest-assured")
 }

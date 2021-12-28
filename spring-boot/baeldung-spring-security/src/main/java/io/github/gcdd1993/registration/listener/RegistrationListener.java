@@ -1,26 +1,20 @@
 package io.github.gcdd1993.registration.listener;
 
+import java.util.UUID;
+
+import io.github.gcdd1993.service.IUserService;
 import io.github.gcdd1993.persistence.model.User;
 import io.github.gcdd1993.registration.OnRegistrationCompleteEvent;
-import io.github.gcdd1993.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.MessageSource;
+import org.springframework.core.env.Environment;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 
-import java.util.UUID;
-
-/**
- * Example 3.2.2. – The RegistrationListener Handles the OnRegistrationCompleteEvent
- *
- * @author gcdd1993
- * @since 2021/12/28
- */
 @Component
 public class RegistrationListener implements ApplicationListener<OnRegistrationCompleteEvent> {
-
     @Autowired
     private IUserService service;
 
@@ -30,26 +24,39 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
     @Autowired
     private JavaMailSender mailSender;
 
+    @Autowired
+    private Environment env;
+
+    // API
+
     @Override
-    public void onApplicationEvent(OnRegistrationCompleteEvent event) {
+    public void onApplicationEvent(final OnRegistrationCompleteEvent event) {
         this.confirmRegistration(event);
     }
 
-    private void confirmRegistration(OnRegistrationCompleteEvent event) {
-        User user = event.getUser();
-        String token = UUID.randomUUID().toString();
-        service.createVerificationToken(user, token);
+    private void confirmRegistration(final OnRegistrationCompleteEvent event) {
+        final User user = event.getUser();
+        final String token = UUID.randomUUID().toString();
+        service.createVerificationTokenForUser(user, token);
 
-        String recipientAddress = user.getEmail();
-        String subject = "Registration Confirmation";
-        String confirmationUrl
-                = event.getAppUrl() + "/regitrationConfirm.html?token=" + token;
-        String message = messages.getMessage("message.regSucc", null, event.getLocale());
-
-        SimpleMailMessage email = new SimpleMailMessage();
-        email.setTo(recipientAddress);
-        email.setSubject(subject);
-        email.setText(message + "\r\n" + "http://localhost:8080" + confirmationUrl);
+        final SimpleMailMessage email = constructEmailMessage(event, user, token);
         mailSender.send(email);
     }
+
+    //
+
+    private SimpleMailMessage constructEmailMessage(final OnRegistrationCompleteEvent event, final User user, final String token) {
+        final String recipientAddress = user.getEmail();
+        final String subject = "Registration Confirmation";
+        final String confirmationUrl = event.getAppUrl() + "/registrationConfirm.html?token=" + token;
+        final String message = messages.getMessage("message.regSuccLink", null, "You registered successfully. To confirm your registration, please click on the below link.", event.getLocale());
+        final SimpleMailMessage email = new SimpleMailMessage();
+        email.setTo(recipientAddress);
+        email.setSubject(subject);
+        email.setText(message + " \r\n" + confirmationUrl);
+        email.setFrom(env.getProperty("support.email"));
+        return email;
+    }
+    
+
 }
