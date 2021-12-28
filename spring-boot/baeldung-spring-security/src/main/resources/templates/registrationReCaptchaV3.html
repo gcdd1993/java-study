@@ -106,7 +106,7 @@ function register(event){
     
     if (typeof grecaptcha !== 'undefined') {
     	var siteKey = /*[[${@captchaServiceV3.getReCaptchaSite()}]]*/;
-    	grecaptcha.execute(siteKey, {action: /*[[${T(com.baeldung.captcha.CaptchaServiceV3).REGISTER_ACTION}]]*/}).then(function(response) {
+    	grecaptcha.execute(siteKey, {action: /*[[${T(io.github.gcdd1993.captcha.CaptchaServiceV3).REGISTER_ACTION}]]*/}).then(function(response) {
 			$('#response').val(response);    
     		var formData= $('form').serialize();
         	
