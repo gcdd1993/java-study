@@ -1100,8 +1100,6 @@ private static void log(ByteBuf buffer) {
 }
 ```
 
-
-
 #### 2）直接内存 vs 堆内存
 
 可以使用下面的代码来创建池化基于堆的 ByteBuf
@@ -1119,8 +1117,6 @@ ByteBuf buffer = ByteBufAllocator.DEFAULT.directBuffer(10);
 * 直接内存创建和销毁的代价昂贵，但读写性能高（少一次内存复制），适合配合池化功能一起用
 * 直接内存对 GC 压力小，因为这部分内存不受 JVM 垃圾回收的管理，但也要注意及时主动释放
 
-
-
 #### 3）池化 vs 非池化
 
 池化的最大意义在于可以重用 ByteBuf，优点有
@@ -1137,8 +1133,6 @@ ByteBuf buffer = ByteBufAllocator.DEFAULT.directBuffer(10);
 
 * 4.1 以后，非 Android 平台默认启用池化实现，Android 平台启用非池化实现
 * 4.1 之前，池化功能还不成熟，默认是非池化实现
-
-
 
 #### 4）组成
 
