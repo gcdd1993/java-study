@@ -8,11 +8,15 @@ import io.netty.channel.ChannelInitializer;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
+import io.netty.handler.logging.LogLevel;
+import io.netty.handler.logging.LoggingHandler;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Scanner;
 
 /**
+ * shutdownGracefully
+ *
  * @author gcdd1993
  * @since 2021/12/28
  */
@@ -28,6 +32,7 @@ public class CloseFutureClient {
                     @Override
                     protected void initChannel(Channel ch) throws Exception {
                         ch.pipeline()
+                                .addLast(new LoggingHandler(LogLevel.DEBUG))
                                 .addLast(new StringDecoder());
                     }
                 })
@@ -41,6 +46,7 @@ public class CloseFutureClient {
                 String line = scanner.nextLine();
                 if ("q".equals(line)) {
                     channel.close();
+//                    log.info("处理关闭之后的操作"); // 无效，因为close是异步操作，在这里还未真正关闭
                     break;
                 }
                 channel.writeAndFlush(line);

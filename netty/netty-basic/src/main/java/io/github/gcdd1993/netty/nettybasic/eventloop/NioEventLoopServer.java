@@ -9,6 +9,8 @@ import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import lombok.extern.slf4j.Slf4j;
 
+import java.nio.charset.StandardCharsets;
+
 /**
  * @author gcdd1993
  * @since 2021/12/27
@@ -29,8 +31,10 @@ public class NioEventLoopServer {
      */
     public static void main(String[] args) throws InterruptedException {
         // 再增加两个非NIO工人
-        DefaultEventLoopGroup normalWorkers = new DefaultEventLoopGroup(2);
+        DefaultEventLoopGroup group = new DefaultEventLoopGroup(2);
         new ServerBootstrap()
+                // boss 和 worker
+                // 细分1：boss 只负责 ServerSocketChannel 上的accept事件，worker只负责ServerSocketChannel上的读写事件
                 .group(new NioEventLoopGroup(1), new NioEventLoopGroup(2))
                 .channel(NioServerSocketChannel.class)
                 .childHandler(new ChannelInitializer<>() {
@@ -38,17 +42,34 @@ public class NioEventLoopServer {
                     protected void initChannel(Channel ch) throws Exception {
                         ch.pipeline()
                                 .addLast(new LoggingHandler(LogLevel.DEBUG))
-                                .addLast(normalWorkers, "myhandler", new ChannelInboundHandlerAdapter() {
+//                                .addLast(normalWorkers, "myhandler", new ChannelInboundHandlerAdapter() {
+//                                    @Override
+//                                    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+//                                        ByteBuf byteBuf = msg instanceof ByteBuf ? ((ByteBuf) msg) : null;
+//                                        if (byteBuf != null) {
+//                                            byte[] buf = new byte[16];
+//                                            ByteBuf len = byteBuf.readBytes(buf, 0, byteBuf.readableBytes());
+//                                            log.info(new String(buf));
+//                                        }
+//                                    }
+//                                });
+                                .addLast("handler1", new ChannelInboundHandlerAdapter() {
                                     @Override
                                     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-                                        ByteBuf byteBuf = msg instanceof ByteBuf ? ((ByteBuf) msg) : null;
-                                        if (byteBuf != null) {
-                                            byte[] buf = new byte[16];
-                                            ByteBuf len = byteBuf.readBytes(buf, 0, byteBuf.readableBytes());
-                                            log.info(new String(buf));
-                                        }
+                                        ByteBuf buf = (ByteBuf) msg;
+                                        log.info(buf.toString(StandardCharsets.UTF_8));
+                                        ctx.fireChannelRead(msg); // 将消息传递给下一个handler
                                     }
-                                });
+                                })
+                                // 交给指定的 DefaultEventLoopGroup 执行
+                                .addLast(group, "handler2", new ChannelInboundHandlerAdapter() {
+                                    @Override
+                                    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+                                        ByteBuf buf = (ByteBuf) msg;
+                                        log.info(buf.toString(StandardCharsets.UTF_8));
+                                    }
+                                })
+                        ;
                     }
                 })
                 .bind(8080)

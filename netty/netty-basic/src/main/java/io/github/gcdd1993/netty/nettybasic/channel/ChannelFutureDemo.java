@@ -26,7 +26,7 @@ public class ChannelFutureDemo {
                                 .addLast(new StringDecoder());
                     }
                 })
-                .connect("localhost", 8080);
+                .connect("localhost", 8080); // 异步非阻塞
 
         System.out.println(channelFuture.channel()); // 执行到 1 时，连接未建立，打印 [id: 0x7cd2f01b]
         channelFuture.sync(); // 执行到 2 时，sync 方法是同步等待连接建立完成

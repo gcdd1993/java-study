@@ -23,5 +23,6 @@ public class NioEventLoopScheduledRunner {
         nioWorkers.scheduleAtFixedRate(() -> {
             log.info("scheduled task...");
         }, 0, 1, TimeUnit.SECONDS);
+
     }
 }
