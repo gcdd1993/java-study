@@ -7,50 +7,47 @@
 服务端代码
 
 ```java
+@Slf4j
 public class HelloWorldServer {
-    static final Logger log = LoggerFactory.getLogger(HelloWorldServer.class);
-    void start() {
-        NioEventLoopGroup boss = new NioEventLoopGroup(1);
+
+    public static void main(String[] args) {
+        NioEventLoopGroup boss = new NioEventLoopGroup();
         NioEventLoopGroup worker = new NioEventLoopGroup();
         try {
-            ServerBootstrap serverBootstrap = new ServerBootstrap();
-            serverBootstrap.channel(NioServerSocketChannel.class);
-            serverBootstrap.group(boss, worker);
-            serverBootstrap.childHandler(new ChannelInitializer<SocketChannel>() {
-                @Override
-                protected void initChannel(SocketChannel ch) throws Exception {
-                    ch.pipeline().addLast(new LoggingHandler(LogLevel.DEBUG));
-                    ch.pipeline().addLast(new ChannelInboundHandlerAdapter() {
+            ChannelFuture channelFuture = new ServerBootstrap()
+                    .group(boss, worker)
+                    .channel(NioServerSocketChannel.class)
+                    .childHandler(new ChannelInitializer<>() {
                         @Override
-                        public void channelActive(ChannelHandlerContext ctx) throws Exception {
-                            log.debug("connected {}", ctx.channel());
-                            super.channelActive(ctx);
-                        }
+                        protected void initChannel(Channel ch) throws Exception {
+                            ch.pipeline()
+                                    .addLast(new LoggingHandler(LogLevel.DEBUG))
+                                    .addLast(new ChannelInboundHandlerAdapter() {
+                                        @Override
+                                        public void channelActive(ChannelHandlerContext ctx) throws Exception {
+                                            log.info("connected {}", ctx.channel());
+                                            super.channelActive(ctx);
+                                        }
 
-                        @Override
-                        public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-                            log.debug("disconnect {}", ctx.channel());
-                            super.channelInactive(ctx);
+                                        @Override
+                                        public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+                                            log.info("disconnected {}", ctx.channel());
+                                            super.channelInactive(ctx);
+                                        }
+                                    });
                         }
-                    });
-                }
-            });
-            ChannelFuture channelFuture = serverBootstrap.bind(8080);
-            log.debug("{} binding...", channelFuture.channel());
+                    }).bind(8080);
+            log.info("{} binding...", channelFuture.channel());
             channelFuture.sync();
-            log.debug("{} bound...", channelFuture.channel());
+            log.info("{} binding...", channelFuture.channel());
             channelFuture.channel().closeFuture().sync();
         } catch (InterruptedException e) {
-            log.error("server error", e);
+            log.error("server error.", e);
         } finally {
             boss.shutdownGracefully();
             worker.shutdownGracefully();
-            log.debug("stoped");
+            log.info("stopped");
         }
-    }
-
-    public static void main(String[] args) {
-        new HelloWorldServer().start();
     }
 }
 ```
@@ -323,8 +320,6 @@ public class HelloWorldClient {
 
 > 半包用这种办法还是不好解决，因为接收方的缓冲区大小是有限的
 
-
-
 #### 方法2，固定长度
 
 让所有数据包长度固定（假设长度为 8 字节），服务器端加入
@@ -480,8 +475,6 @@ public class HelloWorldClient {
 * 长度定的太大，浪费
 * 长度定的太小，对某些数据包又显得不够
 
-
-
 #### 方法3，固定分隔符
 
 服务端加入，默认以 \n 或 \r\n 作为分隔符，如果超出指定长度仍未出现分隔符，则抛出异常
@@ -557,8 +550,6 @@ public class HelloWorldClient {
 +--------+-------------------------------------------------+----------------+
 14:08:18 [DEBUG] [nioEventLoopGroup-2-1] i.n.h.l.LoggingHandler - [id: 0x1282d755, L:/192.168.0.103:63641 - R:/192.168.0.103:9090] FLUSH
 ```
-
-
 
 服务端输出
 
@@ -668,7 +659,7 @@ public class HelloWorldClient {
                                 byte length = (byte) (r.nextInt(16) + 1);
                                 // 先写入长度
                                 buffer.writeByte(length);
-                                // 再
+                                // 再写入内容
                                 for (int j = 1; j <= length; j++) {
                                     buffer.writeByte((byte) c);
                                 }
