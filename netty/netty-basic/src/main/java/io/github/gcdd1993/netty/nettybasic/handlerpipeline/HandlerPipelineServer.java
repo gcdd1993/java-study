@@ -31,43 +31,45 @@ public class HandlerPipelineServer {
                 .childHandler(new ChannelInitializer<>() {
                     @Override
                     protected void initChannel(Channel ch) throws Exception {
+                        // 添加处理器 head -> h1 -> h2 -> h3 -> h6 -> h5 -> h4 -> tail
                         ch.pipeline()
-                                .addLast(new ChannelInboundHandlerAdapter() {
+                                .addLast("h1", new ChannelInboundHandlerAdapter() {
                                     @Override
                                     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
                                         System.out.println(1);
                                         ctx.fireChannelRead(msg); // 调用下一个入站处理器
                                     }
                                 })
-                                .addLast(new ChannelInboundHandlerAdapter() {
+                                .addLast("h2", new ChannelInboundHandlerAdapter() {
                                     @Override
                                     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
                                         System.out.println(2);
                                         ctx.fireChannelRead(msg);
                                     }
                                 })
-                                .addLast(new ChannelInboundHandlerAdapter() {
+                                .addLast("h3", new ChannelInboundHandlerAdapter() {
                                     @Override
                                     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
                                         System.out.println(3);
+//                                        ctx.writeAndFlush(msg); // 从当前handler往前出发出站处理器的执行
                                         ctx.channel().write(msg); // 从尾部开始触发后续出站处理器的执行
                                     }
                                 })
-                                .addLast(new ChannelOutboundHandlerAdapter() {
+                                .addLast("h4", new ChannelOutboundHandlerAdapter() {
                                     @Override
                                     public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception {
                                         System.out.println(4);
                                         ctx.write(msg, promise); // 触发上一个出站处理器
                                     }
                                 })
-                                .addLast(new ChannelOutboundHandlerAdapter() {
+                                .addLast("h5", new ChannelOutboundHandlerAdapter() {
                                     @Override
                                     public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception {
                                         System.out.println(5);
                                         ctx.write(msg, promise); // 触发上一个出站处理器
                                     }
                                 })
-                                .addLast(new ChannelOutboundHandlerAdapter() {
+                                .addLast("h6", new ChannelOutboundHandlerAdapter() {
                                     @Override
                                     public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception {
                                         System.out.println(6);

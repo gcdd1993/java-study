@@ -46,7 +46,9 @@ subprojects { project ->
         annotationProcessor("org.projectlombok:lombok:1.18.22")
 
         testImplementation("org.springframework.boot:spring-boot-starter-test")
+        testImplementation("org.projectlombok:lombok:1.18.22")
         testImplementation("com.github.jsonzou:jmockdata")
+        testAnnotationProcessor("org.projectlombok:lombok:1.18.22")
     }
 
     dependencyManagement {
