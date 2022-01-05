@@ -67,16 +67,8 @@ public class ChatClient {
                                                     ctx.channel().close();
                                                     return;
                                                 }
+                                                printUsage();
                                                 while (true) {
-                                                    System.out.println("===========================================");
-                                                    System.out.println("send [username] [content]");
-                                                    System.out.println("gsend [group name] [content]");
-                                                    System.out.println("gcreate [group name] [m1,m2,m3...]");
-                                                    System.out.println("gmembers [group name]");
-                                                    System.out.println("gjoin [group name]");
-                                                    System.out.println("gquit [group name]");
-                                                    System.out.println("quit");
-                                                    System.out.println("===========================================");
 
                                                     String command = scanner.nextLine();
                                                     String[] s = command.split(" ");
@@ -147,5 +139,17 @@ public class ChatClient {
         } finally {
             group.shutdownGracefully();
         }
+    }
+
+    private static void printUsage() {
+        System.out.println("===========================================");
+        System.out.println("send [username] [content]");
+        System.out.println("gsend [group name] [content]");
+        System.out.println("gcreate [group name] [m1,m2,m3...]");
+        System.out.println("gmembers [group name]");
+        System.out.println("gjoin [group name]");
+        System.out.println("gquit [group name]");
+        System.out.println("quit");
+        System.out.println("===========================================");
     }
 }
