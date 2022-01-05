@@ -12,6 +12,8 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.concurrent.CountDownLatch;
@@ -84,7 +86,9 @@ public class ChatClient {
                                                         }
                                                         break;
                                                         case "gcreate": {
-                                                            GroupCreateRequestMessage requestMessage = new GroupCreateRequestMessage(s[1], Set.of(s[2].split(",")));
+                                                            Set<String> members = new HashSet<>(Arrays.asList(s[2].split(",")));
+                                                            members.add(username);
+                                                            GroupCreateRequestMessage requestMessage = new GroupCreateRequestMessage(s[1], members);
                                                             ctx.writeAndFlush(requestMessage);
                                                         }
                                                         break;
