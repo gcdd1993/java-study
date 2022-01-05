@@ -14,6 +14,6 @@ public class GroupMembersRequestMessage extends Message {
 
     @Override
     public int getMessageType() {
-        return GroupMembersRequestMessage;
+        return GROUP_MEMBERS_REQUEST_MESSAGE;
     }
 }

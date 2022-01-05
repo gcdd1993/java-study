@@ -18,6 +18,6 @@ public class GroupChatRequestMessage extends Message {
 
     @Override
     public int getMessageType() {
-        return GroupChatRequestMessage;
+        return GROUP_CHAT_REQUEST_MESSAGE;
     }
 }

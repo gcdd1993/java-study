@@ -18,6 +18,6 @@ public class GroupCreateRequestMessage extends Message {
 
     @Override
     public int getMessageType() {
-        return GroupCreateRequestMessage;
+        return GROUP_CREATE_REQUEST_MESSAGE;
     }
 }

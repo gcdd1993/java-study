@@ -20,9 +20,11 @@ public class SessionMemoryImpl implements Session {
 
     @Override
     public void unbind(Channel channel) {
-        String username = channelUsernameMap.remove(channel);
-        usernameChannelMap.remove(username);
-        channelAttributesMap.remove(channel);
+        if (channelUsernameMap.containsKey(channel)) {
+            String username = channelUsernameMap.remove(channel);
+            usernameChannelMap.remove(username);
+            channelAttributesMap.remove(channel);
+        }
     }
 
     @Override

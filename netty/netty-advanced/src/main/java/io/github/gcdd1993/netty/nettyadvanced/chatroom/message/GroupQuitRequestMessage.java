@@ -17,6 +17,6 @@ public class GroupQuitRequestMessage extends Message {
 
     @Override
     public int getMessageType() {
-        return GroupQuitRequestMessage;
+        return GROUP_QUIT_REQUEST_MESSAGE;
     }
 }

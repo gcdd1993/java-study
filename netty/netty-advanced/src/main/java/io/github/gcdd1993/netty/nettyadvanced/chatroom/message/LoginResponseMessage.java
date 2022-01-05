@@ -14,6 +14,6 @@ public class LoginResponseMessage extends AbstractResponseMessage {
 
     @Override
     public int getMessageType() {
-        return LoginResponseMessage;
+        return LOGIN_RESPONSE_MESSAGE;
     }
 }

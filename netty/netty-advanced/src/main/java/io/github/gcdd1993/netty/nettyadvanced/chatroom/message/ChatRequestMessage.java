@@ -21,6 +21,6 @@ public class ChatRequestMessage extends Message {
 
     @Override
     public int getMessageType() {
-        return ChatRequestMessage;
+        return CHAT_REQUEST_MESSAGE;
     }
 }

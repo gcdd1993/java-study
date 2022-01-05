@@ -10,6 +10,7 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
+import io.netty.handler.timeout.IdleStateHandler;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -32,6 +33,10 @@ public class ChatServer {
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
                             ch.pipeline()
+                                    // 用来判断是不是 读/写空闲时间过长
+                                    // 5s 内如果没有收到 channel 的消息，会触发一个 IdleState.READER_IDLE 事件
+                                    .addLast(new IdleStateHandler(5, 0, 0))
+                                    .addLast(new IdleCheckHandler())
                                     .addLast(new ProcotolFrameDecoder())
                                     .addLast(loggingHandler)
                                     .addLast(messageCodecSharable)

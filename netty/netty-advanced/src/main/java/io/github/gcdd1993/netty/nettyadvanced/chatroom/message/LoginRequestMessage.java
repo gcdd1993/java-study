@@ -14,6 +14,6 @@ public class LoginRequestMessage extends Message {
 
     @Override
     public int getMessageType() {
-        return LoginRequestMessage;
+        return LOGIN_REQUEST_MESSAGE;
     }
 }
