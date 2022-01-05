@@ -32,8 +32,10 @@ public class ReflectionUtilsTest {
             searchType = searchType.getSuperclass();
         }
 
-        Method method = ReflectionUtils.findMethod(String.class, "codePointBefore", Integer.class);
+        Method method = ReflectionUtils.findMethod(String.class, "codePointBefore", int.class);
 
+        Assertions.assertNotNull(method);
+        method = ReflectionUtils.findMethod(String.class, "codePointBefore", Integer.TYPE);
         Assertions.assertNotNull(method);
 
         // 私有方法
