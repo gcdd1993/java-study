@@ -3,6 +3,7 @@ package io.github.gcdd1993.netty.nettyadvanced.chatroom.server;
 import io.github.gcdd1993.netty.nettyadvanced.chatroom.protocol.MessageCodecSharable;
 import io.github.gcdd1993.netty.nettyadvanced.chatroom.protocol.ProcotolFrameDecoder;
 import io.github.gcdd1993.netty.nettyadvanced.chatroom.server.handler.ChatRequestMessageHandler;
+import io.github.gcdd1993.netty.nettyadvanced.chatroom.server.handler.GroupCreateRequestMessageHandler;
 import io.github.gcdd1993.netty.nettyadvanced.chatroom.server.handler.LoginRequestMessageHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelInitializer;
@@ -38,6 +39,7 @@ public class ChatServer {
                                     .addLast(messageCodecSharable)
                                     .addLast(new LoginRequestMessageHandler())
                                     .addLast(new ChatRequestMessageHandler())
+                                    .addLast(new GroupCreateRequestMessageHandler())
                             ;
                         }
                     })
