@@ -1,3 +1,6 @@
+plugins {
+    id "java-study.java-application-conventions"
+}
 dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("ch.qos.logback:logback-classic")

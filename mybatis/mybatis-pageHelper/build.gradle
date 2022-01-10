@@ -1,3 +1,6 @@
+plugins{
+    id "java-study.java-application-conventions"
+}
 dependencies {
     implementation("com.github.jsqlparser:jsqlparser:4.2")
     compileOnly("org.mybatis:mybatis:3.5.7")

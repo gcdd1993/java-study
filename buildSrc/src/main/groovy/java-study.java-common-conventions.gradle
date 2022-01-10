@@ -1,0 +1,76 @@
+import java.text.SimpleDateFormat
+
+plugins {
+    // Apply the java Plugin to add support for Java.
+    id 'java'
+}
+
+dependencies {
+    constraints {
+        compileOnly("org.mapstruct:mapstruct:$mapstruct_version")
+        testImplementation("org.mapstruct:mapstruct:$mapstruct_version")
+        annotationProcessor("org.mapstruct:mapstruct-processor:$mapstruct_version")
+
+        implementation("org.redisson:redisson-spring-boot-starter:${redisson_version}")
+        implementation("com.aliyun:aliyun-java-sdk-core:${aliyun_sdk_core_version}")
+        implementation("com.aliyun.oss:aliyun-sdk-oss:${aliyun_sdk_oss_version}")
+        implementation("com.aliyun:aliyun-java-sdk-dysmsapi:${aliyun_dysms_api_version}")
+        implementation("com.github.bingoohuang:patchca:${patchca_version}")
+        implementation("io.opentracing.contrib:opentracing-spring-jaeger-cloud-starter:${opentracing_jaeger_version}")
+        implementation("com.github.jsonzou:jmockdata:${jmockdata_version}")
+        implementation("io.netty:netty-all:$netty_version")
+
+    }
+
+    compileOnly("org.projectlombok:lombok:$lombok_version")
+    annotationProcessor("org.projectlombok:lombok:$lombok_version")
+
+    // Use JUnit Jupiter API for testing.
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.2'
+
+    // Use JUnit Jupiter Engine for testing.
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+
+    testImplementation("org.projectlombok:lombok:$lombok_version")
+    testAnnotationProcessor("org.projectlombok:lombok:$lombok_version")
+    testImplementation("com.github.jsonzou:jmockdata:$jmockdata_version")
+
+    implementation platform("org.springframework.cloud:spring-cloud-dependencies:$spring_cloud_version")
+    implementation platform("org.springframework.boot:spring-boot-dependencies:$spring_boot_version")
+
+    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor:$spring_boot_version")
+
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+}
+
+tasks.named('test') {
+    // Use junit platform for unit tests.
+    useJUnitPlatform()
+}
+
+group "io.github.gcdd1993"
+version root_version
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+jar {
+    enabled = true
+    manifest {
+        attributes(
+                "Implementation-Title": project.name,
+                "Implementation-Version": project.version,
+                "Built-By": System.properties["user.name"],
+                "Build-Timestamp": new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").format(new Date()),
+                "Created-By": "Gradle ${gradle.gradleVersion}",
+                "Build-Jdk": "${System.properties["java.version"]} (${System.properties["java.vendor"]} ${System.properties["java.vm.version"]})",
+                "Build-OS": "${System.properties["os.name"]} ${System.properties["os.arch"]} ${System.properties["os.version"]}"
+        )
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}

@@ -1,3 +1,6 @@
+plugins{
+    id "java-study.java-application-conventions"
+}
 dependencies {
     implementation("io.netty:netty-all")
     implementation("com.google.code.gson:gson:2.8.5")

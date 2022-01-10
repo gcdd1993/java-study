@@ -1,3 +1,6 @@
+plugins{
+    id "java-study.java-application-conventions"
+}
 dependencies {
     implementation("org.openjdk.jol:jol-core:0.16")
 }

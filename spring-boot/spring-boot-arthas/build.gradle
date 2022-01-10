@@ -1,3 +1,6 @@
+plugins{
+    id "java-study.java-application-conventions"
+}
 dependencies {
     implementation("com.taobao.arthas:arthas-spring-boot-starter:3.5.4")
     implementation("org.springframework.boot:spring-boot-starter-web")

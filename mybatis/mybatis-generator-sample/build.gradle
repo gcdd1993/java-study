@@ -1,3 +1,6 @@
+plugins{
+    id "java-study.java-application-conventions"
+}
 dependencies {
     implementation("com.baomidou:mybatis-plus-boot-starter:3.4.3.4")
     implementation("org.springframework.boot:spring-boot-starter-web")

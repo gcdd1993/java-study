@@ -1,8 +1,7 @@
+plugins{
+    id "java-study.java-application-conventions"
+}
 dependencies {
     implementation(project(":mybatis:mybatis-core"))
     runtimeOnly("mysql:mysql-connector-java:5.1.49")
-
-    compileOnly("org.projectlombok:lombok:1.18.22")
-    annotationProcessor("org.projectlombok:lombok:1.18.22")
-    testImplementation("com.github.jsonzou:jmockdata")
 }
