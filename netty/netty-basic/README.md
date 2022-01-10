@@ -1021,13 +1021,9 @@ new Bootstrap()
   * 3 处的 ctx.channel().write(msg) 如果改为 ctx.write(msg) 仅会打印 1 2 3，因为节点3 之前没有其它出站处理器了
   * 6 处的 ctx.write(msg, promise) 如果改为 ctx.channel().write(msg) 会打印 1 2 3 6 6 6... 因为 ctx.channel().write() 是从尾部开始查找，结果又是节点6 自己
 
-
-
-图1 - 服务端 pipeline 触发的原始流程，图中数字代表了处理步骤的先后次序
+图1 - 服务端pipeline 触发的原始流程，图中数字代表了处理步骤的先后次序
 
 ![](https://cdn.jsdelivr.net/gh/gcdd1993/image-repo@master/img/202112271836161.png)
-
-
 
 ### 3.5 ByteBuf
 

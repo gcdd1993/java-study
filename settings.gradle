@@ -51,3 +51,5 @@ include("netty:nio-basic")
 include("netty:netty-basic")
 include("netty:netty-advanced")
 include("netty:netty-sourcecode")
+
+include("thirdpart-samples:retrofit")
