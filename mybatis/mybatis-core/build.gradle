@@ -1,5 +1,5 @@
 plugins {
-    id "java-study.java-library-conventions"
+    id "java-library"
 }
 dependencies {
     api("org.springframework.boot:spring-boot-starter-web")

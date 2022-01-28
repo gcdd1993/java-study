@@ -1,6 +1,3 @@
-plugins {
-    id "java-study.java-application-conventions"
-}
 dependencies {
     implementation(project(":mybatis:mybatis-core"))
     implementation("org.springframework.boot:spring-boot-starter-web")
