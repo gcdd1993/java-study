@@ -28,6 +28,7 @@ include("java-core:new-feature-java8")
 include("java-core:java-datastructure")
 include("java-core:java-beancopy")
 include("java-core:java-concurrency")
+include("java-core:java-guide")
 
 include("mybatis:mybatis-core")
 include("mybatis:mybatis-cache")
@@ -53,3 +54,4 @@ include("netty:netty-advanced")
 include("netty:netty-sourcecode")
 
 include("thirdpart-samples:retrofit")
+

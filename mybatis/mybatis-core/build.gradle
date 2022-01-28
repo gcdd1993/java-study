@@ -7,5 +7,6 @@ dependencies {
     compileOnly("org.redisson:redisson-mybatis:3.16.4")
 
     compileOnly("org.projectlombok:lombok:1.18.22")
+
     annotationProcessor("org.projectlombok:lombok:1.18.22")
 }
