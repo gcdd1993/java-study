@@ -1,5 +1,7 @@
 package io.github.gcdd1993.leetcode.editor.cn;
 
+import io.github.gcdd1993.leetcode.editor.cn.model.ListNode;
+
 /**
  * 解决这个问题的关键是，通过某些方式，让 p1 和 p2 能够同时到达相交节点 c1。
  * 所以，我们可以让 p1 遍历完链表 A 之后开始遍历链表 B，让 p2 遍历完链表 B 之后开始遍历链表 A，这样相当于「逻辑上」两条链表接在了一起。
@@ -40,14 +42,5 @@ public class IntersectionOfTwoLinkedLists {
     }
 
     //leetcode submit region end(Prohibit modification and deletion)
-    public class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-            next = null;
-        }
-    }
 
 }

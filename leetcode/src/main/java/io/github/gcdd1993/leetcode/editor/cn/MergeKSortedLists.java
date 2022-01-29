@@ -1,5 +1,7 @@
 package io.github.gcdd1993.leetcode.editor.cn;
 
+import io.github.gcdd1993.leetcode.editor.cn.model.ListNode;
+
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
@@ -61,22 +63,5 @@ public class MergeKSortedLists {
         }
     }
     //leetcode submit region end(Prohibit modification and deletion)
-
-    public class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode() {
-        }
-
-        ListNode(int val) {
-            this.val = val;
-        }
-
-        ListNode(int val, ListNode next) {
-            this.val = val;
-            this.next = next;
-        }
-    }
 
 }

@@ -1,5 +1,7 @@
 package io.github.gcdd1993.leetcode.editor.cn;
 
+import io.github.gcdd1993.leetcode.editor.cn.model.ListNode;
+
 /**
  * 当快慢指针相遇时，让其中任一个指针指向头节点，然后让它俩以相同速度前进，再次相遇时所在的节点位置就是环开始的位置。
  */
@@ -44,14 +46,5 @@ public class LinkedListCycleIi {
     }
 
     //leetcode submit region end(Prohibit modification and deletion)
-    class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-            next = null;
-        }
-    }
 
 }

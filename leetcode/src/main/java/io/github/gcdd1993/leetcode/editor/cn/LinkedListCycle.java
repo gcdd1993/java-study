@@ -1,5 +1,7 @@
 package io.github.gcdd1993.leetcode.editor.cn;
 
+import io.github.gcdd1993.leetcode.editor.cn.model.ListNode;
+
 /**
  * 每当慢指针 slow 前进一步，快指针 fast 就前进两步。
  * 如果 fast 最终遇到空指针，说明链表中没有环；
@@ -32,13 +34,4 @@ public class LinkedListCycle {
     }
 
     //leetcode submit region end(Prohibit modification and deletion)
-    class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-            next = null;
-        }
-    }
 }

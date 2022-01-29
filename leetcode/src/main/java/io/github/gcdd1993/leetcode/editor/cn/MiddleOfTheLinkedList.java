@@ -1,5 +1,7 @@
 package io.github.gcdd1993.leetcode.editor.cn;
 
+import io.github.gcdd1993.leetcode.editor.cn.model.ListNode;
+
 /**
  * 我们让两个指针 slow 和 fast 分别指向链表头结点 head。
  * 每当慢指针 slow 前进一步，快指针 fast 就前进两步，这样，当 fast 走到链表末尾时，slow 就指向了链表中点。
@@ -40,22 +42,5 @@ public class MiddleOfTheLinkedList {
         }
     }
     //leetcode submit region end(Prohibit modification and deletion)
-
-    public class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode() {
-        }
-
-        ListNode(int val) {
-            this.val = val;
-        }
-
-        ListNode(int val, ListNode next) {
-            this.val = val;
-            this.next = next;
-        }
-    }
 
 }
