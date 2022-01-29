@@ -5,9 +5,9 @@ import io.github.gcdd1993.leetcode.editor.cn.model.ListNode;
 /**
  * 当快慢指针相遇时，让其中任一个指针指向头节点，然后让它俩以相同速度前进，再次相遇时所在的节点位置就是环开始的位置。
  */
-public class LinkedListCycleIi {
+public class Num142LinkedListCycleIi {
     public static void main(String[] args) {
-        Solution solution = new LinkedListCycleIi().new Solution();
+        Solution solution = new Num142LinkedListCycleIi().new Solution();
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 

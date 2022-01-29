@@ -7,9 +7,9 @@ import io.github.gcdd1993.leetcode.editor.cn.model.ListNode;
  * 所以，我们可以让 p1 遍历完链表 A 之后开始遍历链表 B，让 p2 遍历完链表 B 之后开始遍历链表 A，这样相当于「逻辑上」两条链表接在了一起。
  * 如果这样进行拼接，就可以让 p1 和 p2 同时进入公共部分，也就是同时到达相交节点 c1
  */
-public class IntersectionOfTwoLinkedLists {
+public class Num160IntersectionOfTwoLinkedLists {
     public static void main(String[] args) {
-        Solution solution = new IntersectionOfTwoLinkedLists().new Solution();
+        Solution solution = new Num160IntersectionOfTwoLinkedLists().new Solution();
     }
 //leetcode submit region begin(Prohibit modification and deletion)
 

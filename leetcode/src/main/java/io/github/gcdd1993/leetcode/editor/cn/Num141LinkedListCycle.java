@@ -7,9 +7,9 @@ import io.github.gcdd1993.leetcode.editor.cn.model.ListNode;
  * 如果 fast 最终遇到空指针，说明链表中没有环；
  * 如果 fast 最终和 slow 相遇，那肯定是 fast 超过了 slow 一圈，说明链表中含有环。
  */
-public class LinkedListCycle {
+public class Num141LinkedListCycle {
     public static void main(String[] args) {
-        Solution solution = new LinkedListCycle().new Solution();
+        Solution solution = new Num141LinkedListCycle().new Solution();
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 

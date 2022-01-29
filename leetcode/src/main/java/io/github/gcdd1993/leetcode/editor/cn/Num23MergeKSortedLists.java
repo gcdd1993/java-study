@@ -11,9 +11,9 @@ import java.util.PriorityQueue;
  * 优先队列 pq 中的元素个数最多是 k，所以一次 poll 或者 add 方法的时间复杂度是 O(logk)；
  * 所有的链表节点都会被加入和弹出 pq，所以算法整体的时间复杂度是 O(Nlogk)，其中 k 是链表的条数，N 是这些链表的节点总数。
  */
-public class MergeKSortedLists {
+public class Num23MergeKSortedLists {
     public static void main(String[] args) {
-        Solution solution = new MergeKSortedLists().new Solution();
+        Solution solution = new Num23MergeKSortedLists().new Solution();
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 

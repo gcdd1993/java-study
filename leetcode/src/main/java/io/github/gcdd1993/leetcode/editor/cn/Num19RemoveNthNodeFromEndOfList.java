@@ -2,9 +2,9 @@ package io.github.gcdd1993.leetcode.editor.cn;
 
 import io.github.gcdd1993.leetcode.editor.cn.model.ListNode;
 
-public class RemoveNthNodeFromEndOfList {
+public class Num19RemoveNthNodeFromEndOfList {
     public static void main(String[] args) {
-        Solution solution = new RemoveNthNodeFromEndOfList().new Solution();
+        Solution solution = new Num19RemoveNthNodeFromEndOfList().new Solution();
 
         ListNode head = new ListNode(1);
         head.next = new ListNode(2);

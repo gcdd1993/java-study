@@ -6,9 +6,9 @@ import io.github.gcdd1993.leetcode.editor.cn.model.ListNode;
  * 我们让两个指针 slow 和 fast 分别指向链表头结点 head。
  * 每当慢指针 slow 前进一步，快指针 fast 就前进两步，这样，当 fast 走到链表末尾时，slow 就指向了链表中点。
  */
-public class MiddleOfTheLinkedList {
+public class Num876MiddleOfTheLinkedList {
     public static void main(String[] args) {
-        Solution solution = new MiddleOfTheLinkedList().new Solution();
+        Solution solution = new Num876MiddleOfTheLinkedList().new Solution();
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 

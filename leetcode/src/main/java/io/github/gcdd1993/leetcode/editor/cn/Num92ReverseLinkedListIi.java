@@ -2,9 +2,9 @@ package io.github.gcdd1993.leetcode.editor.cn;
 
 import io.github.gcdd1993.leetcode.editor.cn.model.ListNode;
 
-public class ReverseLinkedListIi {
+public class Num92ReverseLinkedListIi {
     public static void main(String[] args) {
-        Solution solution = new ReverseLinkedListIi().new Solution();
+        Solution solution = new Num92ReverseLinkedListIi().new Solution();
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 

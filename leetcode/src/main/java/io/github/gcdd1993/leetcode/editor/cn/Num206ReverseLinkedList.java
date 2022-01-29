@@ -5,9 +5,9 @@ import io.github.gcdd1993.leetcode.editor.cn.model.ListNode;
 /**
  * 递归反转整个链表
  */
-public class ReverseLinkedList {
+public class Num206ReverseLinkedList {
     public static void main(String[] args) {
-        Solution solution = new ReverseLinkedList().new Solution();
+        Solution solution = new Num206ReverseLinkedList().new Solution();
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 

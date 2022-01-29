@@ -5,9 +5,9 @@ import io.github.gcdd1993.leetcode.editor.cn.model.ListNode;
 /**
  * https://labuladong.gitee.io/algo/2/17/16/
  */
-public class MergeTwoSortedLists {
+public class Num21MergeTwoSortedLists {
     public static void main(String[] args) {
-        Solution solution = new MergeTwoSortedLists().new Solution();
+        Solution solution = new Num21MergeTwoSortedLists().new Solution();
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 

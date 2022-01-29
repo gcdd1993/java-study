@@ -2,9 +2,9 @@ package io.github.gcdd1993.leetcode.editor.cn;
 
 import io.github.gcdd1993.leetcode.editor.cn.model.ListNode;
 
-public class PalindromeLinkedList {
+public class Num234PalindromeLinkedList {
     public static void main(String[] args) {
-        Solution solution = new PalindromeLinkedList().new Solution();
+        Solution solution = new Num234PalindromeLinkedList().new Solution();
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)

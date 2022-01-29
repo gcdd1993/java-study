@@ -2,9 +2,9 @@ package io.github.gcdd1993.leetcode.editor.cn;
 
 import io.github.gcdd1993.leetcode.editor.cn.model.ListNode;
 
-public class ReverseNodesInKGroup {
+public class Num25ReverseNodesInKGroup {
     public static void main(String[] args) {
-        Solution solution = new ReverseNodesInKGroup().new Solution();
+        Solution solution = new Num25ReverseNodesInKGroup().new Solution();
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
