@@ -39,7 +39,7 @@ public class TreeNode {
     }
 
     /**
-     * 打印中序遍历
+     * 打印后序遍历
      */
     public void printPostOrder() {
         System.out.println(Arrays.toString(postOrder(this).toArray()));
