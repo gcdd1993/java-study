@@ -17,82 +17,68 @@ public class Num1373MaximumSumBstInBinaryTree {
             return maxSum;
         }
 
-        private void traverse(TreeNode root) {
+        /**
+         * res[0] 记录以 root 为根的二叉树是否是 BST，若为 1 则说明是 BST，若为 0 则说明不是 BST；
+         * res[1] 记录以 root 为根的二叉树所有节点中的最小值；
+         * res[2] 记录以 root 为根的二叉树所有节点中的最大值；
+         * res[3] 记录以 root 为根的二叉树所有节点值之和。
+         *
+         * @param root
+         * @return
+         */
+        private int[] traverse(TreeNode root) {
             if (root == null) {
-                return;
+                // 根节点为空，也是 BST
+                return new int[]{1, Integer.MAX_VALUE, Integer.MIN_VALUE, 0};
             }
             // 前序位置
-            // 判断是否是 BST
-            if (isBST(root)) {
-                // 计算当前 BST 的节点之和
-                int leftSum = findSum(root.left);
-                int rightSum = findSum(root.right);
-                int sum = leftSum + rightSum + root.val;
-                if (sum > maxSum) {
-                    maxSum = sum;
+            int[] left = traverse(root.left);
+            // 中序位置
+            int[] right = traverse(root.right);
+            // 后序位置
+            // 判断左右子树是否为 BST
+            if (left[0] == 1 && right[0] == 1) {
+                int leftMax = left[2];
+                int rightMin = right[1];
+                // 判断 root 是否为 BST
+                if (root.val > leftMax && root.val < rightMin) {
+                    int sum = left[3] + right[3] + root.val;
+                    if (sum > maxSum) {
+                        maxSum = sum;
+                    }
+                    return new int[]{
+                            1,
+                            Math.min(left[1], root.val),
+                            Math.max(right[2], root.val),
+                            sum
+                    };
                 }
             }
-
-            traverse(root.left);
-            // 中序位置
-            traverse(root.right);
-            // 后序位置
+            return new int[]{0, 0, 0, 0};
         }
 
-        /**
-         * 判断是否为 BST
-         *
-         * @param root
-         * @return
-         */
-        private boolean isBST(TreeNode root) {
-            return isValidBST(root, null, null);
-        }
-
-        /**
-         * 计算 BST 的节点和
-         *
-         * @param root
-         * @return
-         */
-        private int findSum(TreeNode root) {
+        private int findMin(TreeNode root) {
             if (root == null) {
-                return 0;
+                return Integer.MAX_VALUE;
             }
-            // 前序位置
-            int left = findSum(root.left);
-            // 中序位置
-            int right = findSum(root.right);
-            // 后序位置
-            return left + right + root.val;
+            TreeNode p = root;
+            while (p.left != null) {
+                p = p.left;
+            }
+            return p.val;
         }
 
-        /**
-         * 限定以 root 为根的子树节点必须满足 max.val > root.val > min.val
-         *
-         * @param root 根节点
-         * @param min  最小
-         * @param max  最大
-         * @return
-         */
-        private boolean isValidBST(TreeNode root, TreeNode min, TreeNode max) {
+        private int findMax(TreeNode root) {
             if (root == null) {
-                return true;
+                return Integer.MIN_VALUE;
             }
-            // 若 root.val 不符合 max 和 min 的限制，说明不是合法 BST
-            if (min != null && root.val <= min.val) {
-                return false;
+            TreeNode p = root;
+            while (p.right != null) {
+                p = p.right;
             }
-            // 节点的右子树只包含 大于 当前节点的数
-            if (max != null && root.val >= max.val) {
-                return false;
-            }
-
-            // 限定左子树的最大值是 root.val，右子树的最小值是 root.val
-            return isValidBST(root.left, min, root) &&
-                    isValidBST(root.right, root, max);
-
+            return p.val;
         }
+
     }
     //leetcode submit region end(Prohibit modification and deletion)
 
