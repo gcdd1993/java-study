@@ -41,6 +41,40 @@ void traverse(int[] arr, int i) {
 }
 ```
 
+## 滑动窗口算法
+
+```java
+public String minWindow(String s, String t) {
+    Map<Character, Integer> need = new HashMap<>();
+    Map<Character, Integer> window = new HashMap<>();
+
+    int left = 0, right = 0;
+    int valid = 0;
+
+    char[] chars = s.toCharArray();
+
+    while (right < chars.length) {
+        // c 是将一如窗口的字符
+        char c = chars[right];
+        // 右移窗口
+        right++;
+
+        // todo 进行窗口内数据的一系列更新
+
+        System.out.printf("window: [%d, %d)\n", left, right);
+
+        while (1 == 1) { // todo 判断左侧窗口是否要收缩
+            // d 是将移出窗口的字符
+            char d = chars[left];
+            // 左移窗口
+            left++;
+            // todo 进行窗口内数据的一系列更新
+        }
+    }
+
+}
+```
+
 ## 单链表遍历
 
 ```java
