@@ -52,9 +52,12 @@ public String minWindow(String s, String t) {
     int valid = 0;
 
     char[] chars = s.toCharArray();
+    for (char c : chars) {
+        need.put(c, need.getOrDefault(c, 0) + 1);
+    }
 
     while (right < chars.length) {
-        // c 是将一如窗口的字符
+        // c 是将y窗口的字符
         char c = chars[right];
         // 右移窗口
         right++;
