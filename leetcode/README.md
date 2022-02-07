@@ -78,6 +78,60 @@ public String minWindow(String s, String t) {
 }
 ```
 
+## 二分查找
+
+```java
+int  binarySearch(int[] nums,  int target)  {
+    int left = 0, right = ...;
+
+    while(...) {
+        int mid = left + (right - left) / 2;
+        if (nums[mid] == target) {
+            ...
+        } else if (nums[mid] < target) {
+            left = ...
+        } else if (nums[mid] > target) {
+            right = ...
+        }
+    }
+    return ...;
+}
+```
+
+## 运用二分搜索的套路框架
+
+```java
+// 函数 f 是关于自变量 x 的单调函数
+int f(int x) {
+    // ...
+}
+
+// 主函数，在 f(x) == target 的约束下求 x 的最值
+int solution(int[] nums, int target) {
+    if (nums.length == 0) return -1;
+    // 自变量 x 的最小值是多少？
+    int left = ...;
+    // 自变量 x 的最大值是多少？
+    int right = ... + 1;
+
+    while (left < right) {
+        int mid = left + (right - left) / 2;
+        int res = f(mid);
+        if (res == target) {
+            // 题目是求左边界还是右边界？
+            // ...
+        } else if (res < target) {
+            // 怎么让 f(x) 大一点？
+            // ...
+        } else if (res > target) {
+            // 怎么让 f(x) 小一点？
+            // ...
+        }
+    }
+    return left;
+}
+```
+
 ## 单链表遍历
 
 ```java
