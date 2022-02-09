@@ -43,6 +43,7 @@ include("spring-boot:spring-boot-arthas")
 include("spring-boot:spring-boot-oauth2")
 include("spring-boot:baeldung-spring-security")
 include("spring-boot:spring-boot-common")
+include("spring-boot:spring-boot-skywalking")
 
 include("spring-cloud:spring-cloud-gateway")
 include("spring-cloud:spring-cloud-kubernetes")
