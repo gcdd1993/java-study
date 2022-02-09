@@ -16,7 +16,8 @@ public class Num51NQueens {
          * @return
          */
         public List<List<String>> solveNQueens(int n) {
-
+            // fixme
+            return List.of();
         }
     }
     //leetcode submit region end(Prohibit modification and deletion)
