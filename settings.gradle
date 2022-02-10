@@ -45,6 +45,13 @@ include("spring-boot:baeldung-spring-security")
 include("spring-boot:spring-boot-common")
 include("spring-boot:spring-boot-skywalking")
 
+// seata
+include("spring-boot:spring-boot-seata:sbm-account-service")
+include("spring-boot:spring-boot-seata:sbm-business-service")
+include("spring-boot:spring-boot-seata:sbm-common-service")
+include("spring-boot:spring-boot-seata:sbm-order-service")
+include("spring-boot:spring-boot-seata:sbm-stock-service")
+
 include("spring-cloud:spring-cloud-gateway")
 include("spring-cloud:spring-cloud-kubernetes")
 include("spring-cloud:spring-cloud-openfeign")

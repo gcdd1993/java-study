@@ -66,6 +66,8 @@ subprojects { project ->
             dependency("io.opentracing.contrib:opentracing-spring-jaeger-cloud-starter:${opentracing_jaeger_version}")
             dependency("com.github.jsonzou:jmockdata:${jmockdata_version}")
             dependency("io.netty:netty-all:$netty_version")
+            dependency("org.mybatis.spring.boot:mybatis-spring-boot-starter:$mybatis_version")
+            dependency("com.alibaba:druid-spring-boot-starter:$druid_version")
         }
     }
 

@@ -1,0 +1,7 @@
+plugins {
+    id "java-library"
+}
+dependencies {
+    api("org.springframework.boot:spring-boot-starter-web")
+    api("io.seata:seata-spring-boot-starter:1.4.2")
+}

@@ -1,0 +1,6 @@
+dependencies {
+    implementation project(':spring-boot:spring-boot-seata:sbm-common-service')
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter'
+    implementation 'com.alibaba:druid-spring-boot-starter:1.1.10'
+    runtimeOnly 'mysql:mysql-connector-java'
+}
