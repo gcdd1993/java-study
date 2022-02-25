@@ -2,4 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="io.github.gcdd1993.mybatis.generator.system.mapper.DeptMapper">
 
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        create_by,
+        create_time,
+        update_by,
+        update_time,
+        dept_id, parent_id, ancestors, dept_name, order_num, leader, phone, email, status, del_flag
+    </sql>
+
 </mapper>

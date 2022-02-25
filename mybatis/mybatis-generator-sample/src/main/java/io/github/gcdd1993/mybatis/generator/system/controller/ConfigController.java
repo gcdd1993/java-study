@@ -1,14 +1,9 @@
 package io.github.gcdd1993.mybatis.generator.system.controller;
 
 
-import io.github.gcdd1993.mybatis.generator.system.entity.Config;
-import io.github.gcdd1993.mybatis.generator.system.service.IConfigService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
@@ -16,17 +11,10 @@ import java.util.List;
  * </p>
  *
  * @author gcdd1993
- * @since 2021-12-07
+ * @since 2022-02-24
  */
-@RequiredArgsConstructor
 @RestController
-@RequestMapping("/system/config")
+@RequestMapping("/system/config-po")
 public class ConfigController {
-    private final IConfigService configService;
-
-    @GetMapping
-    public List<Config> list() {
-        return configService.list();
-    }
 
 }

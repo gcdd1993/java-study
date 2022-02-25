@@ -2,4 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="io.github.gcdd1993.mybatis.generator.system.mapper.JobLogMapper">
 
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        create_time,
+        job_log_id, job_name, job_group, invoke_target, job_message, status, exception_info
+    </sql>
+
 </mapper>

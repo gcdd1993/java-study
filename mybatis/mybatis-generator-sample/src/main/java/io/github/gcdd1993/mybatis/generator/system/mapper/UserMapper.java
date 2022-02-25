@@ -1,6 +1,6 @@
 package io.github.gcdd1993.mybatis.generator.system.mapper;
 
-import io.github.gcdd1993.mybatis.generator.system.entity.User;
+import io.github.gcdd1993.mybatis.generator.system.entity.UserPo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author gcdd1993
- * @since 2021-12-07
+ * @since 2022-02-24
  */
-public interface UserMapper extends BaseMapper<User> {
+public interface UserMapper extends BaseMapper<UserPo> {
 
 }

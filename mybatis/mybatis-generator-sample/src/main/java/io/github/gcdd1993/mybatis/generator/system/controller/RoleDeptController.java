@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
  * </p>
  *
  * @author gcdd1993
- * @since 2021-12-07
+ * @since 2022-02-24
  */
 @RestController
-@RequestMapping("/system/role-dept")
+@RequestMapping("/system/role-dept-po")
 public class RoleDeptController {
 
 }

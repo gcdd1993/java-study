@@ -1,6 +1,6 @@
 package io.github.gcdd1993.mybatis.generator.system.mapper;
 
-import io.github.gcdd1993.mybatis.generator.system.entity.DictType;
+import io.github.gcdd1993.mybatis.generator.system.entity.DictTypePo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author gcdd1993
- * @since 2021-12-07
+ * @since 2022-02-24
  */
-public interface DictTypeMapper extends BaseMapper<DictType> {
+public interface DictTypeMapper extends BaseMapper<DictTypePo> {
 
 }

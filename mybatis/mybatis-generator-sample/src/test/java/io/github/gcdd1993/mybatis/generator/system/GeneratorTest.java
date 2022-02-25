@@ -2,6 +2,7 @@ package io.github.gcdd1993.mybatis.generator.system;
 
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.OutputFile;
+import com.baomidou.mybatisplus.generator.config.TemplateType;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 import org.junit.jupiter.api.Test;
 
@@ -25,22 +26,38 @@ class GeneratorTest {
         String password = "123456";
         FastAutoGenerator.create(url, username, password)
                 .globalConfig(builder -> {
-                    builder.author("gcdd1993") // 设置作者
+                    builder
+                            .author("gcdd1993") // 设置作者
                             //.enableSwagger() // 开启 swagger 模式
 //                            .enableKotlin()
                             .fileOverride() // 覆盖已生成文件
-                            .outputDir("D:\\WorkSpace\\Personal-Project\\java-study\\mybatis\\mybatis-generator-sample\\src\\main\\java"); // 指定输出目录
+                            .outputDir("src/main/java"); // 指定输出目录
                 })
                 .packageConfig(builder -> {
-                    builder.parent("io.github.gcdd1993.mybatis.generator") // 设置父包名
+                    builder
+                            .parent("io.github.gcdd1993.mybatis.generator") // 设置父包名
                             .moduleName("system") // 设置父包模块名
-                            .pathInfo(Collections.singletonMap(OutputFile.mapperXml, "D:\\WorkSpace\\Personal-Project\\java-study\\mybatis\\mybatis-generator-sample\\src\\main\\resources\\mappers")); // 设置mapperXml生成路径
+                            .pathInfo(Collections.singletonMap(OutputFile.mapperXml, "src/main/resources/mappers")); // 设置mapperXml生成路径
+                })
+                .templateConfig(builder -> {
+                    builder
+                            .disable(TemplateType.SERVICE)
+                            .serviceImpl("templates/serviceImpl.java");
                 })
                 .strategyConfig(builder -> {
                     builder
                             .addTablePrefix("sys_") // 设置过滤表前缀
                             .controllerBuilder().enableRestStyle()
-                            .entityBuilder().enableLombok()
+                            .entityBuilder()
+                            .disableSerialVersionUID()
+                            .enableLombok()
+                            .enableRemoveIsPrefix()
+                            .formatFileName("%sPo")
+                            .addSuperEntityColumns("create_by", "create_time", "update_by", "update_time")
+                            .mapperBuilder()
+                            .enableBaseColumnList()
+                            .serviceBuilder()
+                            .formatServiceImplFileName("%sService")
 //                            .addInclude("t_simple") // 设置需要生成的表名
                     ;
                 })
