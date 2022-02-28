@@ -65,3 +65,5 @@ include("thirdpart-samples:retrofit")
 
 include("leetcode")
 
+include("rocketmq:rocketmq-examples")
+
