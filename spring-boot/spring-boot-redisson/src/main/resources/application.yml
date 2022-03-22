@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: spring-boot-redisson
+  redis:
+    host: localhost
+    port: 16379
+    database: 0
