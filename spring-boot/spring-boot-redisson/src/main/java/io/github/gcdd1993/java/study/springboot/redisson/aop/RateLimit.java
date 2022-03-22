@@ -2,7 +2,6 @@ package io.github.gcdd1993.java.study.springboot.redisson.aop;
 
 import org.redisson.api.RateIntervalUnit;
 import org.redisson.api.RateType;
-import org.springframework.core.annotation.AliasFor;
 
 import java.lang.annotation.*;
 import java.util.concurrent.TimeUnit;
@@ -19,14 +18,10 @@ import java.util.concurrent.TimeUnit;
 @Inherited
 public @interface RateLimit {
 
-    @AliasFor("name")
-    String value() default "";
-
     /**
      * 限流器名称
      */
-    @AliasFor("value")
-    String name() default "";
+    String value();
 
     /**
      * 限流模式

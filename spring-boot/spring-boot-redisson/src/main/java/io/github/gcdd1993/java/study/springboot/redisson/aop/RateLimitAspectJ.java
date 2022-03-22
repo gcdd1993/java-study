@@ -33,13 +33,13 @@ public class RateLimitAspectJ {
         if (acquired) {
             return pjp.proceed();
         } else {
-            log.error("触发限流策略 {}", rateLimit.name());
+            log.error("触发限流策略 {}", rateLimit.value());
             throw new IllegalAccessException("限流");
         }
     }
 
     private RRateLimiter getRateLimiter(RateLimit rateLimit) {
-        String name = rateLimit.name();
+        String name = rateLimit.value();
         if (rateLimiterCache.containsKey(name)) {
             return rateLimiterCache.get(name);
         }
