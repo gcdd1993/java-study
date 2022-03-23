@@ -4,9 +4,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.redisson.api.RRateLimiter;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.expression.EvaluationContext;
+import org.springframework.expression.ExpressionParser;
+import org.springframework.expression.spel.standard.SpelExpressionParser;
+import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
@@ -28,7 +33,11 @@ public class RateLimitAspectJ {
 
     @Around("@annotation(rateLimit)")
     public Object doRateLimit(ProceedingJoinPoint pjp, RateLimit rateLimit) throws Throwable {
-        RRateLimiter rateLimiter = getRateLimiter(rateLimit);
+        // 参数值
+        Object[] args = pjp.getArgs();
+        // 参数名
+        String[] argNames = ((MethodSignature) pjp.getSignature()).getParameterNames();
+        RRateLimiter rateLimiter = getRateLimiter(rateLimit, args, argNames);
         boolean acquired = rateLimiter.tryAcquire(rateLimit.permits(), rateLimit.permitTimeout(), rateLimit.permitTimeoutUnit());
         if (acquired) {
             return pjp.proceed();
@@ -38,8 +47,8 @@ public class RateLimitAspectJ {
         }
     }
 
-    private RRateLimiter getRateLimiter(RateLimit rateLimit) {
-        String name = rateLimit.value();
+    private RRateLimiter getRateLimiter(RateLimit rateLimit, Object[] args, String[] argNames) {
+        String name = parseName(rateLimit.value(), args, argNames);
         if (rateLimiterCache.containsKey(name)) {
             return rateLimiterCache.get(name);
         }
@@ -47,6 +56,27 @@ public class RateLimitAspectJ {
         rateLimiter.setRate(rateLimit.mode(), rateLimit.rate(), rateLimit.rateInterval(), rateLimit.rateIntervalUnit());
         rateLimiterCache.put(name, rateLimiter);
         return rateLimiter;
+    }
+
+    /**
+     * 解析出限流器名称
+     *
+     * @param expression 表达式
+     * @param args       参数
+     * @param argNames   参数名称
+     * @return 限流器名称
+     */
+    private String parseName(String expression, Object[] args, String[] argNames) {
+        ExpressionParser parser = new SpelExpressionParser();
+        EvaluationContext context = new StandardEvaluationContext();
+        if (argNames != null) {
+            for (int i = 0; i < argNames.length; i++) {
+                String argName = argNames[i];
+                Object argValue = args[i];
+                context.setVariable(argName, argValue);
+            }
+        }
+        return parser.parseExpression(expression).getValue(context, String.class);
     }
 
 }

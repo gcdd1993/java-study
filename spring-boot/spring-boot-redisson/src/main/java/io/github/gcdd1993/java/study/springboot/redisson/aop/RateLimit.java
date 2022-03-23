@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 public @interface RateLimit {
 
     /**
-     * 限流器名称
+     * 限流器名称，支持Spring-EL expression
      */
     String value();
 

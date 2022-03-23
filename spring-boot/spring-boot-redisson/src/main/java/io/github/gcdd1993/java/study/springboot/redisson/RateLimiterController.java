@@ -7,6 +7,7 @@ import org.redisson.api.RateType;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.concurrent.TimeUnit;
@@ -54,6 +55,18 @@ public class RateLimiterController {
     @GetMapping("/hello1")
     String hello1() {
         return "hello";
+    }
+
+    @RateLimit(
+            value = "'Hello'.concat(#name)",
+            mode = RateType.OVERALL,
+            rate = 3,
+            rateInterval = 1,
+            rateIntervalUnit = RateIntervalUnit.MINUTES
+    )
+    @GetMapping("/hello2")
+    String hello2(@RequestParam String name) {
+        return "hello " + name;
     }
 
 }
