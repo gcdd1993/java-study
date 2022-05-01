@@ -1,0 +1,3 @@
+dependencies {
+    implementation("redis.clients:jedis:4.2.2")
+}

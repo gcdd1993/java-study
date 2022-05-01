@@ -1,25 +1,3 @@
-pluginManagement {
-    repositories {
-        mavenLocal()
-        repositories {
-            maven { url 'https://maven.aliyun.com/repository/google' }
-            maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
-            maven { url 'https://maven.aliyun.com/repository/public/' }
-        }
-        mavenCentral()
-    }
-}
-dependencyResolutionManagement {
-    repositories {
-        mavenLocal()
-        maven { url = uri("https://maven.aliyun.com/repository/central") } // central
-        maven { url = uri("https://maven.aliyun.com/repository/public") } // jcenter & public
-        maven { url = uri("https://maven.aliyun.com/repository/google") } // google
-        maven { url = uri("https://maven.aliyun.com/repository/spring") } // spring
-        maven { url = uri("https://maven.aliyun.com/repository/spring-plugin") } // spring plugin
-        maven { url = uri("https://maven.aliyun.com/repository/grails-core") } // spring plugin
-    }
-}
 rootProject.name = 'java-study'
 
 include("java-core:java-design-pattern")
@@ -62,8 +40,13 @@ include("netty:netty-advanced")
 include("netty:netty-sourcecode")
 
 include("thirdpart-samples:retrofit")
+include("thirdpart-samples:jedis")
+include("thirdpart-samples:lettuce")
+include("thirdpart-samples:easypoi")
 
 include("leetcode")
 
 include("rocketmq:rocketmq-examples")
+include("rabbitmq:rabbitmq-examples")
+include("elasticsearch:elasticsearch-demo")
 

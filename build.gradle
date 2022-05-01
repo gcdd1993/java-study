@@ -77,4 +77,14 @@ subprojects { project ->
         useJUnitPlatform()
     }
 
+    repositories {
+        mavenLocal()
+        maven { url = uri("https://maven.aliyun.com/repository/central") } // central
+        maven { url = uri("https://maven.aliyun.com/repository/public") } // jcenter & public
+        maven { url = uri("https://maven.aliyun.com/repository/google") } // google
+        maven { url = uri("https://maven.aliyun.com/repository/spring") } // spring
+        maven { url = uri("https://maven.aliyun.com/repository/spring-plugin") } // spring plugin
+        maven { url = uri("https://maven.aliyun.com/repository/grails-core") } // spring plugin
+    }
+
 }
