@@ -12,6 +12,7 @@ include("mybatis:mybatis-cache")
 include("mybatis:mybatis-basic")
 include("mybatis:mybatis-pageHelper")
 include("mybatis:mybatis-generator-sample")
+include("mybatis:mybatis-type-handler")
 
 include("spring-boot:spring-boot-cache")
 include("spring-boot:spring-boot-aspectj-weaver")

@@ -70,6 +70,7 @@ subprojects { project ->
             dependency("com.alibaba:druid-spring-boot-starter:$druid_version")
             dependency("org.apache.rocketmq:rocketmq-client:$rocketmq_version")
             dependency("org.apache.rocketmq:rocketmq-openmessaging:$rocketmq_version")
+            dependency("com.baomidou:mybatis-plus-boot-starter:$mybatis_plus_version")
         }
     }
 
