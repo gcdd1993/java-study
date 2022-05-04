@@ -44,6 +44,8 @@ include("thirdpart-samples:retrofit")
 include("thirdpart-samples:jedis")
 include("thirdpart-samples:lettuce")
 include("thirdpart-samples:easypoi")
+include("thirdpart-samples:poi-tl")
+include("thirdpart-samples:jodconverter")
 
 include("leetcode")
 

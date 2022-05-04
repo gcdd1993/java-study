@@ -117,3 +117,4 @@ hs_err_pid*
 !aspectjweaver-1.9.7.jar
 
 **/*.mmdb
+*.ttf

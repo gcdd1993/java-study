@@ -1,0 +1,4 @@
+dependencies {
+    implementation("com.deepoove:poi-tl:1.12.0")
+    implementation("io.github.draco1023:poi-tl-ext:0.3.14-beta")
+}

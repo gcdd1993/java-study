@@ -1,0 +1,34 @@
+afterEvaluate {
+    if (pluginManager.hasPlugin("application")) {
+        springBoot {
+            buildInfo()
+        }
+
+        task archiveDeps(type: Tar) { task ->
+            def dependencies = task.project.configurations.runtimeClasspath.fileCollection { true }
+            from dependencies.sort()
+            compression = Compression.GZIP
+            archiveFileName = "dep-libs.tar.gz"
+            from jar.archiveFile
+            destinationDirectory = file("$buildDir/docker")
+        }
+
+        task copyDeps(type: Copy) {
+            dependsOn(archiveDeps)
+            from tarTree(resources.gzip("$buildDir/docker/dep-libs.tar.gz"))
+            into "$buildDir/docker/libs/"
+        }
+
+        task copyApp(type: Copy) {
+            dependsOn(jar, startScripts)
+            from "$buildDir/scripts/"
+            from jar.outputs
+            into "$buildDir/docker/"
+        }
+
+        task prepare() {
+            dependsOn(copyApp, copyDeps)
+        }
+
+    }
+}
