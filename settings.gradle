@@ -23,6 +23,7 @@ include("spring-boot:baeldung-spring-security")
 include("spring-boot:spring-boot-common")
 include("spring-boot:spring-boot-skywalking")
 include("spring-boot:spring-boot-redisson")
+include("spring-boot:spring-boot-querydsl")
 
 // seata
 include("spring-boot:spring-boot-seata:sbm-account-service")

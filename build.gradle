@@ -49,6 +49,8 @@ subprojects { project ->
         testImplementation("org.projectlombok:lombok:1.18.22")
         testImplementation("com.github.jsonzou:jmockdata")
         testAnnotationProcessor("org.projectlombok:lombok:1.18.22")
+
+        testImplementation("com.github.javafaker:javafaker:1.0.2")
     }
 
     dependencyManagement {

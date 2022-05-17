@@ -1,0 +1,11 @@
+dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+
+    // querydsl
+    implementation("com.querydsl:querydsl-jpa:$querydsl_version")
+    compileOnly("com.querydsl:querydsl-apt:$querydsl_version:jpa")
+    annotationProcessor("com.querydsl:querydsl-apt:$querydsl_version:jpa")
+
+    runtimeOnly("org.postgresql:postgresql")
+}
