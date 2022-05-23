@@ -1,3 +1,5 @@
 dependencies {
     implementation("org.openjdk.jol:jol-core:0.16")
+
+    implementation("org.springframework.boot:spring-boot-starter-test")
 }
