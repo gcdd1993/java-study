@@ -1,0 +1,7 @@
+dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("com.baomidou:mybatis-plus-boot-starter")
+    implementation("io.github.mouzt:bizlog-sdk:2.0.3")
+
+    implementation("org.postgresql:postgresql")
+}
