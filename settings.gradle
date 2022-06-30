@@ -25,6 +25,7 @@ include("spring-boot:spring-boot-skywalking")
 include("spring-boot:spring-boot-redisson")
 include("spring-boot:spring-boot-querydsl")
 include("spring-boot:spring-boot-mzt-biz-log")
+include("spring-boot:spring-boot-shiro")
 
 // seata
 include("spring-boot:spring-boot-seata:sbm-account-service")

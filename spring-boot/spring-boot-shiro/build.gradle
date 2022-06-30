@@ -1,0 +1,4 @@
+dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.apache.shiro:shiro-spring-boot-starter:1.9.1")
+}
