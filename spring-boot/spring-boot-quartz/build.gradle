@@ -1,0 +1,6 @@
+dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-quartz")
+    implementation("com.baomidou:mybatis-plus-boot-starter:3.4.3.4")
+    runtimeOnly("mysql:mysql-connector-java:5.1.49")
+}
