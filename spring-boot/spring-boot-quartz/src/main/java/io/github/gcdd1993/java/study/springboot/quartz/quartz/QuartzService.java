@@ -16,12 +16,15 @@ import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 import org.quartz.TriggerKey;
 import org.quartz.impl.matchers.GroupMatcher;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -113,6 +116,46 @@ public class QuartzService /*implements CommandLineRunner*/ {
                     .withSchedule(CronScheduleBuilder.cronSchedule(jobTime)).startNow().build();
             // 把作业和触发器注册到任务调度中
             scheduler.scheduleJob(jobDetail, trigger);
+            log.info("jobDataMap: {}", jobDetail.getJobDataMap());
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("add job error!");
+        }
+    }
+
+    /**
+     * 增加一个job
+     *
+     * @param jobClass     任务实现类
+     * @param jobName      任务名称(建议唯一)
+     * @param jobGroupName 任务组名
+     * @param jobData      参数
+     * @param time         任务执行时间
+     */
+    public void addJobByTime(Class<? extends Job> jobClass,
+                             String jobName,
+                             String jobGroupName,
+                             Map<String, ?> jobData,
+                             Instant time) {
+        try {
+            // 创建jobDetail实例，绑定Job实现类
+            // 指明job的名称，所在组的名称，以及绑定job类
+            // 任务名称和组构成任务key
+            JobDetail jobDetail = JobBuilder.newJob(jobClass).withIdentity(jobName, jobGroupName)
+                    .build();
+            // 设置job参数
+            if (jobData != null && jobData.size() > 0) {
+                jobDetail.getJobDataMap().putAll(jobData);
+            }
+            // 定义调度触发规则
+            // 使用cornTrigger规则
+            // 触发器key
+            Trigger trigger = TriggerBuilder.newTrigger().withIdentity(jobName, jobGroupName)
+                    .startAt(Date.from(time))
+                    .build();
+            // 把作业和触发器注册到任务调度中
+            scheduler.scheduleJob(jobDetail, trigger);
+            log.info("添加一次性任务 {}", LocalDateTime.ofInstant(time, ZoneId.systemDefault()));
             log.info("jobDataMap: {}", jobDetail.getJobDataMap());
         } catch (Exception e) {
             e.printStackTrace();

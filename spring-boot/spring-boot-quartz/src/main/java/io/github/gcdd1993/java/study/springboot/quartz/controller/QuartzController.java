@@ -1,15 +1,19 @@
 package io.github.gcdd1993.java.study.springboot.quartz.controller;
 
 import io.github.gcdd1993.java.study.springboot.quartz.job.HelloJob;
+import io.github.gcdd1993.java.study.springboot.quartz.job.OnceJob;
 import io.github.gcdd1993.java.study.springboot.quartz.model.JobForm;
 import io.github.gcdd1993.java.study.springboot.quartz.quartz.QuartzService;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 
@@ -36,6 +40,16 @@ public class QuartzController {
     }
 
     /**
+     * 按照时间添加任务
+     *
+     * @param time 运行时间
+     */
+    @PostMapping("/addByTime")
+    void addJobByTime(@RequestBody JobForm form, @RequestParam Instant time) {
+        quartzService.addJobByTime(OnceJob.class, form.getJobName(), form.getJobGroupName(), form.getJobData(), time);
+    }
+
+    /**
      * 获取所有计划中的任务列表
      *
      * @return 任务列表
@@ -43,6 +57,17 @@ public class QuartzController {
     @GetMapping("/queryAllJob")
     List<Map<String, Object>> queryAllJob() {
         return quartzService.queryAllJob();
+    }
+
+    /**
+     * 删除任务
+     *
+     * @param jobName      任务名称
+     * @param jobGroupName 任务组名
+     */
+    @DeleteMapping
+    void deleteJob(@RequestParam String jobName, @RequestParam String jobGroupName) {
+        quartzService.deleteJob(jobName, jobGroupName);
     }
 
 }
