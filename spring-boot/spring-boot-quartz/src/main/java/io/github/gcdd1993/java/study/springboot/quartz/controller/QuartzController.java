@@ -4,6 +4,7 @@ import io.github.gcdd1993.java.study.springboot.quartz.job.HelloJob;
 import io.github.gcdd1993.java.study.springboot.quartz.job.OnceJob;
 import io.github.gcdd1993.java.study.springboot.quartz.model.JobForm;
 import io.github.gcdd1993.java.study.springboot.quartz.quartz.QuartzService;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,7 +46,8 @@ public class QuartzController {
      * @param time 运行时间
      */
     @PostMapping("/addByTime")
-    void addJobByTime(@RequestBody JobForm form, @RequestParam Instant time) {
+    void addJobByTime(@RequestBody JobForm form,
+                      @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Instant time) {
         quartzService.addJobByTime(OnceJob.class, form.getJobName(), form.getJobGroupName(), form.getJobData(), time);
     }
 
