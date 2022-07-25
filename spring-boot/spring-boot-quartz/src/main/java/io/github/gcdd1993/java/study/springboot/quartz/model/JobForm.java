@@ -11,6 +11,7 @@ import java.util.Map;
  */
 @Data
 public class JobForm {
+    private String jobClass;
     private String jobName;
     private String jobGroupName;
     private String jobTime;

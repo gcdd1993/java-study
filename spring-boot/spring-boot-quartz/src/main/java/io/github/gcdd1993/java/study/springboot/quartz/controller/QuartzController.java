@@ -1,9 +1,9 @@
 package io.github.gcdd1993.java.study.springboot.quartz.controller;
 
-import io.github.gcdd1993.java.study.springboot.quartz.job.HelloJob;
 import io.github.gcdd1993.java.study.springboot.quartz.job.OnceJob;
 import io.github.gcdd1993.java.study.springboot.quartz.model.JobForm;
 import io.github.gcdd1993.java.study.springboot.quartz.quartz.QuartzService;
+import org.quartz.Job;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,8 +36,9 @@ public class QuartzController {
      * 新建任务
      */
     @PostMapping
-    void addJob(@RequestBody JobForm form) {
-        quartzService.addJob(HelloJob.class, form.getJobName(), form.getJobGroupName(), form.getJobTime(), form.getJobData());
+    void addJob(@RequestBody JobForm form) throws ClassNotFoundException {
+        Class<? extends Job> jobClass = (Class<? extends Job>) Class.forName(form.getJobClass());
+        quartzService.addJob(jobClass, form.getJobName(), form.getJobGroupName(), form.getJobTime(), form.getJobData());
     }
 
     /**
