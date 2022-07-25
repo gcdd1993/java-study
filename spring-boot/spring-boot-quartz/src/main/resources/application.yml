@@ -14,6 +14,8 @@ spring:
             instanceName: clusteredScheduler
             instanceId: AUTO
           jobStore:
+            # error: DataSource name not set. https://blog.csdn.net/weixin_42458219/article/details/122247162
+            # class: org.springframework.scheduling.quartz.LocalDataSourceJobStore
             class: org.quartz.impl.jdbcjobstore.JobStoreTX
             driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
             tablePrefix: QRTZ_
