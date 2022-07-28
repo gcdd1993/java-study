@@ -118,3 +118,4 @@ hs_err_pid*
 
 **/*.mmdb
 *.ttf
+**/ip2region.xdb

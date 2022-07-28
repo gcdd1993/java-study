@@ -50,6 +50,7 @@ include("thirdpart-samples:lettuce")
 include("thirdpart-samples:easypoi")
 include("thirdpart-samples:poi-tl")
 include("thirdpart-samples:jodconverter")
+include("thirdpart-samples:ip2region")
 
 include("leetcode")
 

@@ -1,0 +1,3 @@
+dependencies {
+    implementation("org.lionsoul:ip2region:2.6.5")
+}
