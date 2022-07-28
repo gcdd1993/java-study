@@ -51,6 +51,7 @@ include("thirdpart-samples:easypoi")
 include("thirdpart-samples:poi-tl")
 include("thirdpart-samples:jodconverter")
 include("thirdpart-samples:ip2region")
+include("thirdpart-samples:notify-qywx") // 企业微信机器人通知
 
 include("leetcode")
 
