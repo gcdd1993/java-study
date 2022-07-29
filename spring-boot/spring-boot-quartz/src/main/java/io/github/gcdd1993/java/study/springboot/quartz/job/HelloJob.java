@@ -30,5 +30,7 @@ public class HelloJob implements Job {
         System.out.println(jv1 + ":" + jv2);
         System.out.println(sv);
         System.out.println("hello:" + LocalDateTime.now());
+
+        throw new RuntimeException("任务执行失败");
     }
 }

@@ -2,6 +2,7 @@ package io.github.gcdd1993.java.study.springboot.quartz.job;
 
 import io.github.gcdd1993.java.study.springboot.quartz.service.HelloService;
 import org.quartz.Job;
+import org.quartz.JobDetail;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
@@ -19,6 +20,7 @@ public class InjectJob implements Job {
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
+        JobDetail jobDetail = context.getJobDetail();
         helloService.sayHello();
     }
 }

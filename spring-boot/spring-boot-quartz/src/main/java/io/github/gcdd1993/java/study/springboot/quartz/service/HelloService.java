@@ -12,5 +12,6 @@ public class HelloService {
 
     public void sayHello() {
         System.out.println("hello world");
+        throw new RuntimeException("任务执行失败");
     }
 }
